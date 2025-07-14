@@ -1,0 +1,7 @@
+{
+  "name": "frontBarber",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
