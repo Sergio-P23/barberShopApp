@@ -1,27 +1,25 @@
-#container {
-  text-align: center;
+// header
+.custom-header {
+  --background: transparent;
+  margin-right: 100px;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  ion-toolbar {
+    --background: transparent;
+    background: rgb(166, 166, 166); /* Blanco semitransparente */
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.logo-header{
+  height: 100px; // o el alto que prefieras
+  max-height: 100%;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
 
-  color: #8c8c8c;
-
-  margin: 0;
+// body
+ion-content {
+  --padding-top: 5px;
+  --background: #ffffff; // Fondo blanco
+  --color: #000000; // Texto negro
+  
 }
 
-#container a {
-  text-decoration: none;
-}
