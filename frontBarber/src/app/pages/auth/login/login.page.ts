@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem,IonInput, IonInputPasswordToggle, IonButton, IonButtons, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonItem,IonInput, IonButton, IonIcon } from '@ionic/angular/standalone';
 
 
 import { addIcons } from 'ionicons';
@@ -11,7 +11,7 @@ import { lockClosed, lockClosedOutline, mailOutline } from 'ionicons/icons';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem,IonInput, IonInputPasswordToggle, IonButton, IonButtons, IonIcon]
+  imports: [IonContent, CommonModule, FormsModule, IonItem,IonInput, IonButton, IonIcon]
 })
 export class LoginPage implements OnInit {
 
