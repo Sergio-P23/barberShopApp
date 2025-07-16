@@ -1,0 +1,55 @@
+<ion-content [fullscreen]="true">
+    <div class="login-container">
+        <div class="login-card">
+
+            <h1 class="login-title">Login</h1>
+            <form>
+                <ion-item class="login-input" lines="none">
+                    <ion-icon name="mail-outline" slot="start"></ion-icon>
+                    <ion-input 
+                        type="email" 
+                        placeholder="Email" 
+                        fill="outline"
+                        labelPlacement="floating">
+                        
+                    </ion-input>
+                </ion-item>
+
+                <ion-item class="login-input" lines="none">
+                    <ion-input 
+                        type="password" 
+                        placeholder="Password" fill="outline">
+                    </ion-input>
+                </ion-item>
+
+                <ion-button class="login-button" expand="block">
+                    Sign In
+                </ion-button>
+            </form>
+
+            <div class="forgot-password">
+                <a href="#" onclick="alert('Forgot password clicked')">Forgot Password?</a>
+            </div>
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+            <div class="social-login">
+                <div class="social-btn" onclick="alert('Google login')">
+                    <ion-icon name="logo-google"></ion-icon>
+                </div>
+                <div class="social-btn" onclick="alert('Facebook login')">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </div>
+                <div class="social-btn" onclick="alert('Apple login')">
+                    <ion-icon name="logo-apple"></ion-icon>
+                </div>
+            </div>
+
+            <div class="register-link">
+                Don't have an account? <a href="#" onclick="alert('Register clicked')">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</ion-content>
