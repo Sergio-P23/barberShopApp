@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem,IonInput, IonInputPasswordToggle, IonButton, IonButtons, IonIcon } from '@ionic/angular/standalone';
 
-import { addIcons } from 'ionicons';
 
+import { addIcons } from 'ionicons';
+import { lockClosed, lockClosedOutline, mailOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -15,7 +16,10 @@ import { addIcons } from 'ionicons';
 export class LoginPage implements OnInit {
 
   constructor() { 
-    addIcons({});
+    addIcons({
+      mailOutline,
+      lockClosedOutline
+    })
   }
 
   ngOnInit() {
