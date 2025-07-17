@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonMenuButton, IonModal, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonIcon } from '@ionic/angular/standalone'; // Importa nuevos componentes Ionic
+import { IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonMenuButton, IonModal, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonIcon, IonGrid, IonCol, IonRow } from '@ionic/angular/standalone'; // Importa nuevos componentes Ionic
 
 import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons'; // Importa addIcons
@@ -14,7 +14,7 @@ import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBack
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonRow, IonCol, IonGrid, 
     IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, RouterModule,
     IonButtons, IonButton, IonMenuButton, IonModal, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonIcon // Añade los componentes importados
   ]

@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" class="main-header">
+<ion-header mode="ios" [translucent]="true" class="main-header">
   <ion-toolbar>
     <div class="header-content">
       <img src="../../../assets/logoOne.jpg" alt="Logo de la Barbería" class="header-logo" />
@@ -47,22 +47,27 @@
     <h2 class="section-title">SERVICIOS</h2>
     <div class="services-grid">
       <div class="service-card" (click)="openBookingModal()">
-        <img src="https://images.unsplash.com/photo-1596434311145-c4199c08006e?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Hombre recibiendo un corte de pelo clásico" class="service-image">
+        <img
+          src="https://images.unsplash.com/photo-1596434311145-c4199c08006e?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Hombre recibiendo un corte de pelo clásico" class="service-image">
         <h3 class="service-title">Corte Clásico</h3>
         <p class="service-price">$ 30.000 COP</p>
       </div>
       <div class="service-card" (click)="openBookingModal()">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0mYPjDp5GOw3Lotl1LguEiYNN8z9SU2eXaw&s" alt="Barbero arreglando la barba de un cliente" class="service-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0mYPjDp5GOw3Lotl1LguEiYNN8z9SU2eXaw&s"
+          alt="Barbero arreglando la barba de un cliente" class="service-image">
         <h3 class="service-title">Arreglo de Barba</h3>
         <p class="service-price">$ 20.000 COP</p>
       </div>
       <div class="service-card" (click)="openBookingModal()">
-        <img src="https://i.pinimg.com/736x/e8/35/7b/e8357b776553cc13da123651309a83a7.jpg" alt="Cabello teñido en una barbería" class="service-image">
+        <img src="https://i.pinimg.com/736x/e8/35/7b/e8357b776553cc13da123651309a83a7.jpg"
+          alt="Cabello teñido en una barbería" class="service-image">
         <h3 class="service-title">Tintura</h3>
         <p class="service-price">$ 50.000 COP</p>
       </div>
       <div class="service-card" (click)="openBookingModal()">
-        <img src="https://i.pinimg.com/1200x/05/f0/27/05f0271b699f734621834da08fcf4f6b.jpg" alt="Diseño y arreglo de cejas" class="service-image">
+        <img src="https://i.pinimg.com/1200x/05/f0/27/05f0271b699f734621834da08fcf4f6b.jpg"
+          alt="Diseño y arreglo de cejas" class="service-image">
         <h3 class="service-title">Diseño de Cejas</h3>
         <p class="service-price">$ 15.000 COP</p>
       </div>
@@ -75,11 +80,7 @@
     <div class="map-container">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15891.80237731737!2d-74.2483844837583!3d4.707765181774312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9d50a3b1c67d%3A0xc3f1d8e2b8c9d0d!2sMosquera%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1701792000000!5m2!1ses!2sco"
-        width="100%"
-        height="450"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
+        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
@@ -87,9 +88,9 @@
 
 </ion-content>
 
-<ion-modal [isOpen]="isBarberModalOpen">
+<ion-modal mode="md" [isOpen]="isBarberModalOpen">
   <ng-template>
-    <ion-header class="modal-header">
+    <ion-header>
       <ion-toolbar>
         <ion-title>Seleccione el barbero de su preferencia</ion-title>
         <ion-buttons slot="end">
@@ -97,33 +98,48 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="modal-content-custom">
-      <div class="barber-selection-grid">
-        <div class="barber-card" (click)="selectBarber('Pepe')">
-          <div class="barber-avatar"></div>
-          <p>PEPE</p>
-        </div>
-        <div class="barber-card" (click)="selectBarber('María')">
-          <div class="barber-avatar"></div>
-          <p>MARÍA</p>
-        </div>
-        <div class="barber-card" (click)="selectBarber('Juan')">
-          <div class="barber-avatar"></div>
+    <ion-content>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="6" sizeMd="4" >
+            <div class="barber-card" (click)="selectBarber('Pepe')">
+              <img src="https://media.istockphoto.com/id/1365608023/es/foto/foto-de-un-apuesto-joven-barbero-parado-solo-en-su-sal%C3%B3n.jpg?s=612x612&w=0&k=20&c=NDzaOnc4HNzvg2IOXubfN5J9S0TaXrxY8qOzVgg5QWw=" alt="">
+              <p>PEPE</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" sizeMd="4" >
+            <div class="barber-card" (click)="selectBarber('Juan')">
+          <img src="https://media.istockphoto.com/id/1365608023/es/foto/foto-de-un-apuesto-joven-barbero-parado-solo-en-su-sal%C3%B3n.jpg?s=612x612&w=0&k=20&c=NDzaOnc4HNzvg2IOXubfN5J9S0TaXrxY8qOzVgg5QWw=" alt="">
           <p>JUAN</p>
         </div>
-        <div class="barber-card" (click)="selectBarber('Juan 2')">
-          <div class="barber-avatar"></div>
+          </ion-col>
+
+           <ion-col size="6" sizeMd="4" >
+            <div class="barber-card" (click)="selectBarber('María')">
+              <img src="https://media.istockphoto.com/id/1365608023/es/foto/foto-de-un-apuesto-joven-barbero-parado-solo-en-su-sal%C3%B3n.jpg?s=612x612&w=0&k=20&c=NDzaOnc4HNzvg2IOXubfN5J9S0TaXrxY8qOzVgg5QWw=" alt="">
+              <p>MARÍA</p>
+            </div>
+          </ion-col>
+
+           <ion-col size="6" sizeMd="4" >
+            <div class="barber-card" (click)="selectBarber('Juan 2')">
+          <img src="https://media.istockphoto.com/id/1365608023/es/foto/foto-de-un-apuesto-joven-barbero-parado-solo-en-su-sal%C3%B3n.jpg?s=612x612&w=0&k=20&c=NDzaOnc4HNzvg2IOXubfN5J9S0TaXrxY8qOzVgg5QWw=" alt="">
           <p>JUAN 2</p>
         </div>
-      </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    
       <ion-button expand="block" class="modal-next-button" (click)="confirmBarberSelection()">Siguiente</ion-button>
     </ion-content>
   </ng-template>
 </ion-modal>
 
+
+
 <ion-modal [isOpen]="isDateTimeModalOpen">
   <ng-template>
-    <ion-header class="modal-header">
+    <ion-header>
       <ion-toolbar>
         <ion-title>Seleccione el día de su cita</ion-title>
         <ion-buttons slot="end">
@@ -131,27 +147,27 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="modal-content-custom ion-padding">
-      <ion-item class="modal-select-input" lines="none">
+    <ion-content class="ion-padding">
+      <ion-item lines="none">
         <ion-select placeholder="Año" labelPlacement="floating">
           <ion-select-option value="2024">2024</ion-select-option>
           <ion-select-option value="2025">2025</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item class="modal-select-input" lines="none">
+      <ion-item lines="none">
         <ion-select placeholder="Mes" labelPlacement="floating">
           <ion-select-option value="enero">Enero</ion-select-option>
           <ion-select-option value="julio">Julio</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item class="modal-select-input" lines="none">
+      <ion-item lines="none">
         <ion-select placeholder="Día" labelPlacement="floating">
           <ion-select-option value="1">1</ion-select-option>
           <ion-select-option value="16">16</ion-select-option>
           <ion-select-option value="17">17</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item class="modal-select-input" lines="none">
+      <ion-item lines="none">
         <ion-select placeholder="Hora" labelPlacement="floating">
           <ion-select-option value="9am">9:00 AM</ion-select-option>
           <ion-select-option value="10am">10:00 AM</ion-select-option>
@@ -162,9 +178,11 @@
   </ng-template>
 </ion-modal>
 
+
+
 <ion-modal [isOpen]="isInfoModalOpen">
   <ng-template>
-    <ion-header class="modal-header">
+    <ion-header>
       <ion-toolbar>
         <ion-title>Información</ion-title>
         <ion-buttons slot="end">
@@ -172,15 +190,16 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="modal-content-custom ion-padding">
-      <ion-item class="modal-input" lines="none">
+    <ion-content class="ion-padding">
+      <ion-item lines="none">
         <ion-input type="tel" placeholder="Celular" labelPlacement="floating"></ion-input>
       </ion-item>
-      <ion-item class="modal-input" lines="none">
+      <ion-item lines="none">
         <ion-input type="text" placeholder="Nombre" labelPlacement="floating"></ion-input>
       </ion-item>
       <p class="info-text">
-        Esta INFORMACIÓN es muy IMPORTANTE para NOSOTROS debido a que haremos una llamada de CONFIRMACIÓN del servicio. Si la llamada no es contestada puede que el servicio sea CANCELADO.
+        Esta INFORMACIÓN es muy IMPORTANTE para NOSOTROS debido a que haremos una llamada de CONFIRMACIÓN del servicio.
+        Si la llamada no es contestada puede que el servicio sea CANCELADO.
       </p>
       <ion-button expand="block" class="modal-reserve-button" (click)="makeReservation()">RESERVAR</ion-button>
     </ion-content>

@@ -188,101 +188,59 @@
   font-size: 1em;
 }
 
+/* Estilos para el modal en general */
+ion-modal {
+  /* Establece el fondo del modal en sí */
+  --background: #000000; /* Blanco puro */
+  /* Si el modo es "md" (Material Design), también ajusta esto */
+  --background-rgb: 255, 255, 255;
+  
+  /* Opcional: Ajusta el borde y la sombra si lo deseas, para que combine con el blanco */
+  --border-radius: 12px; 
+  --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  --width: 70vw;
+}
 
+/* Estilos para el contenido del modal (ion-content) */
+ion-modal ion-content {
+  /* Asegura que el contenido también sea blanco */
+  --background: #000000; /* Blanco puro */
+  --background-rgb: 255, 255, 255;
+}
 
-/* Estilos para la cuadrícula de selección de barbero */
-.barber-selection-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 15px;
-  margin-bottom: 30px;
-  justify-items: center; /* Centra los items en la grilla */
+/* Estilos para el encabezado del modal (ion-header) */
+ion-modal ion-header {
+  /* Fondo del encabezado a blanco o un tono claro para que combine */
+  background: #000000; /* Blanco puro */
+  /* Si tienes un toolbar dentro del header, también puedes estilizarlo */
+  ion-toolbar {
+    --background: #000000; /* Blanco para el toolbar */
+    --background-rgb: 255, 255, 255;
+    --color: #ffffff; /* Color del texto y los iconos dentro del toolbar (ej: título, botones) */
+  }
 }
 
 .barber-card {
-  background-color: var(--ion-color-primary-contrast); /* Fondo blanco */
-  border-radius: 10px;
-  padding: 15px;
+  background-color: #f2f2f2;
+  padding: 23px;
+  color: #000;
+  width: 100%;
+  height: 200px;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  border: 2px solid transparent; /* Borde transparente por defecto */
-}
-
-.barber-card.selected {
-  border: 2px solid var(--ion-color-highlight); /* Borde dorado cuando seleccionado */
-  box-shadow: 0 4px 10px rgba(218, 165, 32, 0.5); /* Sombra dorada */
 }
 
 .barber-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
-.barber-avatar {
-  width: 80px;
-  height: 80px;
-  background-color: var(--ion-color-tertiary); /* Gris para el placeholder del avatar */
-  border-radius: 50%;
-  margin: 0 auto 10px auto;
-  overflow: hidden; /* Para futuras imágenes */
-}
-.barber-avatar img {
-  width: 100%;
+.barber-card img{
   height: 100%;
   object-fit: cover;
-}
-
-.barber-card p {
-  color: var(--ion-color-primary); /* Nombre del barbero negro */
-  font-weight: 600;
-  margin: 0;
-}
-
-/* Estilos para inputs y selects dentro de modales */
-.modal-select-input,
-.modal-input {
-  margin-bottom: 15px;
-  --background: var(--ion-color-primary-contrast); /* Fondo blanco para inputs/selects del modal */
-  --border-radius: 8px;
-  --padding-start: 10px;
-  --padding-end: 10px;
-  --color: var(--ion-color-primary); /* Texto negro */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.modal-select-input ion-select,
-.modal-input ion-input {
-  --color: var(--ion-color-primary);
-  --placeholder-color: var(--ion-color-tertiary);
-}
-
-/* Botones de navegación en modales */
-.modal-next-button,
-.modal-reserve-button {
-  --background: var(--ion-color-highlight); /* Botón dorado */
-  --color: var(--ion-color-primary); /* Texto negro */
-  --border-radius: 8px;
-  font-weight: 600;
-  height: 45px;
-  margin-top: 20px;
-  box-shadow: 0 2px 10px rgba(218, 165, 32, 0.4);
-}
-
-.modal-next-button:hover,
-.modal-reserve-button:hover {
-  --background: #b8941f; /* Dorado más oscuro al pasar el mouse */
-}
-
-/* Texto informativo en modal de reserva */
-.info-text {
-  color: var(--ion-color-primary);
-  font-size: 0.9em;
-  text-align: justify;
-  margin-top: 20px;
-  padding: 0 10px;
-  line-height: 1.5;
 }
 
 /* Media Queries (se mantienen, con posibles ajustes para modales si es necesario) */
@@ -302,9 +260,7 @@
     padding: 0 10px;
   }
 
-  .modal-content-custom {
-    padding: 15px;
-  }
+
 }
 
 @media (min-width: 768px) {
@@ -322,13 +278,7 @@
     margin: 0 auto;
   }
 
-  /* Ajustes para modales en pantallas grandes */
-  ion-modal::part(content) {
-    max-width: 500px; /* Ancho máximo para el contenido del modal */
-    margin: auto;
-    border-radius: 20px; /* Redondear toda la tarjeta del modal */
-    overflow: hidden;
-  }
+
 }
 
 @media (min-width: 1024px) {
