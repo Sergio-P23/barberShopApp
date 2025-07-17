@@ -1,18 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonItem, IonInput, IonButton, IonIcon, IonHeader, IonToolbar, IonButtons, IonBackButton } from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+// ¡Importa los nuevos iconos y el de retroceso si aún no lo tienes!
+import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBackOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonButtons, IonToolbar, IonBackButton, IonHeader, IonContent, CommonModule, FormsModule, IonItem, IonInput, IonButton, IonIcon] // Asegúrate de que todos los componentes Ionic estén aquí
 })
 export class RegisterPage implements OnInit {
 
-  constructor() { }
+  constructor() {
+    addIcons({
+      personOutline,      // Nuevo icono para Nombre
+      callOutline,        // Nuevo icono para Celular
+      mailOutline,
+      lockClosedOutline,
+      chevronBackOutline  // Icono para el botón de retroceso
+    });
+  }
 
   ngOnInit() {
   }

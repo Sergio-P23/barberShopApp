@@ -1,25 +1,346 @@
-// header
-.custom-header {
-  --background: transparent;
-  margin-right: 100px;
+/* Variables de Colores (se mantienen) */
+:root {
+  --ion-color-primary: #000000; /* Negro principal */
+  --ion-color-primary-contrast: #ffffff; /* Contraste para texto en negro */
+  --ion-color-secondary: #f0f0f0; /* Gris claro para fondos */
+  --ion-color-tertiary: #a0a0a0; /* Gris medio */
+  --ion-color-highlight: #DAA520; /* Dorado para resaltar */
+}
 
-  ion-toolbar {
-    --background: transparent;
-    background: rgb(166, 166, 166); /* Blanco semitransparente */
+/* Encabezado (se mantiene) */
+.main-header {
+  --background: var(--ion-color-primary);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.main-header ion-toolbar {
+  --background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  padding: 0 16px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-logo {
+  height: 60px;
+  object-fit: contain;
+  /* margin-right: 48px; /* Considerar si este margen es necesario o el gap en header-content */
+}
+
+.header-auth-section,
+.header-logged-in-section {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre los botones o entre logo y botón de menú */
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.header-buttons ion-button {
+  --border-radius: 8px;
+  font-weight: 600;
+  min-width: 120px;
+  text-transform: uppercase;
+  height: 40px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.btn-primary-outline {
+  --color: var(--ion-color-highlight);
+  --border-color: var(--ion-color-highlight);
+  --background: transparent;
+}
+
+.btn-primary-solid {
+  --background: var(--ion-color-highlight);
+  --color: var(--ion-color-primary);
+}
+
+/* Estilos para el botón de menú (hamburguesa) */
+.menu-button-custom {
+  --color: var(--ion-color-highlight); /* Color dorado para el icono de hamburguesa */
+  font-size: 2.5em; /* Tamaño del icono */
+  --padding-end: 0;
+  --padding-start: 0;
+}
+
+/* Contenido Principal (se mantiene) */
+.main-content {
+  --background: var(--ion-color-secondary);
+  padding: 20px;
+}
+
+/* Carrusel (se mantiene) */
+.carousel-section {
+  margin-bottom: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-image {
+  border-radius: 10px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: var(--ion-color-highlight);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+/* Sección de Servicios (se mantiene, con hover para service-card) */
+.services-section {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.section-title {
+  color: var(--ion-color-primary);
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--ion-color-highlight);
+  border-radius: 2px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+.service-card {
+  background-color: var(--ion-color-primary-contrast);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer; /* Añadir cursor de puntero para indicar que es clickeable */
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al pasar el mouse */
+}
+
+.service-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.service-title {
+  color: var(--ion-color-primary);
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.service-price {
+  color: var(--ion-color-highlight);
+  font-size: 1em;
+  font-weight: 600;
+}
+
+/* Sección de Ubicación (se mantiene) */
+.location-section {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.location-section p {
+  color: var(--ion-color-primary);
+  font-size: 1em;
+}
+
+
+
+/* Estilos para la cuadrícula de selección de barbero */
+.barber-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+  justify-items: center; /* Centra los items en la grilla */
+}
+
+.barber-card {
+  background-color: var(--ion-color-primary-contrast); /* Fondo blanco */
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid transparent; /* Borde transparente por defecto */
+}
+
+.barber-card.selected {
+  border: 2px solid var(--ion-color-highlight); /* Borde dorado cuando seleccionado */
+  box-shadow: 0 4px 10px rgba(218, 165, 32, 0.5); /* Sombra dorada */
+}
+
+.barber-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.barber-avatar {
+  width: 80px;
+  height: 80px;
+  background-color: var(--ion-color-tertiary); /* Gris para el placeholder del avatar */
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+  overflow: hidden; /* Para futuras imágenes */
+}
+.barber-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.barber-card p {
+  color: var(--ion-color-primary); /* Nombre del barbero negro */
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Estilos para inputs y selects dentro de modales */
+.modal-select-input,
+.modal-input {
+  margin-bottom: 15px;
+  --background: var(--ion-color-primary-contrast); /* Fondo blanco para inputs/selects del modal */
+  --border-radius: 8px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --color: var(--ion-color-primary); /* Texto negro */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.modal-select-input ion-select,
+.modal-input ion-input {
+  --color: var(--ion-color-primary);
+  --placeholder-color: var(--ion-color-tertiary);
+}
+
+/* Botones de navegación en modales */
+.modal-next-button,
+.modal-reserve-button {
+  --background: var(--ion-color-highlight); /* Botón dorado */
+  --color: var(--ion-color-primary); /* Texto negro */
+  --border-radius: 8px;
+  font-weight: 600;
+  height: 45px;
+  margin-top: 20px;
+  box-shadow: 0 2px 10px rgba(218, 165, 32, 0.4);
+}
+
+.modal-next-button:hover,
+.modal-reserve-button:hover {
+  --background: #b8941f; /* Dorado más oscuro al pasar el mouse */
+}
+
+/* Texto informativo en modal de reserva */
+.info-text {
+  color: var(--ion-color-primary);
+  font-size: 0.9em;
+  text-align: justify;
+  margin-top: 20px;
+  padding: 0 10px;
+  line-height: 1.5;
+}
+
+/* Media Queries (se mantienen, con posibles ajustes para modales si es necesario) */
+@media (max-width: 480px) {
+  .header-buttons ion-button {
+    min-width: 100px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 0.85em;
+  }
+
+  .header-content {
+    gap: 5px;
+  }
+
+  .main-header ion-toolbar {
+    padding: 0 10px;
+  }
+
+  .modal-content-custom {
+    padding: 15px;
   }
 }
 
-.logo-header{
-  height: 100px; // o el alto que prefieras
-  max-height: 100%;
+@media (min-width: 768px) {
+  .header-logo {
+    height: 80px;
+  }
+
+  .carousel-image {
+    height: 350px;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Ajustes para modales en pantallas grandes */
+  ion-modal::part(content) {
+    max-width: 500px; /* Ancho máximo para el contenido del modal */
+    margin: auto;
+    border-radius: 20px; /* Redondear toda la tarjeta del modal */
+    overflow: hidden;
+  }
 }
 
+@media (min-width: 1024px) {
+  .main-content {
+    padding: 30px;
+  }
 
-// body
-ion-content {
-  --padding-top: 5px;
-  --background: #ffffff; // Fondo blanco
-  --color: #000000; // Texto negro
-  
+  .carousel-image {
+    height: 450px;
+  }
+
+  .section-title {
+    font-size: 2.2em;
+  }
 }
-

@@ -1,0 +1,279 @@
+/* Variables de Colores para fácil manejo (las mismas que en login.page.scss) */
+:root {
+  --ion-color-primary: #000000; /* Negro principal */
+  --ion-color-primary-contrast: #ffffff; /* Contraste para texto en negro */
+  --ion-color-secondary: #f0f0f0; /* Gris claro para fondos */
+  --ion-color-tertiary: #a0a0a0; /* Gris medio */
+  --ion-color-highlight: #DAA520; /* Dorado para resaltar */
+}
+ion-header{
+   
+    box-shadow: none;
+}
+/* Estilos para el encabezado con botón de retroceso (similar a login) */
+.transparent-toolbar {
+  --background: transparent;
+  --border-width: 0;
+  box-shadow: none;
+}
+
+.transparent-toolbar ion-back-button {
+  --color: var(--ion-color-secondary); /* Color dorado para el icono de retroceso */
+}
+
+ion-content {
+  --padding-top: 0; /* Asegúrate de que no haya padding superior en el content si el header es transparente */
+}
+
+/* Contenedor principal del formulario de registro */
+.register-container {
+  height: 100vh;/* Variables de Colores (se mantienen igual) */
+
+
+/* Estilos para el encabezado con botón de retroceso (se mantienen igual) */
+.transparent-toolbar {
+  --background: transparent;
+  --border-width: 0;
+  box-shadow: none;
+}
+
+.transparent-toolbar ion-back-button {
+  --color: var(--ion-color-highlight);
+}
+
+/* Contenedor principal del formulario de registro (se mantiene igual) */
+.register-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+  padding: 20px;
+}
+
+/* Tarjeta del formulario de registro (se mantiene igual) */
+.register-card {
+  background: var(--ion-color-primary-contrast);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.359);
+  border: 1px solid var(--ion-color-highlight);
+}
+
+/* Título del formulario (se mantiene igual) */
+.register-title {
+  color: var(--ion-color-primary);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+/* Estilos para los campos de entrada individuales (se mantienen en general) */
+.register-input {
+  margin-bottom: 20px; /* Mantener margen inferior para espaciado vertical */
+  --background: var(--ion-color-secondary);
+  --border-radius: 12px;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --color: var(--ion-color-primary);
+  width: 100%; /* Asegura que cada item ocupe el espacio de su columna */
+}
+
+.register-input ion-input {
+  --color: var(--ion-color-primary);
+  --placeholder-color: var(--ion-color-tertiary);
+  font-size: 16px;
+}
+
+.register-input ion-icon {
+  color: var(--ion-color-tertiary);
+}
+
+/* NUEVO: Estilos para la grilla de inputs */
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Por defecto, una columna en móviles */
+  gap: 15px; /* Espacio entre los campos */
+  margin-bottom: 20px; /* Espacio antes del botón de registro */
+}
+
+/* Clase para que un input ocupe todo el ancho en la grilla */
+.full-width-input {
+  grid-column: 1 / -1; /* Ocupa todas las columnas disponibles */
+}
+
+
+/* Botón de registro (se mantiene igual) */
+.register-button {
+  width: 100%;
+  height: 50px;
+  --background: var(--ion-color-highlight);
+  --background-hover: #b8941f;
+  --color: var(--ion-color-primary);
+  --border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+}
+
+/* Enlace para ir a la página de inicio de sesión (se mantiene igual) */
+.login-prompt {
+  text-align: center;
+  margin-top: 30px;
+  color: var(--ion-color-primary);
+  font-size: 14px;
+}
+
+.login-link-text {
+  color: var(--ion-color-highlight);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link-text:hover {
+  color: #f4d03f;
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 480px) {
+  .register-card {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+
+  .register-title {
+    font-size: 1.8rem;
+  }
+  /* En móviles pequeños, mantenemos una sola columna */
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* NUEVO: Media query para pantallas medianas y grandes (donde se aplican las dos columnas) */
+@media (min-width: 600px) { /* Puedes ajustar este breakpoint si lo deseas */
+  .register-card {
+    max-width: 600px; /* Permitimos que la tarjeta sea un poco más ancha para las dos columnas */
+    padding: 40px 40px; /* Ajustamos el padding para más espacio */
+  }
+
+  .input-grid {
+    grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
+    gap: 20px 25px; /* Espacio vertical y horizontal entre los campos */
+  }
+
+  /* Aseguramos que solo Confirmar Contraseña ocupe todo el ancho si lo deseas */
+  .full-width-input {
+    grid-column: 1 / -1; /* Ocupa ambas columnas */
+  }
+
+  /* Si quisieras que todos los campos fueran de dos columnas, eliminarías full-width-input */
+  /* Si quisieras un layout diferente, ajustarías grid-template-columns */
+}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Fondo con degradado usando colores de la marca: gris oscuro a blanco/gris claro */
+   background: linear-gradient(
+  135deg,
+  var(--ion-color-primary) 0%,
+  var(--ion-color-primary)49.75%,
+  var(--ion-color-highlight) 49.75%,
+  var(--ion-color-highlight) 50.25%,
+  var(--ion-color-tertiary) 50.25%,
+  var(--ion-color-tertiary) 100%
+);
+  padding: 20px;
+}
+
+/* Tarjeta del formulario de registro */
+.register-card {
+  background: var(--ion-color-primary-contrast); /* Fondo blanco para la tarjeta */
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.359);
+  border: 1px solid var(--ion-color-highlight); /* Borde dorado */
+}
+
+/* Título del formulario */
+.register-title {
+  color: var(--ion-color-primary); /* Título negro */
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+/* Estilos para los campos de entrada */
+.register-input {
+  margin-bottom: 20px;
+  --background: var(--ion-color-secondary); /* Fondo gris claro para los inputs */
+  --border-radius: 12px;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --color: var(--ion-color-primary); /* Texto del input negro */
+}
+
+.register-input ion-input {
+  --color: var(--ion-color-primary); /* Color del texto del input */
+  --placeholder-color: var(--ion-color-tertiary); /* Color del placeholder gris */
+  font-size: 16px;
+}
+
+.register-input ion-icon {
+  color: var(--ion-color-tertiary); /* Color de los iconos de input gris */
+}
+
+/* Botón de registro */
+.register-button {
+  width: 100%;
+  height: 50px;
+  --background: var(--ion-color-highlight); /* Fondo dorado para el botón principal */
+  --background-hover: #b8941f; /* Dorado un poco más oscuro al pasar el mouse */
+  --color: var(--ion-color-primary); /* Texto del botón negro */
+  --border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3); /* Sombra dorada */
+}
+
+/* Enlace para ir a la página de inicio de sesión */
+.login-prompt {
+  text-align: center;
+  margin-top: 30px;
+  color: var(--ion-color-primary); /* Texto negro */
+  font-size: 14px;
+}
+
+.login-link-text {
+  color: var(--ion-color-highlight); /* Enlace dorado */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link-text:hover {
+  color: #f4d03f; /* Dorado más claro al pasar el mouse */
+}
+
+/* Media Queries para responsividad (similar a login) */
+@media (max-width: 480px) {
+  .register-card {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+
+  .register-title {
+    font-size: 1.8rem;
+  }
+}

@@ -1,53 +1,47 @@
+<ion-header [translucent]="false">
+  <ion-toolbar class="transparent-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="volver" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
-    <div class="login-container">
-        <div class="login-card">
+  <div class="login-container">
+    <div class="login-card">
 
-            <h1 class="login-title">Login</h1>
-            <form>
-                <ion-item class="login-input" lines="none">
-                    <ion-icon name="mail-outline" slot="start"></ion-icon>
-                    <ion-input 
-                        type="email" 
-                        placeholder="Email" 
-                        labelPlacement="floating">
+      <h1 class="login-title">Iniciar Sesión</h1>
+      <form>
+        <ion-item class="login-input" lines="none">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input
+            type="email"
+            placeholder="Correo electrónico"
+            labelPlacement="floating">
+          </ion-input>
+        </ion-item>
 
-                    </ion-input>
-                </ion-item>
+        <ion-item class="login-input" lines="none">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input
+            type="password"
+            placeholder="Contraseña"
+            labelPlacement="floating">
+          </ion-input>
+        </ion-item>
 
-                <ion-item class="login-input" lines="none">
-                    <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-                    <ion-input 
-                        type="password" 
-                        placeholder="Password"
-                        labelPlacement="floating">
-                    </ion-input>
-                </ion-item>
+        <ion-button class="login-button" expand="block">
+          Ingresar
+        </ion-button>
+      </form>
 
-                <ion-button class="login-button" expand="block" >
-                    Sign In
-                </ion-button>
-            </form>
+      <div class="forgot-password">
+        <a href="#" onclick="alert('Forgot password clicked')">¿Olvidaste tu contraseña?</a>
+      </div>
 
-            <div class="forgot-password">
-                <a href="#" onclick="alert('Forgot password clicked')">Forgot Password?</a>
-            </div>
-
-            <div class="divider">
-                <span>or</span>
-            </div>
-
-            <div class="social-login">
-                <div class="social-btn">
-                    <ion-icon name="logo-google"></ion-icon>
-                </div>
-                <div class="social-btn">
-                    <ion-icon name="logo-apple"></ion-icon>
-                </div>
-            </div>
-
-            <div class="register-link">
-                Don't have an account? <a href="#" >Sign Up</a>
-            </div>
-        </div>
+      <div class="register-prompt">
+        ¿No tienes cuenta? <a routerLink="/auth/register" class="register-link-text">¡Haz clic aquí para registrarte!</a>
+      </div>
     </div>
+  </div>
 </ion-content>

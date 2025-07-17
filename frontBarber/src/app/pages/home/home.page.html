@@ -1,90 +1,188 @@
-<ion-header [translucent]="true" class="custom-header">
+<ion-header [translucent]="true" class="main-header">
   <ion-toolbar>
-    <div class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col-4">
-          <img src="../../../assets/logoOne.jpg" alt="logo" class="logo-header" />
-        </div>
-        <div class="col-8 text-end" style="gap: 16px;">
-          <button routerLink="/auth/login"class="btn btn-outline-dark btn-sm" style="margin-right: 10px;">Iniciar sesion</button>
-          <button routerLink="/auth/register" class="btn btn-outline-dark btn-sm">Registrarse</button>
+    <div class="header-content">
+      <img src="../../../assets/logoOne.jpg" alt="Logo de la Barbería" class="header-logo" />
 
+      <div class="header-auth-section" *ngIf="!isLoggedIn">
+        <div class="header-buttons">
+          <ion-button routerLink="/auth/login" fill="outline" class="btn-primary-outline">Iniciar sesión</ion-button>
+          <ion-button routerLink="/auth/register" fill="solid" class="btn-primary-solid">Registrarse</ion-button>
         </div>
+      </div>
+
+      <div class="header-logged-in-section" *ngIf="isLoggedIn">
+        <ion-menu-button class="menu-button-custom"></ion-menu-button>
       </div>
     </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding main-content">
 
-  <div id="carouselExampleFade" class="carousel slide carousel-fade custom-carrusel" style="margin-top: 18px;">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="../../../assets/carrusel1.jpg" class="d-block w-100" alt="...">
+  <div class="carousel-section">
+    <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="../../../assets/carrusel1.jpg" class="d-block w-100 carousel-image" alt="Imagen de barbería 1">
+        </div>
+        <div class="carousel-item">
+          <img src="../../../assets/carrusel2.jpg" class="d-block w-100 carousel-image" alt="Imagen de barbería 2">
+        </div>
+        <div class="carousel-item">
+          <img src="../../../assets/carrusel3.avif" class="d-block w-100 carousel-image" alt="Imagen de barbería 3">
+        </div>
       </div>
-      <div class="carousel-item">
-        <img src="../../../assets/carrusel2.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="../../../assets/carrusel3.avif" class="d-block w-100" alt="...">
-      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
 
-  <h1>servicios</h1>
+  <div class="services-section">
+    <h2 class="section-title">SERVICIOS</h2>
+    <div class="services-grid">
+      <div class="service-card" (click)="openBookingModal()">
+        <img src="https://images.unsplash.com/photo-1596434311145-c4199c08006e?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Hombre recibiendo un corte de pelo clásico" class="service-image">
+        <h3 class="service-title">Corte Clásico</h3>
+        <p class="service-price">$ 30.000 COP</p>
+      </div>
+      <div class="service-card" (click)="openBookingModal()">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0mYPjDp5GOw3Lotl1LguEiYNN8z9SU2eXaw&s" alt="Barbero arreglando la barba de un cliente" class="service-image">
+        <h3 class="service-title">Arreglo de Barba</h3>
+        <p class="service-price">$ 20.000 COP</p>
+      </div>
+      <div class="service-card" (click)="openBookingModal()">
+        <img src="https://i.pinimg.com/736x/e8/35/7b/e8357b776553cc13da123651309a83a7.jpg" alt="Cabello teñido en una barbería" class="service-image">
+        <h3 class="service-title">Tintura</h3>
+        <p class="service-price">$ 50.000 COP</p>
+      </div>
+      <div class="service-card" (click)="openBookingModal()">
+        <img src="https://i.pinimg.com/1200x/05/f0/27/05f0271b699f734621834da08fcf4f6b.jpg" alt="Diseño y arreglo de cejas" class="service-image">
+        <h3 class="service-title">Diseño de Cejas</h3>
+        <p class="service-price">$ 15.000 COP</p>
+      </div>
+    </div>
+  </div>
 
-  <h2>Rhinoceros</h2>
-  <img alt="rhino standing near grass"
-    src="https://images.unsplash.com/flagged/photo-1556983257-71fddc36bc75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80" />
-  <p>
-    The rhinoceros gets its name from one of its most notable features: its horns. The word rhinoceros come from the
-    Greek words rhino meaning “nose” and ceros meaning “horn.” The number of horns that a rhino has varies on the
-    species. The two African species (the black rhino and the white rhino) and the Sumatran rhino have two horns, while
-    the Javan rhino and one-horned rhino have one horn.
-  </p>
+  <div class="location-section">
+    <h2 class="section-title">UBICACIÓN</h2>
+    <p>Encuéntranos en Mosquera, Cundinamarca. ¡Te esperamos!</p>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15891.80237731737!2d-74.2483844837583!3d4.707765181774312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9d50a3b1c67d%3A0xc3f1d8e2b8c9d0d!2sMosquera%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1701792000000!5m2!1ses!2sco"
+        width="100%"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
 
-  <h2>Sea Turtle</h2>
-  <img alt="brown sea turtle in water"
-    src="https://images.unsplash.com/photo-1573551089778-46a7abc39d9f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" />
-  <p>
-    Sea turtles are characterized by a large, streamlined shell and non-retractile head and limbs. Unlike other turtles,
-    sea turtles cannot pull their limbs and head inside their shells. Their limbs are flippers that are adapted for
-    swimming, so they are vulnerable while on land.
-  </p>
-
-  <h2>Giraffe</h2>
-  <img alt="giraffe sticking its tongue out"
-    src="https://images.unsplash.com/photo-1577114995803-d8ce0e2b4aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1746&q=80" />
-  <p>
-    Giraffes are known for their long, tall appearance. They have a small hump on their back like a camel and have a
-    spotted pattern similar to that of a leopard. Because of the combination of these features, some people called the
-    giraffe a “camel-leopard.” That’s where the giraffe’s species name “camelopardalis” comes from.
-  </p>
-
-  <h2>Elephant</h2>
-  <img alt="two grey elephants on grass plains during sunset"
-    src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1754&q=80" />
-  <p>
-    Elephants are the largest existing land animal, with massive bodies, large ears, and long trunks. Elephants’ long
-    trunks are multifunctional. They are used to pick up objects, trumpet warnings, greet other elephants, or suck up
-    water for drinking or bathing.
-  </p>
-
-  <h2>Dolphin</h2>
-  <img alt="black and white dolphin in water"
-    src="https://images.unsplash.com/photo-1607153333879-c174d265f1d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80" />
-  <p>
-    Dolphins range in color depending on the species, from white, pearl, and pink to darker shades of brown, gray, blue,
-    and black. They have smooth skin, flippers, and a dorsal fin. They have a long, slender snout with about 100 teeth
-    and a streamlined body. They have a single blowhole on top of their head, which has a flap that opens to reveal a
-    pair of nostrils. The dolphin uses these nostrils for breathing when it surfaces.
-  </p>
 </ion-content>
+
+<ion-modal [isOpen]="isBarberModalOpen">
+  <ng-template>
+    <ion-header class="modal-header">
+      <ion-toolbar>
+        <ion-title>Seleccione el barbero de su preferencia</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cancelBarberSelection()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content-custom">
+      <div class="barber-selection-grid">
+        <div class="barber-card" (click)="selectBarber('Pepe')">
+          <div class="barber-avatar"></div>
+          <p>PEPE</p>
+        </div>
+        <div class="barber-card" (click)="selectBarber('María')">
+          <div class="barber-avatar"></div>
+          <p>MARÍA</p>
+        </div>
+        <div class="barber-card" (click)="selectBarber('Juan')">
+          <div class="barber-avatar"></div>
+          <p>JUAN</p>
+        </div>
+        <div class="barber-card" (click)="selectBarber('Juan 2')">
+          <div class="barber-avatar"></div>
+          <p>JUAN 2</p>
+        </div>
+      </div>
+      <ion-button expand="block" class="modal-next-button" (click)="confirmBarberSelection()">Siguiente</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal [isOpen]="isDateTimeModalOpen">
+  <ng-template>
+    <ion-header class="modal-header">
+      <ion-toolbar>
+        <ion-title>Seleccione el día de su cita</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cancelDateTimeSelection()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content-custom ion-padding">
+      <ion-item class="modal-select-input" lines="none">
+        <ion-select placeholder="Año" labelPlacement="floating">
+          <ion-select-option value="2024">2024</ion-select-option>
+          <ion-select-option value="2025">2025</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="modal-select-input" lines="none">
+        <ion-select placeholder="Mes" labelPlacement="floating">
+          <ion-select-option value="enero">Enero</ion-select-option>
+          <ion-select-option value="julio">Julio</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="modal-select-input" lines="none">
+        <ion-select placeholder="Día" labelPlacement="floating">
+          <ion-select-option value="1">1</ion-select-option>
+          <ion-select-option value="16">16</ion-select-option>
+          <ion-select-option value="17">17</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="modal-select-input" lines="none">
+        <ion-select placeholder="Hora" labelPlacement="floating">
+          <ion-select-option value="9am">9:00 AM</ion-select-option>
+          <ion-select-option value="10am">10:00 AM</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button expand="block" class="modal-next-button" (click)="confirmDateTimeSelection()">Siguiente</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal [isOpen]="isInfoModalOpen">
+  <ng-template>
+    <ion-header class="modal-header">
+      <ion-toolbar>
+        <ion-title>Información</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cancelInfo()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content-custom ion-padding">
+      <ion-item class="modal-input" lines="none">
+        <ion-input type="tel" placeholder="Celular" labelPlacement="floating"></ion-input>
+      </ion-item>
+      <ion-item class="modal-input" lines="none">
+        <ion-input type="text" placeholder="Nombre" labelPlacement="floating"></ion-input>
+      </ion-item>
+      <p class="info-text">
+        Esta INFORMACIÓN es muy IMPORTANTE para NOSOTROS debido a que haremos una llamada de CONFIRMACIÓN del servicio. Si la llamada no es contestada puede que el servicio sea CANCELADO.
+      </p>
+      <ion-button expand="block" class="modal-reserve-button" (click)="makeReservation()">RESERVAR</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>

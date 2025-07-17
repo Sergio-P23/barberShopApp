@@ -1,146 +1,139 @@
+ion-header{
+    box-shadow: none;
+}
+
+.transparent-toolbar {
+  --background: transparent; /* Hace el fondo del toolbar transparente */
+  --border-width: 0; /* Elimina cualquier borde inferior si lo tiene */
+  --color: var(--ion-color-primary); /* Color del icono del botón de retroceso (negro) */
+  
+}
+
+/* Si quieres que el icono del botón de retroceso sea dorado para resaltar */
+.transparent-toolbar ion-back-button {
+    --color: var(--ion-color-primary-contrast); /* Color del icono dorado */
+}
+
+/* Asegura que el contenido no quede por debajo del header */
+ion-content {
+  --padding-top: 0; /* Asegúrate de que no haya padding superior en el content si el header es transparente */
+}
+
+
 .login-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #f6a801 0%, #ffffff 100%);
-    padding: 20px;
-        }
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Fondo con degradado usando colores de la marca: gris oscuro a blanco/gris claro */
+  background: linear-gradient(
+  135deg,
+  var(--ion-color-primary) 0%,
+  var(--ion-color-primary)49.75%,
+  var(--ion-color-highlight) 49.75%,
+  var(--ion-color-highlight) 50.25%,
+  var(--ion-color-tertiary) 50.25%,
+  var(--ion-color-tertiary) 100%
+);
+
+  padding: 20px;
+}
 
 .login-card {
-    background: #e1e1e1;
-    border-radius: 20px;
-    padding: 40px 30px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.359);
-    border: 1px solid rgb(182, 125, 4);
+  background: var(--ion-color-primary-contrast); /* Fondo blanco para la tarjeta */
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.359);
+  border: 1px solid var(--ion-color-highlight); /* Borde dorado */
 }
 
 .login-title {
-    color: #000000;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 40px;
-    letter-spacing: 1px;
+  color: var(--ion-color-primary); /* Título negro */
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
 }
 
 .login-input {
-    margin-bottom: 20px;
-    --background: #b8b8b8;
-    --border-radius: 12px;
-    --padding-start: 15px;
-     --padding-end: 15px;
-    --color: #333;  
+  margin-bottom: 20px;
+  --background: var(--ion-color-secondary); /* Fondo gris claro para los inputs */
+  --border-radius: 12px;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --color: var(--ion-color-primary); /* Texto del input negro */
 }
 
 .login-input ion-input {
-    --color: #333;
-    --placeholder-color: #666;
-    font-size: 16px;
+  --color: var(--ion-color-primary); /* Color del texto del input */
+  --placeholder-color: var(--ion-color-tertiary); /* Color del placeholder gris */
+  font-size: 16px;
+}
+
+.login-input ion-icon {
+  color: var(--ion-color-tertiary); /* Color de los iconos de input gris */
 }
 
 .login-button {
-    width: 100%;
-    height: 50px;
-    --background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
-    --background-hover: linear-gradient(135deg, #b8941f 0%, #d4af37 100%);
-    --color: #000;
-    --border-radius: 12px;
-    font-weight: 600;
-    font-size: 16px;
-    letter-spacing: 0.5px;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  width: 100%;
+  height: 50px;
+  --background: var(--ion-color-highlight); /* Fondo dorado para el botón principal */
+  --background-hover: #b8941f; /* Dorado un poco más oscuro al pasar el mouse */
+  --color: var(--ion-color-primary); /* Texto del botón negro */
+  --border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3); /* Sombra dorada */
 }
 
 .forgot-password {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .forgot-password a {
-    color: #d4af37;
-    text-decoration: none;
-    font-size: 14px;
+  color: var(--ion-color-highlight); /* Enlace dorado */
+  text-decoration: none;
+  font-size: 14px;
 }
 
 .forgot-password a:hover {
-    color: #f4d03f;
+  color: #f4d03f; /* Dorado más claro al pasar el mouse */
 }
 
-.divider {
-    display: flex;
-    align-items: center;
-    margin: 30px 0;
+/* Eliminamos los estilos del divisor y botones sociales, ya que se quitaron del HTML */
+/* .divider, .social-login, .social-btn { display: none; } */
+
+
+.register-prompt { /* Nueva clase para el contenedor del mensaje de registro */
+  text-align: center;
+  margin-top: 30px;
+  color: var(--ion-color-primary); /* Texto negro */
+  font-size: 14px;
 }
 
-.divider::before,
-.divider::after {
-    content: '';
-    flex: 1;
-    height: 2px;
-    background: rgba(166, 136, 37, 0.3);
+.register-link-text { /* Nueva clase para el texto del enlace de registro */
+  color: var(--ion-color-highlight); /* Enlace dorado */
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.divider span {
-    color: #d4af37;
-    padding: 0 15px;
-    font-size: 15px;
-}
-
-.social-login {
-     display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.social-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-    color: #d4af37;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.social-btn:hover {
-    background: rgba(212, 175, 55, 0.1);
-    border-color: #d4af37;
-    transform: scale(1.10);
-}
-
-.register-link {
-    text-align: center;
-    margin-top: 30px;
-    color: #ccc;
-    font-size: 14px;
-}
-
-.register-link a {
-    color: #d4af37;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.register-link a:hover {
-    color: #f4d03f;
+.register-link-text:hover {
+  color: #f4d03f; /* Dorado más claro al pasar el mouse */
 }
 
 @media (max-width: 480px) {
-    .login-card {
-        padding: 30px 20px;
-        margin: 10px;
-    }
-            
-    .login-title {
-        font-size: 1.8rem;
-    }
+  .login-card {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+
+  .login-title {
+    font-size: 1.8rem;
+  }
 }
