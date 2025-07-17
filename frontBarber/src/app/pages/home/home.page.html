@@ -1,4 +1,8 @@
-<ion-header mode="ios" [translucent]="true" class="main-header">
+
+
+<ion-content [fullscreen]="true" class=" main-content">
+
+  <ion-header mode="ios"  class="main-header">
   <ion-toolbar>
     <div class="header-content">
       <img src="../../../assets/logoOne.jpg" alt="Logo de la Barbería" class="header-logo" />
@@ -16,8 +20,6 @@
     </div>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true" class="ion-padding main-content">
 
   <div class="carousel-section">
     <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -45,7 +47,7 @@
 
   <div class="services-section">
     <h2 class="section-title">SERVICIOS</h2>
-    <div class="services-grid">
+    <div class="services-grid mt-3" *ngFor="let item of [1,1,1,1,1,1,1]">
       <div class="service-card" (click)="openBookingModal()">
         <img
           src="https://images.unsplash.com/photo-1596434311145-c4199c08006e?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
