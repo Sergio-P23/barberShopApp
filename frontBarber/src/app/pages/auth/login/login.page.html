@@ -10,18 +10,20 @@
                         type="email" 
                         placeholder="Email" 
                         labelPlacement="floating">
-                        
+
                     </ion-input>
                 </ion-item>
 
                 <ion-item class="login-input" lines="none">
+                    <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
                     <ion-input 
                         type="password" 
-                        placeholder="Password">
+                        placeholder="Password"
+                        labelPlacement="floating">
                     </ion-input>
                 </ion-item>
 
-                <ion-button class="login-button" expand="block">
+                <ion-button class="login-button" expand="block" >
                     Sign In
                 </ion-button>
             </form>
@@ -35,19 +37,16 @@
             </div>
 
             <div class="social-login">
-                <div class="social-btn" onclick="alert('Google login')">
+                <div class="social-btn">
                     <ion-icon name="logo-google"></ion-icon>
                 </div>
-                <div class="social-btn" onclick="alert('Facebook login')">
-                    <ion-icon name="logo-facebook"></ion-icon>
-                </div>
-                <div class="social-btn" onclick="alert('Apple login')">
+                <div class="social-btn">
                     <ion-icon name="logo-apple"></ion-icon>
                 </div>
             </div>
 
             <div class="register-link">
-                Don't have an account? <a href="#" onclick="alert('Register clicked')">Sign Up</a>
+                Don't have an account? <a href="#" >Sign Up</a>
             </div>
         </div>
     </div>

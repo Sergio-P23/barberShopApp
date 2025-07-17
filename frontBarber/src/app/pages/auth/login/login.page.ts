@@ -5,7 +5,7 @@ import { IonContent, IonItem,IonInput, IonButton, IonIcon } from '@ionic/angular
 
 
 import { addIcons } from 'ionicons';
-import { lockClosed, lockClosedOutline, mailOutline } from 'ionicons/icons';
+import { lockClosed, lockClosedOutline, mailOutline, logoGoogle, logoApple } from 'ionicons/icons';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -18,7 +18,10 @@ export class LoginPage implements OnInit {
   constructor() { 
     addIcons({
       mailOutline,
-      lockClosedOutline
+      lockClosedOutline,
+      logoGoogle,
+      logoApple
+
     })
   }
 
