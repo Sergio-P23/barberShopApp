@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular'; // Este importa TODO lo de Ionic
 
 import { addIcons } from 'ionicons'; // Importa addIcons
-import { menuOutline } from 'ionicons/icons';
+import { menuOutline, logOutOutline } from 'ionicons/icons';
 
 import { RouterModule } from '@angular/router';
 
@@ -106,6 +106,8 @@ export class ServiciosPage implements OnInit {
   constructor() {
     addIcons({
       menuOutline, // Icono de hamburguesa
+      logOutOutline
+      
         });
    }
 
