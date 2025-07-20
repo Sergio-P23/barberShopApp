@@ -5,7 +5,7 @@ import { IonContent, IonItem, IonInput, IonButton, IonIcon, IonHeader, IonBackBu
 
 import { addIcons } from 'ionicons';
 // ¡Importa chevronBackOutline aquí!
-import { lockClosed, lockClosedOutline, mailOutline, logoGoogle, logoApple, chevronBackOutline } from 'ionicons/icons'; // 
+import { lockClosed, lockClosedOutline, mailOutline, chevronBackOutline } from 'ionicons/icons'; // 
 
 @Component({
   selector: 'app-login',
@@ -20,8 +20,6 @@ export class LoginPage implements OnInit {
     addIcons({
       mailOutline,
       lockClosedOutline,
-      logoGoogle,
-      logoApple,
       chevronBackOutline // ¡Añádelo aquí para que Ionic pueda usarlo! 
     });
   }
