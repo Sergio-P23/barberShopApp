@@ -1,9 +1,4 @@
-.botones {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-left: 10px;
-}
+
 
 
 
@@ -50,6 +45,17 @@
   font-size: 2.5em; /* Tamaño del icono */
   --padding-end: 0;
   --padding-start: 0;
+}
+
+.menu-button-fotter {
+  font-size: 1.5rem; /* Tamaño del icono */
+  text-align: center;
+  margin-top: 400px;
+}
+
+.btn-primary-solid {
+  --background: var(--ion-color-highlight);
+  --color: var(--ion-color-primary);
 }
 
 
@@ -127,9 +133,12 @@
   font-weight: 600;
 }
 
-ion-col {
+.botones {
   display: flex;
-  text-align: center;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: 10px;
 }
+
 
 
