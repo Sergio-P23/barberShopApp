@@ -28,13 +28,6 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     IonicModule,
     RouterModule,
-    // IonButtons, 
-    // IonContent, 
-    // IonHeader, 
-    // IonMenu, 
-    // IonMenuButton, 
-    // IonTitle, 
-    // IonToolbar
    ]
 })
 export class ServiciosPage implements OnInit {

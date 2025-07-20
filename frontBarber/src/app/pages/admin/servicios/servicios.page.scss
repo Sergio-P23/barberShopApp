@@ -84,15 +84,15 @@
 }
 
 .service-card {
-  // background-color: var(--ion-color-primary-contrast);
-  background: #fff !important;
-  background-color: #fff !important;
+  background-color: var(--ion-color-primary-contrast);
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 15px;
   text-align: center;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: pointer; /* Añadir cursor de puntero para indicar que es clickeable */
+
+  height: 350px;
 }
 
 .service-card:hover {
