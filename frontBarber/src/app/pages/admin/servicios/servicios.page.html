@@ -5,9 +5,15 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <a routerLink="/admin/servicios" class="register-link-text"><p>servicios</p></a>
-    <a routerLink="/admin/barberos" class="register-link-text"><p>barberos</p></a>
-    <a routerLink="/admin/reservas" class="register-link-text"><p>reservas</p></a>
+    <a routerLink="/admin/servicios" class="register-link-text">
+      <p>servicios</p>
+    </a>
+    <a routerLink="/admin/barberos" class="register-link-text">
+      <p>barberos</p>
+    </a>
+    <a routerLink="/admin/reservas" class="register-link-text">
+      <p>reservas</p>
+    </a>
   </ion-content>
 </ion-menu>
 
@@ -29,24 +35,32 @@
   <div class="services-section">
     <h2 class="section-title">SERVICIOS</h2>
     <div class="services-grid mt-3">
-      <ion-list class="service-card">
-        <div class="services-grid mt-3">
-          <ion-item class="service-card" *ngFor="let servicio of servicios">
-            <ion-label>
-              <img src="{{servicio.imagen}}" alt="{{servicio.titulo}}" class="service-image">
-              <h2 class="service-title">{{ servicio.titulo }}</h2>
-              <p class="service-price">{{ servicio.descripcion }}</p>
-              <p class="service-price">{{servicio.precio}}</p>
-            </ion-label>
-            <div class="botones">
-              <ion-button color="warning" fill="outline" size="small" (click)="editar(servicio)">
-                Editar
-              </ion-button>
-              <ion-button color="danger" fill="outline" size="small" (click)="confirmarBorrado(servicio)">
-                Borrar
-              </ion-button>
-            </div>
-          </ion-item>
+      <ion-list class="services-grid">
+        <div class="service-card" *ngFor="let servicio of servicios">
+            <ion-grid>
+              <ion-row>
+                <ion-label>
+                  <img src="{{servicio.imagen}}" alt="{{servicio.titulo}}" class="service-image">
+                  <h2 class="service-title">{{ servicio.titulo }}</h2>
+                  <p class="service-price">{{ servicio.descripcion }}</p>
+                  <p class="service-price">{{servicio.precio}}</p>
+                </ion-label>
+              </ion-row>
+              <ion-row>
+                <div class="botones">
+                  <ion-col>
+                    <ion-button color="warning" fill="outline" size="small" (click)="editar(servicio)">
+                      Editar
+                    </ion-button>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button color="danger" fill="outline" size="small" (click)="confirmarBorrado(servicio)">
+                      Borrar
+                    </ion-button>
+                  </ion-col>
+                </div>
+              </ion-row>
+            </ion-grid>
 
 
         </div>

@@ -76,6 +76,7 @@
 }
 
 .services-grid {
+  background-color: #fff;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
@@ -83,7 +84,9 @@
 }
 
 .service-card {
-  background-color: var(--ion-color-primary-contrast);
+  // background-color: var(--ion-color-primary-contrast);
+  background: #fff !important;
+  background-color: #fff !important;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 15px;
@@ -124,7 +127,9 @@
   font-weight: 600;
 }
 
-ion-item {
-  background-color: blue;
+ion-col {
+  display: flex;
+  text-align: center;
 }
+
 
