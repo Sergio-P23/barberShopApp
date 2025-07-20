@@ -103,7 +103,7 @@ export class ServiciosPage implements OnInit {
   }
 
 
-  constructor() {
+  constructor(){
     addIcons({
       menuOutline, // Icono de hamburguesa
       logOutOutline
