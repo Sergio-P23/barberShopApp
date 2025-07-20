@@ -4,3 +4,127 @@
   gap: 5px;
   margin-left: 10px;
 }
+
+
+
+
+
+/* Encabezado (se mantiene) */
+.main-header {
+  --background: var(--ion-color-primary);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.main-header ion-toolbar {
+  --background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  padding: 0 16px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-logo {
+  height: 60px;
+  object-fit: contain;
+  /* margin-right: 48px; /* Considerar si este margen es necesario o el gap en header-content */
+}
+
+.header-logged-in-section {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre los botones o entre logo y botón de menú */
+}
+
+.menu-button-custom {
+  --color: var(--ion-color-highlight); /* Color dorado para el icono de hamburguesa */
+  font-size: 2.5em; /* Tamaño del icono */
+  --padding-end: 0;
+  --padding-start: 0;
+}
+
+
+//content
+/* Contenido Principal (se mantiene) */
+.main-content {
+  --background: var(--ion-color-secondary);
+  padding: 0px;
+}
+
+.services-section {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.section-title {
+  color: var(--ion-color-primary);
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+.service-card {
+  background-color: var(--ion-color-primary-contrast);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer; /* Añadir cursor de puntero para indicar que es clickeable */
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al pasar el mouse */
+}
+
+.service-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.service-title {
+  color: var(--ion-color-primary);
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.service-price {
+  color: var(--ion-color-highlight);
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.register-link-text { /* Nueva clase para el texto del enlace de registro */
+  color: var(--ion-color-highlight); /* Enlace dorado */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+ion-item {
+  background-color: blue;
+}
+

@@ -23,11 +23,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/admin/servicios/servicios.page').then( m => m.ServiciosPage)
   },
   {
-    path: 'barberos',
+    path: 'admin/barberos',
     loadComponent: () => import('./pages/admin/barberos/barberos.page').then( m => m.BarberosPage)
   },
   {
-    path: 'reservas',
+    path: 'admin/reservas',
     loadComponent: () => import('./pages/admin/reservas/reservas.page').then( m => m.ReservasPage)
   }
 

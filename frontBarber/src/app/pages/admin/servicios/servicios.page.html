@@ -1,29 +1,60 @@
-<ion-header>
+<ion-menu side="end" contentId="main-content" class="main-header">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <a routerLink="/admin/servicios" class="register-link-text"><p>servicios</p></a>
+    <a routerLink="/admin/barberos" class="register-link-text"><p>barberos</p></a>
+    <a routerLink="/admin/reservas" class="register-link-text"><p>reservas</p></a>
+  </ion-content>
+</ion-menu>
+
+<ion-header class="main-header">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Servicios</ion-title>
+    <div class="header-content">
+      <img src="../../../assets/logoOne.jpg" alt="Logo de la Barbería" class="header-logo" />
+
+      <div class="header-logged-in-section">
+        <ion-menu-button class="menu-button-custom"></ion-menu-button>
+      </div>
+
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-list>
-    <ion-item *ngFor="let servicio of servicios">
-      <ion-label>
-        <h2>{{ servicio.titulo }}</h2>
-        <p>{{ servicio.descripcion }}</p>
-      </ion-label>
-      <div class="botones">
-        <ion-button color="warning" fill="outline" size="small" (click)="editar(servicio)">
-          Editar
-        </ion-button>
-        <ion-button color="danger" fill="outline" size="small" (click)="confirmarBorrado(servicio)">
-          Borrar
-        </ion-button>
-      </div>
-    </ion-item>
-  </ion-list>
+<ion-content class=" main-content" id="main-content">
+
+  <div class="services-section">
+    <h2 class="section-title">SERVICIOS</h2>
+    <div class="services-grid mt-3">
+      <ion-list class="service-card">
+        <div class="services-grid mt-3">
+          <ion-item class="service-card" *ngFor="let servicio of servicios">
+            <ion-label>
+              <img src="{{servicio.imagen}}" alt="{{servicio.titulo}}" class="service-image">
+              <h2 class="service-title">{{ servicio.titulo }}</h2>
+              <p class="service-price">{{ servicio.descripcion }}</p>
+              <p class="service-price">{{servicio.precio}}</p>
+            </ion-label>
+            <div class="botones">
+              <ion-button color="warning" fill="outline" size="small" (click)="editar(servicio)">
+                Editar
+              </ion-button>
+              <ion-button color="danger" fill="outline" size="small" (click)="confirmarBorrado(servicio)">
+                Borrar
+              </ion-button>
+            </div>
+          </ion-item>
+
+
+        </div>
+
+      </ion-list>
+    </div>
+  </div>
+
 
   <ion-button expand="block" (click)="crear()">Crear Servicio</ion-button>
 
