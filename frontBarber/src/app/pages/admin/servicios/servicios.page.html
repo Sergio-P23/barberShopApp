@@ -66,7 +66,33 @@
   <ion-button expand="block" (click)="crear()">Crear Servicio</ion-button>
 
   <!-- Modal de Confirmación -->
-  <ion-alert [isOpen]="mostrarAlerta" header="Confirmar eliminación"
-    message="¿Estás seguro de que deseas borrar este servicio?" [buttons]="botonesAlerta">
-  </ion-alert>
+  <ion-modal [isOpen]="mostrarModalBorrar" cssClass="modal-confirmacion" (didDismiss)="mostrarModalBorrar = false">
+    <ng-template>
+      <ion-content class="ion-padding modal-content modal-style">
+        <h2>¿Estás seguro de borrar el servicio?</h2>
+        <p style="margin-top: 50px; font-size: 1.2rem;"><strong>{{ servicioSeleccionado?.titulo }}</strong></p>
+
+        <div class="modal-botones">
+          <ion-button expand="block" color="medium" (click)="mostrarModalBorrar = false">Cancelar</ion-button>
+          <ion-button expand="block" color="danger" (click)="borrar()">Sí, borrar</ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Modal de editas -->
+  <ion-modal [isOpen]="mostrarModalEditar" cssClass="modal-confirmacion" (didDismiss)="mostrarModalEditar = false">
+    <ng-template>
+      <ion-content class="ion-padding modal-content modal-style">
+        <h2>logica editar</h2>
+
+        <div class="modal-botones">
+          <ion-button expand="block" color="medium" (click)="mostrarModalEditar = false">Cancelar</ion-button>
+          <ion-button expand="block" color="danger" (click)="borrar()">Sí, borrar</ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
 </ion-content>

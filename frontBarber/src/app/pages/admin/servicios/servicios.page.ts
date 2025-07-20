@@ -55,39 +55,24 @@ export class ServiciosPage implements OnInit {
     },
   ];
 
-  mostrarAlerta = false;
+  mostrarModalBorrar = false;
+  mostrarModalEditar = false;
   servicioSeleccionado: any = null;
-
-  // ✅ Este arreglo será asignado dinámicamente antes de abrir el alerta
-  botonesAlerta: any[] = [];
 
   confirmarBorrado(servicio: any) {
     this.servicioSeleccionado = servicio;
-    this.botonesAlerta = [
-      {
-        text: 'No',
-        role: 'cancel',
-        handler: () => {
-          this.mostrarAlerta = false;
-        }
-      },
-      {
-        text: 'Sí',
-        handler: () => {
-          this.borrar();
-        }
-      }
-    ];
-    this.mostrarAlerta = true;
+    this.mostrarModalBorrar = true;
   }
 
   borrar() {
     this.servicios = this.servicios.filter(s => s.id !== this.servicioSeleccionado.id);
-    this.mostrarAlerta = false;
+    this.mostrarModalBorrar = false;
+    this.servicioSeleccionado = null;
   }
 
   editar(servicio: any) {
-    console.log('Editar servicio:', servicio);
+    this.servicioSeleccionado = servicio;
+    this.mostrarModalEditar = true;
   }
 
   crear() {
