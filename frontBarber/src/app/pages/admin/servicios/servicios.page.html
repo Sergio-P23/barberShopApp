@@ -50,7 +50,7 @@
           <p class="service-price">{{ servicio.descripcion }}</p>
           <p class="service-price">{{servicio.precio}}</p>
           <div class="botones">
-            <ion-button color="warning" fill="outline" size="small" (click)="editar(servicio)">
+            <ion-button color="warning" fill="outline" size="small" (click)="abrirModalEditar(servicio)">
               Editar
             </ion-button>
             <ion-button color="danger" fill="outline" size="small" (click)="confirmarBorrado(servicio)">
@@ -80,16 +80,91 @@
     </ng-template>
   </ion-modal>
 
-  <!-- Modal de editas -->
-  <ion-modal [isOpen]="mostrarModalEditar" cssClass="modal-confirmacion" (didDismiss)="mostrarModalEditar = false">
+  <!-- Modal de editar -->
+  <ion-modal [isOpen]="mostrarModalEditar" cssClass="modal-editar" (didDismiss)="mostrarModalEditar = false">
     <ng-template>
-      <ion-content class="ion-padding modal-content modal-style">
-        <h2>logica editar</h2>
 
-        <div class="modal-botones">
-          <ion-button expand="block" color="medium" (click)="mostrarModalEditar = false">Cancelar</ion-button>
-          <ion-button expand="block" color="danger" (click)="borrar()">Sí, borrar</ion-button>
-        </div>
+      <ion-header class="modal-editar-header">
+        <ion-toolbar class="modal-editar-header">
+          <ion-title>Editar Servicio</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-editar-content">
+        <form [formGroup]="editarForm" (ngSubmit)="guardarCambios()" > 
+          <div class="input-grid" >
+
+            <!-- Campo Título -->
+            <ion-item class="editar-input">
+              <ion-label position="stacked">Título *</ion-label>
+              <ion-input type="text" formControlName="titulo" placeholder="Ingresa el título del servicio"
+                [class.ion-invalid]="editarForm.get('titulo')?.invalid && editarForm.get('titulo')?.touched">
+              </ion-input>
+            </ion-item>
+            <ion-note color="danger" *ngIf="editarForm.get('titulo')?.invalid && editarForm.get('titulo')?.touched">
+              El título es obligatorio
+            </ion-note>
+
+            <!-- Campo Descripción -->
+            <ion-item class="editar-input">
+              <ion-label position="stacked">Descripción *</ion-label>
+              <ion-textarea formControlName="descripcion" placeholder="Describe el servicio..." rows="3"
+                [class.ion-invalid]="editarForm.get('descripcion')?.invalid && editarForm.get('descripcion')?.touched">
+              </ion-textarea>
+            </ion-item>
+            <ion-note color="danger"
+              *ngIf="editarForm.get('descripcion')?.invalid && editarForm.get('descripcion')?.touched">
+              La descripción es obligatoria
+            </ion-note>
+
+            <!-- Campo Precio -->
+            <ion-item class="editar-input">
+              <ion-label position="stacked">Precio ($) *</ion-label>
+              <ion-input type="text" formControlName="precio" placeholder="0" min="0" step="1"
+                [class.ion-invalid]="editarForm.get('precio')?.invalid && editarForm.get('precio')?.touched">
+              </ion-input>
+            </ion-item>
+            <ion-note color="danger" *ngIf="editarForm.get('precio')?.invalid && editarForm.get('precio')?.touched">
+              <span *ngIf="editarForm.get('precio')?.errors?.['required']">El precio es obligatorio</span>
+              <span *ngIf="editarForm.get('precio')?.errors?.['min']">El precio debe ser mayor a 0</span>
+            </ion-note>
+
+            <!-- Campo Imagen -->
+            <ion-item class="editar-input">
+              <ion-label position="stacked">Imagen del servicio</ion-label>
+              <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput
+                style="margin-top: 10px;">
+            </ion-item>
+
+            <!-- Preview de imagen actual o nueva -->
+            <div *ngIf="imagenPreview || servicioActual?.imagen" class="image-preview">
+              <img [src]="imagenPreview || servicioActual?.imagen" alt="Preview"
+                style="width: 100%; max-width: 200px; height: 150px; object-fit: cover; border-radius: 8px; margin-top: 10px;">
+              <ion-button fill="clear" color="danger" size="small" (click)="eliminarImagen()">
+                <ion-icon name="trash" slot="start"></ion-icon>
+                Eliminar imagen
+              </ion-button>
+            </div>
+
+            <!-- Botones del formulario -->
+            <div class="modal-editar-botones">
+              <ion-button expand="block" color="success" type="submit" [disabled]="editarForm.invalid || guardando">
+                <ion-icon name="save" slot="start"></ion-icon>
+                <span *ngIf="!guardando">Guardar Cambios</span>
+                <span *ngIf="guardando">Guardando...</span>
+              </ion-button>
+
+              <ion-button expand="block" fill="outline" color="medium" (click)="cancelarEdicion()">
+                <ion-icon name="close" slot="start"></ion-icon>
+                Cancelar
+              </ion-button>
+            </div>
+
+           
+
+          </div>
+        </form>
+
       </ion-content>
     </ng-template>
   </ion-modal>
