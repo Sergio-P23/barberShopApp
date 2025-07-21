@@ -62,3 +62,81 @@
   --background: var(--ion-color-highlight);
   --color: var(--ion-color-primary);
 }
+
+
+
+//contenido
+.main-content {
+  --background: var(--ion-color-secondary);
+  padding: 0px;
+}
+
+.services-section {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.services-grid {
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, max-content));
+  gap: 20px;
+  justify-content: center;
+  
+}
+
+.section-title {
+  color: var(--ion-color-primary);
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.service-card {
+  background-color: var(--ion-color-primary-contrast);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer; /* Añadir cursor de puntero para indicar que es clickeable */
+  
+  height: 500px;
+  max-width: 400px;
+  margin-left: 50px;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al pasar el mouse */
+}
+
+.service-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.service-title {
+  color: var(--ion-color-primary);
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+.botones {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 350px;
+
+  justify-content: center;
+  margin: 0 auto;            
+}
+

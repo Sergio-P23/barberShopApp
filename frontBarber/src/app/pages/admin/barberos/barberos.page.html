@@ -38,21 +38,27 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" id="main-content">
-  <ion-list>
-    <ion-item *ngFor="let barbero of barberos">
-      <ion-avatar slot="start">
-        <img [src]="barbero.foto" alt="Foto del barbero" />
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ barbero.nombre }}</h2>
-      </ion-label>
-      <div class="botones">
-        <ion-button color="warning" fill="outline" size="small" (click)="editar(barbero)">Editar</ion-button>
-        <ion-button color="danger" fill="outline" size="small" (click)="confirmarBorrado(barbero)">Borrar</ion-button>
-      </div>
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-padding main-content" id="main-content">
+  <div class="services-section">
+    <h2 class="section-title">BARBEROS</h2>
+    <div class="services-section">
+      <ion-list class="services-grid mt-3 mb-5">
+        <div class="service-card mb-2" *ngFor="let barbero of barberos">
+          <img src="{{barbero.foto}}" alt="Foto del barbero" class="service-image">
+          <h2 class="service-title">{{barbero.nombre}}</h2>
+
+          <div class="botones">
+            <ion-button color="warning" fill="outline" size="small" (click)="editar(barbero)">Editar</ion-button>
+            <ion-button color="danger" fill="outline" size="small"
+              (click)="confirmarBorrado(barbero)">Borrar</ion-button>
+          </div>
+        </div>
+      </ion-list>
+    </div>
+  </div>
+
+
+
 
   <ion-button expand="block" (click)="crear()">Agregar Barbero</ion-button>
 

@@ -34,6 +34,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
    ]
 })
 export class ServiciosPage implements OnInit {
+
+  constructor( private fb: FormBuilder,){
+    this.inicializarFormulario();
+
+    addIcons({
+      menuOutline, // Icono de hamburguesa
+      logOutOutline
+      
+        });
+  }
+
+  ngOnInit() {
+  }  
+
+
     servicios = [
     {
       id: 1,
@@ -180,26 +195,6 @@ export class ServiciosPage implements OnInit {
     this.servicioActual = null;
   }
 
-
-
-
-
-
-
-
-//1111111111111111111111111111111111111111111111111
-  constructor( private fb: FormBuilder,){
-    this.inicializarFormulario();
-
-    addIcons({
-      menuOutline, // Icono de hamburguesa
-      logOutOutline
-      
-        });
-  }
-
-  ngOnInit() {
-  }
 
 
   confirmarBorrado(servicio: any) {

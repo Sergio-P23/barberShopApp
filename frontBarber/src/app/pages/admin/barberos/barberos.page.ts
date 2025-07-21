@@ -45,12 +45,12 @@ export class BarberosPage implements OnInit {
     {
       id: 1,
       nombre: 'Carlos Sánchez',
-      foto: 'https://via.placeholder.com/100x100?text=Carlos'
+      foto: 'https://www.giomrbarber.com/wp-content/uploads/2022/11/giovanny-hernandez.jpg'
     },
     {
       id: 2,
       nombre: 'Luis Pérez',
-      foto: 'https://via.placeholder.com/100x100?text=Luis'
+      foto: 'https://thumbs.dreamstime.com/b/barberos-de-edad-p…zados-en-la-peluquer%C3%ADa-moderna-231500500.jpg'
     }
   ];
 
@@ -77,7 +77,7 @@ export class BarberosPage implements OnInit {
     const nuevoBarbero = {
       id: nuevoId,
       nombre: 'Nuevo Barbero',
-      foto: 'https://via.placeholder.com/100x100?text=Nuevo'
+      foto: 'https://tse3.mm.bing.net/th/id/OIP.YbjJkPQmvm-LdJniAhJ78gHaG8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3'
     };
     this.barberos.push(nuevoBarbero);
   }

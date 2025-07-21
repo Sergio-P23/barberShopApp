@@ -44,7 +44,7 @@
     <h2 class="section-title">SERVICIOS</h2>
     <div class="services-grid mt-3">
       <ion-list class="services-grid">
-        <div class="service-card" *ngFor="let servicio of servicios">
+        <div class="service-card mb-3" *ngFor="let servicio of servicios">
           <img src="{{servicio.imagen}}" alt="{{servicio.titulo}}" class="service-image">
           <h2 class="service-title">{{ servicio.titulo }}</h2>
           <p class="service-price">{{ servicio.descripcion }}</p>
@@ -63,7 +63,7 @@
   </div>
 
 
-  <ion-button expand="block" (click)="crear()">Crear Servicio</ion-button>
+  <ion-button expand="block" (click)="crear()">Agregar Servicio</ion-button>
 
   <!-- Modal de Confirmación -->
   <ion-modal [isOpen]="mostrarModalBorrar" cssClass="modal-confirmacion" (didDismiss)="mostrarModalBorrar = false">
