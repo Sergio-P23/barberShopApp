@@ -140,3 +140,157 @@
   margin: 0 auto;            
 }
 
+
+//modal confirmacion
+.modal-confirmacion::part(content) {
+  --background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(218,165,32, 0.3);
+  padding: 20px;
+  max-width: 300px;
+  max-height: 450px;
+  margin: auto;
+}
+
+.modal-style {
+  --background: #fff;
+  --color: #000;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+  text-align: center;
+  background-color: #fff;
+}
+
+.modal-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 150px;
+}
+
+
+//editar
+
+//modal editar
+
+.modal-editar::part(content) {
+  --background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(218,165,32, 0.3);
+  padding: 20px;
+  max-width: 500px;
+  max-height: 450px;
+  margin: auto;
+}
+
+.modal-editar-header {
+  --background: rgb(255, 255, 255);
+  --color: rgb(11, 4, 4);
+  text-align: center;
+} 
+
+.modal-editar-content{
+  --background: rgb(255, 255, 255);
+  --color: rgb(11, 4, 4);
+  --max-width: 500px;
+  --max-height: 90vh;
+  --border-radius: 16px;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Por defecto, una columna en móviles */
+  gap: 15px; /* Espacio entre los campos */
+  margin-bottom: 20px; /* Espacio antes del botón de registro */
+  padding-top: 30px;
+}
+
+/* Estilos para los campos de entrada individuales (se mantienen en general) */
+.editar-input {
+  margin-bottom: 8px; /* Mantener margen inferior para espaciado vertical */
+  --background: var(--ion-color-secondary);
+  --border-radius: 12px;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --color: var(--ion-color-primary);
+  width: 100%; /* Asegura que cada item ocupe el espacio de su columna */
+
+  --border-style: none;
+  --inner-padding-end: 0;
+  
+}
+
+.editar-input ion-input {
+  --color: var(--ion-color-primary);
+  --placeholder-color: var(--ion-color-tertiary);
+  font-size: 16px;
+}
+
+.editar-input ion-icon {
+  color: var(--ion-color-tertiary);
+}
+
+.modal-editar-botones {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.image-preview {
+  text-align: center;
+  margin: 16px 0;
+}
+
+ion-note {
+  margin-left: 16px;
+  font-size: 12px;
+}
+
+.ion-invalid {
+  --border-color: var(--ion-color-danger);
+  --color: var(--ion-color-danger);
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+input[type="file"]:hover {
+  border-color: var(--ion-color-primary);
+}
+
+/* Scroll del modal principal */
+.modal-editar-content {
+  /* Scroll para Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 transparent;
+}
+
+/* Scroll para Webkit (Chrome, Safari, Edge) */
+.modal-editar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-editar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-editar-content::-webkit-scrollbar-thumb {
+  background-color: #cbd5e0;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.modal-editar-content::-webkit-scrollbar-thumb:hover {
+  background-color: #a0aec0;
+}

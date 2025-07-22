@@ -48,7 +48,7 @@
           <h2 class="service-title">{{barbero.nombre}}</h2>
 
           <div class="botones">
-            <ion-button color="warning" fill="outline" size="small" (click)="editar(barbero)">Editar</ion-button>
+            <ion-button color="warning" fill="outline" size="small" (click)="abrirModalEditar(barbero)">Editar</ion-button>
             <ion-button color="danger" fill="outline" size="small"
               (click)="confirmarBorrado(barbero)">Borrar</ion-button>
           </div>
@@ -66,8 +66,8 @@
   <ion-modal [isOpen]="mostrarModalBorrar" cssClass="modal-confirmacion" (didDismiss)="mostrarModalBorrar = false">
     <ng-template>
       <ion-content class="ion-padding modal-content modal-style">
-        <h2>¿Estás seguro de borrar el servicio?</h2>
-        <p style="margin-top: 50px; font-size: 1.2rem;"><strong>{{ barberoSeleccionado?.titulo }}</strong></p>
+        <h2>¿Estás seguro de borrar a el barbero?</h2>
+        <p style="margin-top: 50px; font-size: 1.2rem;"><strong>{{ barberoSeleccionado?.nombre }}</strong></p>
 
         <div class="modal-botones">
           <ion-button expand="block" color="medium" (click)="mostrarModalBorrar = false">Cancelar</ion-button>
@@ -76,4 +76,68 @@
       </ion-content>
     </ng-template>
   </ion-modal>
+
+  <!-- Modal de editar -->
+  <ion-modal [isOpen]="mostrarModalEditar" cssClass="modal-editar" (didDismiss)="mostrarModalEditar = false">
+    <ng-template>
+
+      <ion-header class="modal-editar-header">
+        <ion-toolbar class="modal-editar-header">
+          <ion-title>Editar Barbero</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-editar-content">
+        <form [formGroup]="editarForm" (ngSubmit)="guardarCambios()" > 
+          <div class="input-grid" >
+
+            <!-- Campo Título -->
+            <ion-item class="editar-input">
+              <ion-label position="stacked">nombre *</ion-label>
+              <ion-input type="text" formControlName="nombre" placeholder="Ingresa el nombre del barbero"
+                [class.ion-invalid]="editarForm.get('nombre')?.invalid && editarForm.get('nombre')?.touched">
+              </ion-input>
+            </ion-item>
+            <ion-note color="danger" *ngIf="editarForm.get('nombre')?.invalid && editarForm.get('nombre')?.touched">
+              nombre es obligatorio
+            </ion-note>
+
+            <!-- Campo Imagen -->
+            <ion-item class="editar-input">
+              <ion-label position="stacked">Foto del servicio</ion-label>
+              <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput
+                style="margin-top: 10px;">
+            </ion-item>
+
+            <!-- Preview de foto actual o nueva -->
+            <div *ngIf="fotoPreview || barberoActual?.foto" class="image-preview">
+              <img [src]="fotoPreview || barberoActual?.foto" alt="Preview"
+                style="width: 100%; max-width: 200px; height: 150px; object-fit: cover; border-radius: 8px; margin-top: 10px;">
+              <ion-button fill="clear" color="danger" size="small" (click)="eliminarImagen()">
+                <ion-icon name="trash" slot="start"></ion-icon>
+                Eliminar foto
+              </ion-button>
+            </div>
+
+            <!-- Botones del formulario -->
+            <div class="modal-editar-botones">
+              <ion-button expand="block" color="success" type="submit" [disabled]="editarForm.invalid || guardando">
+                <ion-icon name="save" slot="start"></ion-icon>
+                <span *ngIf="!guardando">Guardar Cambios</span>
+                <span *ngIf="guardando">Guardando...</span>
+              </ion-button>
+
+              <ion-button expand="block" fill="outline" color="medium" (click)="cancelarEdicion()">
+                <ion-icon name="close" slot="start"></ion-icon>
+                Cancelar
+              </ion-button>
+            </div>
+          </div>
+        </form>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
 </ion-content>

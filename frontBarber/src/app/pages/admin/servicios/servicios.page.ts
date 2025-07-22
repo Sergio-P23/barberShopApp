@@ -74,7 +74,6 @@ export class ServiciosPage implements OnInit {
   ];
 
   mostrarModalBorrar = false;
-  // mostrarModalEditar = false;
   servicioSeleccionado: any = null;
 
 
@@ -195,7 +194,7 @@ export class ServiciosPage implements OnInit {
     this.servicioActual = null;
   }
 
-
+//////////////////////////////
 
   confirmarBorrado(servicio: any) {
     this.servicioSeleccionado = servicio;
@@ -207,11 +206,6 @@ export class ServiciosPage implements OnInit {
     this.mostrarModalBorrar = false;
     this.servicioSeleccionado = null;
   }
-
-  // editar(servicio: any) {
-  //   this.servicioSeleccionado = servicio;
-  //   this.mostrarModalEditar = true;
-  // }
 
   crear() {
     const nuevoId = Math.max(...this.servicios.map(s => s.id)) + 1;
