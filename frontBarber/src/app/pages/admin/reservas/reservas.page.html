@@ -49,10 +49,10 @@
     </ion-button>
 
     <!-- Popover con ion-datetime -->
-    <ion-popover trigger="btn-fecha" showBackdrop="true" side="bottom" alignment="start" dismissOnSelect="true">
+    <ion-popover cssClass="popover-datetime" trigger="btn-fecha" showBackdrop="true" side="bottom" alignment="start" dismissOnSelect="true">
       <ng-template>
         <ion-datetime presentation="date" [(ngModel)]="fechaFiltro" (ionChange)="filtrarPorFecha()" preferWheel="false"
-        showDefaultButtons="true" showClearButton="true">
+        showDefaultButtons="true" showClearButton="true" [min]="minDate" [max]="maxDate">
         </ion-datetime>
       </ng-template>
     </ion-popover>
