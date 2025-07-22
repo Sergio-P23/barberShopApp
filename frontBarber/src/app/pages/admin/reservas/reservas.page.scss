@@ -108,9 +108,104 @@
   margin-bottom: 10px;
 }
 
-//cale
+//modal fecha
+.modal-datetime {
+  --width: min(450px, 90vw);
+  --max-height: 75vh;
+  --border-radius: 24px;
+  --backdrop-opacity: 0.4;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+
+.calendario-titulo {
+  color: rgb(0, 0, 0);
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.calendar-modal-content {
+  --background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.calendar-header {
+  background: rgb(255, 255, 255);
+  padding: 20px 24px 10px;
+  position: relative;
+}
+
+/* Contenido del calendario */
+.calendar-content {
+  padding: 2px 24px 24px;
+}
+
+.datetime-container {
+  background: rgb(122, 108, 108);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
 
 
+.custom-datetime {
+  --background: transparent;
+  --color: rgb(90, 88, 83);
+  --highlight-background: var(--ion-color-primary);
+  --highlight-color: white;
+  border-radius: 12px;
+}
+
+.primary-action-btn {
+  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-shade) 100%);
+  --background-hover: var(--ion-color-primary-shade);
+  --border-radius: 12px;
+  --box-shadow: 0 4px 15px 0 rgba(var(--ion-color-primary-rgb), 0.4);
+  --color: white;
+  font-weight: 600;
+  height: 48px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.primary-action-btn:hover {
+  transform: translateY(-2px);
+  --box-shadow: 0 6px 20px 0 rgba(var(--ion-color-primary-rgb), 0.5);
+}
+
+/* Scroll del modal principal */
+.modal-editar-content {
+  /* Scroll para Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 transparent;
+}
+
+/* Scroll para Webkit (Chrome, Safari, Edge) */
+.modal-editar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-editar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-editar-content::-webkit-scrollbar-thumb {
+  background-color: #cbd5e0;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.modal-editar-content::-webkit-scrollbar-thumb:hover {
+  background-color: #a0aec0;
+}
 
 
 

@@ -66,71 +66,114 @@ export class ReservasPage implements OnInit {
       telefono: '3045678910',
       barbero: 'Juan',
       precio: 45000
+    },
+    {
+      titulo: 'Corte simple',
+      fecha: '2025-09-10',
+      nombre: 'Juan Triana',
+      telefono: '3001234567',
+      barbero: 'Carlos',
+      precio: 5000
+    },
+    {
+      titulo: 'Cejas + Depilación',
+      fecha: '2025-09-01',
+      nombre: 'Sofia Gómez',
+      telefono: '3123456789',
+      barbero: 'Juan',
+      precio: 10000
+    },
+    {
+      titulo: 'Corte + colorizado',
+      fecha: '2025-10-03',
+      nombre: 'darwin Torres',
+      telefono: '3012345678',
+      barbero: 'Carlos',
+      precio: 35000
+    },
+    {
+      titulo: 'Color + barba',
+      fecha: '2025-11-04',
+      nombre: 'Julián rodriguez',
+      telefono: '3045678910',
+      barbero: 'Juan',
+      precio: 45000
     }
   ];
 
-  reservasFiltradas = [...this.reservas]; // inicializa con todas
-  // fechaFiltro: string = '';
+  reservasFiltradas = [...this.reservas]; //copia de reservas para filtrar
+  //variables control de estado
   mostrarModalBorrar = false;
-  reservaSeleccionada: any;
+  reservaSeleccionada: any; //almacena la reserva seleccionada para borrar
+  mostrarModalFecha = false;
+  fechaTemporal: string = ''; //almacena la fecha seleccionada en el modal de fecha aun sin aplicar filtro
+  fechaFiltro: string = ''; //almacena la fecha definitiva para filtrar 
 
+  //rangos calendario
   minDate: string = '2020-01-01'; // Fecha mínima
   maxDate: string = '2030-12-31'; // Fecha máxima
 
 
-   confirmarCancelacion(reserva: any) {
+  confirmarCancelacion(reserva: any) {
     this.reservaSeleccionada = reserva;
     this.mostrarModalBorrar = true;
   }
 
   cancelar() {
-    this.reservas = this.reservas.filter(r => r !== this.reservaSeleccionada);
-    this.filtrarPorFecha(); // volver a aplicar el filtro
-    this.mostrarModalBorrar = false;
+     this.reservas = this.reservas.filter(r => r !== this.reservaSeleccionada);
+  
+  // 🔁 Vuelve a aplicar el filtro actual
+  if (this.fechaFiltro) {
+    const fecha = new Date(this.fechaFiltro);
+    this.filtrarPorFechaAvanzado(fecha);
+  } else {
+    this.reservasFiltradas = [...this.reservas]; // si no hay filtro, muestra todas
   }
 
-  // filtrarPorFecha() {
-  //   console.log('Fecha seleccionada:', this.fechaFiltro); // Para debug
+  this.mostrarModalBorrar = false;
+  }
 
-  //   if (this.fechaFiltro) {
-  //     const fechaSeleccionada = new Date(this.fechaFiltro);
-  //     const fechaStr = fechaSeleccionada.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+  abrirModalFecha() {
+    this.mostrarModalFecha = true;
+  }
 
-  //     this.reservasFiltradas = this.reservas.filter(r => r.fecha === fechaStr);
-  //   } else {
-  //     this.reservasFiltradas = [...this.reservas];
-  //   }
-  // }
+  cerrarModalFecha() {
+    this.mostrarModalFecha = false;
+  }
 
+  aplicarFiltro() {
+    if (this.fechaTemporal) {
+      const fechaSeleccionada = new Date(this.fechaTemporal);
+      this.fechaFiltro = fechaSeleccionada.toISOString().split('T')[0];
+      this.filtrarPorFechaAvanzado(fechaSeleccionada);
+    }
+    this.cerrarModalFecha();
+  }
 
-
-  mostrarModalFecha = false;
-fechaTemporal: string = '';
-fechaFiltro: string = '';
-
-abrirModalFecha() {
-  this.mostrarModalFecha = true;
-}
-
-cerrarModalFecha() {
-  this.mostrarModalFecha = false;
-}
-
-aplicarFiltro() {
-  this.fechaFiltro = this.fechaTemporal;
-  this.filtrarPorFecha();
-  this.cerrarModalFecha();
-}
-
-filtrarPorFecha() {
-  if (this.fechaFiltro) {
-    const fechaStr = new Date(this.fechaFiltro).toISOString().split('T')[0];
-    this.reservasFiltradas = this.reservas.filter(r => r.fecha === fechaStr);
-  } else {
+  quitarFiltro() {
+    this.fechaFiltro = '';
+    this.fechaTemporal = '';
     this.reservasFiltradas = [...this.reservas];
   }
-}
 
- 
+  filtrarPorFechaAvanzado(fecha: Date) {
+    //extraer datos de fecha: Date
+    const año = fecha.getFullYear();
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0'); //meses en JS van de 0 a 11. padStart asegura que tenga dos dígitos (08 y no 8)
+    const dia = String(fecha.getDate()).padStart(2, '0');
+
+    const filtroCompleto = `${año}-${mes}-${dia}`; //filtro completo con año, mes y día
+    const filtroMes = `${año}-${mes}`; //filtro solo con año y mes
+
+    const reservasDelDia = this.reservas.filter(r => r.fecha === filtroCompleto);
+    if (reservasDelDia.length > 0) {
+      this.reservasFiltradas = reservasDelDia;
+    } else {
+      // Mostrar todas del mes
+      this.reservasFiltradas = this.reservas.filter(r => r.fecha.startsWith(filtroMes));
+    }
+  }
+
+
 
 }

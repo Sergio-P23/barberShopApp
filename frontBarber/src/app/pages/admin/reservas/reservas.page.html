@@ -42,25 +42,38 @@
 
   <!-- Filtro por fecha -->
   <div>
-    <!-- Botón que actúa como trigger del popover -->
+
     <ion-button fill="outline" size="small" (click)="abrirModalFecha()">
       <ion-icon name="calendar-outline" slot="start"></ion-icon>
       Filtrar por fecha
     </ion-button>
 
     <!-- Modal con ion-datetime -->
-    <ion-modal [isOpen]="mostrarModalFecha" (didDismiss)="cerrarModalFecha()" cssClass="modal-datetime">
+    <ion-modal [isOpen]="mostrarModalFecha" (didDismiss)="cerrarModalFecha()" cssClass="modal-datetime modal-editar-content">
       <ng-template>
-        <ion-content class="ion-padding">
-          <h2>Selecciona una fecha</h2>
-          <ion-datetime presentation="date" [(ngModel)]="fechaTemporal" [min]="minDate" [max]="maxDate"
-            preferWheel="false" showClearButton="true" doneText="Seleccionar" cancelText="Cancelar">
-          </ion-datetime>
-
-          <div style="margin-top: 20px">
-            <ion-button expand="block" color="primary" (click)="aplicarFiltro()">Filtrar por fecha</ion-button>
-            <ion-button expand="block" fill="clear" color="medium" (click)="cerrarModalFecha()">Cerrar</ion-button>
+        <ion-content class=" calendar-modal-content">
+          <div class="calendar-header">
+            <h2 class="calendario-titulo">Selecciona una fecha</h2>
           </div>
+          <div class="calendar-content">
+            <div class="datetime-container">
+              <ion-datetime presentation="date" [(ngModel)]="fechaTemporal" [min]="minDate" [max]="maxDate"
+                preferWheel="false" doneText="Seleccionar" cancelText="Cancelar" class="custom-datetime">
+              </ion-datetime>
+            </div>
+
+
+            <div class="action-buttons">
+              <ion-button expand="block" color="primary" (click)="aplicarFiltro()" class="primary-action-btn">Filtrar
+                por fecha</ion-button>
+              <ion-button expand="block" fill="clear" color="medium" (click)="quitarFiltro()" class="primary-action-btn">
+                Quitar filtro
+              </ion-button>
+              <ion-button expand="block" fill="clear" color="medium" (click)="cerrarModalFecha()"
+                class="primary-action-btn">Cerrar</ion-button>
+            </div>
+          </div>
+
         </ion-content>
       </ng-template>
     </ion-modal>
