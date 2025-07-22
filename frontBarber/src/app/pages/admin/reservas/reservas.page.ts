@@ -120,17 +120,17 @@ export class ReservasPage implements OnInit {
   }
 
   cancelar() {
-     this.reservas = this.reservas.filter(r => r !== this.reservaSeleccionada);
-  
-  // 🔁 Vuelve a aplicar el filtro actual
-  if (this.fechaFiltro) {
-    const fecha = new Date(this.fechaFiltro);
-    this.filtrarPorFechaAvanzado(fecha);
-  } else {
-    this.reservasFiltradas = [...this.reservas]; // si no hay filtro, muestra todas
-  }
+    this.reservas = this.reservas.filter(r => r !== this.reservaSeleccionada);
 
-  this.mostrarModalBorrar = false;
+    // 🔁 Vuelve a aplicar el filtro actual
+    if (this.fechaFiltro) {
+      const fecha = new Date(this.fechaFiltro);
+      this.filtrarPorFechaAvanzado(fecha);
+    } else {
+      this.reservasFiltradas = [...this.reservas]; // si no hay filtro, muestra todas
+    }
+
+    this.mostrarModalBorrar = false;
   }
 
   abrirModalFecha() {
