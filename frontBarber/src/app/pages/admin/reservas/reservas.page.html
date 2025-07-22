@@ -43,19 +43,27 @@
   <!-- Filtro por fecha -->
   <div>
     <!-- Botón que actúa como trigger del popover -->
-    <ion-button id="btn-fecha" fill="outline" size="small">
+    <ion-button fill="outline" size="small" (click)="abrirModalFecha()">
       <ion-icon name="calendar-outline" slot="start"></ion-icon>
       Filtrar por fecha
     </ion-button>
 
-    <!-- Popover con ion-datetime -->
-    <ion-popover trigger="btn-fecha" showBackdrop="true" side="bottom" alignment="start" dismissOnSelect="true">
+    <!-- Modal con ion-datetime -->
+    <ion-modal [isOpen]="mostrarModalFecha" (didDismiss)="cerrarModalFecha()" cssClass="modal-datetime">
       <ng-template>
-        <ion-datetime presentation="date" [(ngModel)]="fechaFiltro" (ionChange)="filtrarPorFecha()" preferWheel="false"
-        showDefaultButtons="true" showClearButton="true" [min]="minDate" [max]="maxDate">
-        </ion-datetime>
+        <ion-content class="ion-padding">
+          <h2>Selecciona una fecha</h2>
+          <ion-datetime presentation="date" [(ngModel)]="fechaTemporal" [min]="minDate" [max]="maxDate"
+            preferWheel="false" showClearButton="true" doneText="Seleccionar" cancelText="Cancelar">
+          </ion-datetime>
+
+          <div style="margin-top: 20px">
+            <ion-button expand="block" color="primary" (click)="aplicarFiltro()">Filtrar por fecha</ion-button>
+            <ion-button expand="block" fill="clear" color="medium" (click)="cerrarModalFecha()">Cerrar</ion-button>
+          </div>
+        </ion-content>
       </ng-template>
-    </ion-popover>
+    </ion-modal>
   </div>
 
   <!-- Lista de reservas -->
@@ -63,7 +71,7 @@
     <h2 class="section-title">RESERVACIONES</h2>
     <div class="reservas-section">
       <ion-card *ngFor="let reserva of reservasFiltradas" class="services-grid">
-        <ion-card-header >
+        <ion-card-header>
           <ion-card-title class="service-title">{{ reserva.titulo }}</ion-card-title>
           <ion-card-subtitle class="service-subtitle">{{ reserva.fecha }}</ion-card-subtitle>
         </ion-card-header>

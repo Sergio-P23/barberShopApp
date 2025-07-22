@@ -70,7 +70,7 @@ export class ReservasPage implements OnInit {
   ];
 
   reservasFiltradas = [...this.reservas]; // inicializa con todas
-  fechaFiltro: string = '';
+  // fechaFiltro: string = '';
   mostrarModalBorrar = false;
   reservaSeleccionada: any;
 
@@ -89,18 +89,47 @@ export class ReservasPage implements OnInit {
     this.mostrarModalBorrar = false;
   }
 
-  filtrarPorFecha() {
-    console.log('Fecha seleccionada:', this.fechaFiltro); // Para debug
+  // filtrarPorFecha() {
+  //   console.log('Fecha seleccionada:', this.fechaFiltro); // Para debug
 
-    if (this.fechaFiltro) {
-      const fechaSeleccionada = new Date(this.fechaFiltro);
-      const fechaStr = fechaSeleccionada.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+  //   if (this.fechaFiltro) {
+  //     const fechaSeleccionada = new Date(this.fechaFiltro);
+  //     const fechaStr = fechaSeleccionada.toISOString().split('T')[0]; // Formato YYYY-MM-DD
 
-      this.reservasFiltradas = this.reservas.filter(r => r.fecha === fechaStr);
-    } else {
-      this.reservasFiltradas = [...this.reservas];
-    }
+  //     this.reservasFiltradas = this.reservas.filter(r => r.fecha === fechaStr);
+  //   } else {
+  //     this.reservasFiltradas = [...this.reservas];
+  //   }
+  // }
+
+
+
+  mostrarModalFecha = false;
+fechaTemporal: string = '';
+fechaFiltro: string = '';
+
+abrirModalFecha() {
+  this.mostrarModalFecha = true;
+}
+
+cerrarModalFecha() {
+  this.mostrarModalFecha = false;
+}
+
+aplicarFiltro() {
+  this.fechaFiltro = this.fechaTemporal;
+  this.filtrarPorFecha();
+  this.cerrarModalFecha();
+}
+
+filtrarPorFecha() {
+  if (this.fechaFiltro) {
+    const fechaStr = new Date(this.fechaFiltro).toISOString().split('T')[0];
+    this.reservasFiltradas = this.reservas.filter(r => r.fecha === fechaStr);
+  } else {
+    this.reservasFiltradas = [...this.reservas];
   }
+}
 
  
 
