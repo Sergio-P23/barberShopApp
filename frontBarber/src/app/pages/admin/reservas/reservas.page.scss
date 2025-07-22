@@ -1,0 +1,72 @@
+/* Encabezado (se mantiene) */
+.main-header {
+  --background: var(--ion-color-primary);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.main-header ion-toolbar {
+  --background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  padding: 0 16px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-logo {
+  height: 60px;
+  object-fit: contain;
+  /* margin-right: 48px; /* Considerar si este margen es necesario o el gap en header-content */
+}
+
+.header-logged-in-section {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre los botones o entre logo y botón de menú */
+}
+
+.menu-button-custom {
+  --color: var(--ion-color-highlight); /* Color dorado para el icono de hamburguesa */
+  font-size: 2.5em; /* Tamaño del icono */
+  --padding-end: 0;
+  --padding-start: 0;
+}
+
+.menu-button-fotter {
+  font-size: 1.5rem; /* Tamaño del icono */
+  text-align: center;
+  margin-top: 400px;
+}
+
+.btn-primary-solid {
+  --background: var(--ion-color-highlight);
+  --color: var(--ion-color-primary);
+}
+
+.register-link-text { /* Nueva clase para el texto del enlace de registro */
+  color: var(--ion-color-highlight); /* Enlace dorado */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-primary-solid {
+  --background: var(--ion-color-highlight);
+  --color: var(--ion-color-primary);
+}
+
+
+
+//contenido
+.main-content {
+  --background: var(--ion-color-secondary);
+  padding: 0px;
+}
