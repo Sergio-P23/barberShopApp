@@ -39,9 +39,67 @@
 </ion-header>
 
 <ion-content class="ion-padding main-content" id="main-content">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">reservas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <!-- Filtro por fecha -->
+  <div>
+    <!-- Botón que actúa como trigger del popover -->
+    <ion-button id="btn-fecha" fill="outline" size="small">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      Filtrar por fecha
+    </ion-button>
+
+    <!-- Popover con ion-datetime -->
+    <ion-popover trigger="btn-fecha" showBackdrop="true" side="bottom" alignment="start" dismissOnSelect="true">
+      <ng-template>
+        <ion-datetime presentation="date" [(ngModel)]="fechaFiltro" (ionChange)="filtrarPorFecha()" preferWheel="false"
+        showDefaultButtons="true" showClearButton="true">
+        </ion-datetime>
+      </ng-template>
+    </ion-popover>
+  </div>
+
+  <!-- Lista de reservas -->
+  <div class="reservas-section">
+    <h2 class="section-title">RESERVACIONES</h2>
+    <div class="reservas-section">
+      <ion-card *ngFor="let reserva of reservasFiltradas" class="services-grid">
+        <ion-card-header >
+          <ion-card-title class="service-title">{{ reserva.titulo }}</ion-card-title>
+          <ion-card-subtitle class="service-subtitle">{{ reserva.fecha }}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p><strong>Cliente:</strong> {{ reserva.nombre }}</p>
+          <p><strong>Teléfono:</strong> {{ reserva.telefono }}</p>
+          <p><strong>Barbero:</strong> {{ reserva.barbero }}</p>
+          <p><strong>Precio:</strong> ${{ reserva.precio }}</p>
+          <ion-button color="danger" expand="block" fill="outline" (click)="confirmarCancelacion(reserva)">
+            Cancelar Servicio
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </div>
+
+
+
+  <!-- Modal de Confirmación -->
+  <ion-modal [isOpen]="mostrarModalBorrar" cssClass="modal-confirmacion" (didDismiss)="mostrarModalBorrar = false">
+    <ng-template>
+      <ion-content class="ion-padding modal-content modal-style">
+        <h2>¿Estás seguro de eliminar la reserva?</h2>
+        <p style="margin-top: 50px; font-size: 1.2rem;"><strong>{{ reservaSeleccionada?.titulo }}</strong></p>
+        <p style="font-size: 1.2rem;"><strong>{{ reservaSeleccionada?.nombre }}</strong></p>
+        <p style="font-size: 1.2rem;"><strong>{{ reservaSeleccionada?.fecha }}</strong></p>
+
+        <div class="modal-botones">
+          <ion-button expand="block" color="medium" (click)="mostrarModalBorrar = false">Cancelar</ion-button>
+          <ion-button expand="block" color="danger" (click)="cancelar()">Sí, Eliminar</ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
 </ion-content>
