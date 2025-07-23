@@ -49,7 +49,8 @@
     </ion-button>
 
     <!-- Modal con ion-datetime -->
-    <ion-modal [isOpen]="mostrarModalFecha" (didDismiss)="cerrarModalFecha()" cssClass="modal-datetime modal-editar-content">
+    <ion-modal [isOpen]="mostrarModalFecha" (didDismiss)="cerrarModalFecha()"
+      cssClass="modal-datetime modal-editar-content">
       <ng-template>
         <ion-content class=" calendar-modal-content">
           <div class="calendar-header">
@@ -66,7 +67,8 @@
             <div class="action-buttons">
               <ion-button expand="block" color="primary" (click)="aplicarFiltro()" class="primary-action-btn">Filtrar
                 por fecha</ion-button>
-              <ion-button expand="block" fill="clear" color="medium" (click)="quitarFiltro()" class="primary-action-btn">
+              <ion-button expand="block" fill="clear" color="medium" (click)="quitarFiltro()"
+                class="primary-action-btn">
                 Quitar filtro
               </ion-button>
               <ion-button expand="block" fill="clear" color="medium" (click)="cerrarModalFecha()"
@@ -83,22 +85,44 @@
   <div class="reservas-section">
     <h2 class="section-title">RESERVACIONES</h2>
     <div class="reservas-section">
-      <ion-card *ngFor="let reserva of reservasFiltradas" class="services-grid">
-        <ion-card-header>
-          <ion-card-title class="service-title">{{ reserva.titulo }}</ion-card-title>
-          <ion-card-subtitle class="service-subtitle">{{ reserva.fecha }}</ion-card-subtitle>
-        </ion-card-header>
+      <div class="row">
+        <div class="col-12 col-md-6" *ngFor="let reserva of reservasFiltradas">
+          <ion-card class="services-grid">
 
-        <ion-card-content>
-          <p><strong>Cliente:</strong> {{ reserva.nombre }}</p>
-          <p><strong>Teléfono:</strong> {{ reserva.telefono }}</p>
-          <p><strong>Barbero:</strong> {{ reserva.barbero }}</p>
-          <p><strong>Precio:</strong> ${{ reserva.precio }}</p>
-          <ion-button color="danger" expand="block" fill="outline" (click)="confirmarCancelacion(reserva)">
-            Cancelar Servicio
-          </ion-button>
-        </ion-card-content>
-      </ion-card>
+            <ion-card-header>
+              <div class="row w-100">
+                <div class="col text-start">
+                  <ion-card-title class="service-title">{{ reserva.titulo }}</ion-card-title>
+                </div>
+                <div class="col text-end">
+                  <ion-card-subtitle class="service-subtitle">{{ reserva.fecha }}</ion-card-subtitle>
+                </div>
+              </div>
+
+            </ion-card-header>
+
+            <ion-card-content>
+              <div class="row w-100">
+                <div class="col-7 text-start">
+                  <p><strong>Cliente:</strong> {{ reserva.nombre }}</p>
+                  <p><strong>Teléfono:</strong> {{ reserva.telefono }}</p>
+                </div>
+                <div class="col-5 text-end">
+                  <p><strong>Barbero:</strong> {{ reserva.barbero }}</p>
+                  <p><strong>Precio:</strong> ${{ reserva.precio }}</p>
+                </div>
+
+              </div>
+
+
+              <ion-button color="danger" expand="block" fill="outline" (click)="confirmarCancelacion(reserva)">
+                Cancelar Servicio
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
+
     </div>
 
   </div>

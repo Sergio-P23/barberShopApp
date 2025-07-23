@@ -84,15 +84,17 @@
   padding-bottom: 10px;
   text-transform: uppercase;
   text-align: center;
+
 }
 
 .services-grid {
   background-color: #fff;
   color: black;
-  grid-template-columns: repeat(auto-fit, minmax(500px, max-content));
   gap: 20px;
   justify-content: center;
-  
+  box-shadow: inset 13px 0 0 0 #08B;
+  border-radius: 0% 2% 2% 0%;
+  padding-left: 13px;
 }
 
 .service-title {
