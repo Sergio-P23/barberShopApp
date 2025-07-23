@@ -2,6 +2,7 @@
   <ion-toolbar>
     <div class="header-content container-fluid">
       <img src="../../../assets/logoOne.jpg" alt="Logo de la Barbería" class="header-logo" />
+      
 
       <div class="header-auth-section">
         <div class="header-buttons">
@@ -14,6 +15,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="false" class="main-content">
+
+  
 
   
   <div class="carousel-section">
@@ -40,8 +43,19 @@
     </div>
   </div>
 
+    <div class="container text-center">
+    <div class="p-5">
+      <h1 class="display-5 fw-bold text-warning mb-4">¡Bienvenido a Sky's the Limit!</h1>
+      <p class="lead text-dark">
+        Aquí no solo cortamos cabello, <span class="fw-semibold text-warning">creamos estilo</span>.<br>
+        Somos más que una barbería: el lugar donde la actitud, el detalle y el flow se encuentran.<br>
+        Toma asiento, relájate y deja que tu mejor versión hable por ti.
+      </p>
+    </div>
+  </div>
+
   <div class="services-section">
-    <h2 class="section-title">SERVICIOS</h2>
+    <h2 class="section-title">NUESTROS SERVICIOS</h2>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let servicio of servicios">
