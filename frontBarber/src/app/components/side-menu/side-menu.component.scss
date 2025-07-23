@@ -1,0 +1,101 @@
+
+
+/* -------------------- ION-MENU (MENÚ LATERAL) -------------------- */
+.custom-admin-menu {
+  --width: 280px;
+  // Fondo oscuro translúcido para el menú completo
+  --background: rgba(0, 0, 0, 0.9); /* Negro con 90% de opacidad */
+  --ion-backdrop-opacity: 0.5; /* Opacidad del overlay que cubre el contenido principal */
+}
+
+.custom-menu-header {
+  --background: var(--ion-color-primary); /* Fondo negro para el header del menú */
+  color: var(--ion-color-primary-contrast);
+  border-bottom: 1px solid var(--ion-color-tertiary); /* Borde gris inferior */
+}
+
+.custom-menu-header ion-title {
+  color: var(--ion-color-highlight); /* Título en dorado */
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.custom-menu-content {
+  --background: transparent; /* El contenido es transparente para que se vea el fondo del ion-menu */
+  padding-top: 10px; /* Reducido el padding para que las líneas divisorias se vean mejor */
+  padding-bottom: 10px;
+}
+
+.custom-menu-content ion-list {
+  background: transparent; /* Asegurar que la lista no tenga un fondo blanco */
+}
+
+.custom-menu-content ion-item {
+  --background: transparent;
+  --color: var(--ion-color-primary-contrast); /* Texto blanco por defecto */
+  --ripple-color: var(--ion-color-highlight); /* Efecto de ripple dorado */
+  font-size: 1.15em; /* Un poco más grande */
+  padding: 12px 15px; /* Más padding vertical */
+  margin-bottom: 0; /* No hay margen inferior para controlar las líneas */
+  border-radius: 0; /* Sin bordes redondeados para las líneas divisorias */
+  transition: background-color 0.2s ease, color 0.2s ease;
+  --detail-icon-opacity: 0; /* Ocultar la flecha de detalle de los items */
+}
+
+.custom-menu-content ion-item ion-icon {
+  color: var(--ion-color-tertiary); /* Iconos grises por defecto */
+  margin-inline-end: 15px;
+  font-size: 1.4em;
+  transition: color 0.2s ease;
+}
+
+/* Estilo para la línea divisoria de cada sección */
+.custom-menu-content .menu-item-with-divider {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea blanca muy sutil y translúcida */
+  margin-bottom: 0px; /* Eliminar cualquier espacio extra */
+}
+
+.custom-menu-content .menu-item-with-divider:last-child {
+  border-bottom: none; /* No hay línea en el último elemento */
+}
+
+/* Estilo para la ruta activa */
+.custom-menu-content ion-item.menu-item-active {
+  --background: rgba(218, 165, 32, 0.2); /* Fondo dorado translúcido para la ruta activa */
+  --color: var(--ion-color-highlight); /* Texto dorado */
+  font-weight: bold;
+}
+
+.custom-menu-content ion-item.menu-item-active ion-icon {
+  color: var(--ion-color-highlight); /* Icono dorado */
+}
+
+/* Efecto hover en items no activos */
+.custom-menu-content ion-item:not(.menu-item-active):hover {
+  --background: rgba(255, 255, 255, 0.05); /* Fondo muy sutil al pasar el mouse */
+  --color: var(--ion-color-highlight); /* Texto dorado al pasar el mouse */
+}
+
+.custom-menu-content ion-item:not(.menu-item-active):hover ion-icon {
+  color: var(--ion-color-highlight); /* Icono dorado al pasar el mouse */
+}
+
+
+.custom-menu-footer {
+  --background: var(--ion-color-primary); /* Fondo negro para el footer */
+  padding: 15px;
+  border-top: 1px solid var(--ion-color-tertiary); /* Borde gris superior */
+}
+
+.logout-button {
+  --background: var(--ion-color-highlight); /* Botón Salir en dorado */
+  --color: var(--ion-color-primary); /* Texto negro */
+  --border-radius: 8px;
+  height: 48px;
+  font-weight: 600;
+}
+
+.logout-button ion-icon {
+  color: var(--ion-color-primary);
+}

@@ -1,18 +1,26 @@
+/* Variables de Colores para fácil manejo */
+:root {
+  --ion-color-primary: #000000; /* Negro principal */
+  --ion-color-primary-contrast: #ffffff; /* Contraste para texto en negro */
+  --ion-color-secondary: #f0f0f0; /* Gris claro para fondos */
+  --ion-color-tertiary: #a0a0a0; /* Gris medio */
+  --ion-color-highlight: #DAA520; /* Dorado para resaltar */
+}
 
-
-/* Encabezado (se mantiene) */
+/* Encabezado */
 .main-header {
-  --background: var(--ion-color-primary);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  --background: var(--ion-color-primary); /* Fondo negro para el header */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sutil sombra */
 }
 
 .main-header ion-toolbar {
   --background: var(--ion-color-primary);
-  color: var(--ion-color-primary-contrast);
-  padding: 0 16px;
-  height: 80px;
-  display: flex;
-  align-items: center;
+  color: var(--ion-color-primary-contrast); /* Texto blanco en el header */
+  padding: 0 16px; /* Padding para el contenido */
+  height: 60px; /* Altura fija para el toolbar */
+  display: flex; /* Usar flexbox para alinear contenido */
+  align-items: center; /* Centrar verticalmente */
+
 }
 
 .header-content {
@@ -20,21 +28,18 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
 .header-logo {
-  height: 60px;
+  height: 60px; /* Tamaño del logo */
   object-fit: contain;
-  /* margin-right: 48px; /* Considerar si este margen es necesario o el gap en header-content */
 }
 
-.header-auth-section,
-.header-logged-in-section {
+.header-auth-section { /* Esta sección siempre estará visible */
   display: flex;
   align-items: center;
-  gap: 10px; /* Espacio entre los botones o entre logo y botón de menú */
+  gap: 10px;
 }
 
 .header-buttons {
@@ -48,9 +53,10 @@
   font-weight: 600;
   min-width: 120px;
   text-transform: uppercase;
-  height: 40px;
+  height: 20px;
   margin: 0;
   flex-shrink: 0;
+  font-size: 0.8rem;
 }
 
 .btn-primary-outline {
@@ -64,32 +70,22 @@
   --color: var(--ion-color-primary);
 }
 
-/* Estilos para el botón de menú (hamburguesa) */
-.menu-button-custom {
-  --color: var(--ion-color-highlight); /* Color dorado para el icono de hamburguesa */
-  font-size: 2.5em; /* Tamaño del icono */
-  --padding-end: 0;
-  --padding-start: 0;
-}
-
-/* Contenido Principal (se mantiene) */
+/* Contenido Principal */
 .main-content {
   --background: var(--ion-color-secondary);
-  padding: 0px;
+  padding: 20px;
 }
 
-/* Carrusel (se mantiene) */
+/* Carrusel */
 .carousel-section {
-  padding: 12%;
-  padding-top: 3%;
   margin-bottom: 30px;
-  border-radius: 10px;
+  border-radius: 0px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-image {
-  border-radius: 10px;
+ 
   height: 200px;
   object-fit: cover;
 }
@@ -101,7 +97,7 @@
   padding: 10px;
 }
 
-/* Sección de Servicios (se mantiene, con hover para service-card) */
+/* -------------------- SECCIÓN DE SERVICIOS (HOME PAGE) -------------------- */
 .services-section {
   margin-bottom: 30px;
   text-align: center;
@@ -129,54 +125,105 @@
   border-radius: 2px;
 }
 
+/* .services-grid ya no usa display:grid directo, lo hace Bootstrap */
 .services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
-  justify-content: center;
+  /* No se necesitan estilos de grid aquí si se usa Bootstrap .row y .col-* */
 }
 
 .service-card {
-  background-color: var(--ion-color-primary-contrast);
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  background-color: var(--ion-color-primary-contrast); /* Fondo blanco */
+  border-radius: 12px; /* Más redondeado */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más definida */
+  padding: 0; /* Quitamos padding aquí, lo manejamos internamente */
   text-align: center;
+  overflow: hidden; /* Para que la imagen no se desborde */
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  cursor: pointer; /* Añadir cursor de puntero para indicar que es clickeable */
+  cursor: pointer;
+  display: flex; /* Usamos flexbox para organizar el contenido verticalmente */
+  flex-direction: column;
+  justify-content: space-between; /* Para empujar el botón al final */
+  min-height: 350px; /* Altura mínima para consistencia */
+  width: 100%; /* Ocupa el 100% de la columna Bootstrap */
+  height: 100%; /* Ocupa el 100% de la altura de la columna Bootstrap */
 }
 
 .service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al pasar el mouse */
+  transform: translateY(-8px); /* Efecto de elevación más pronunciado */
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el mouse */
 }
 
-.service-image {
+.service-image-container {
   width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  height: 180px; /* Altura fija para la imagen */
+  overflow: hidden;
+  border-radius: 12px 12px 0 0; /* Bordes redondeados solo arriba */
 }
 
-.service-title {
+.service-display-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsión */
+  display: block; /* Elimina espacio extra debajo de la imagen */
+}
+
+.service-details {
+  padding: 15px 20px 20px; /* Padding para el texto y botón */
+  flex-grow: 1; /* Permite que esta sección crezca y empuje el botón */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.service-display-title {
   color: var(--ion-color-primary);
-  font-size: 1.1em;
+  font-size: 1.4em; /* Título más grande */
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 8px; /* Espacio debajo del título */
+  line-height: 1.3;
 }
 
-.service-price {
+.service-display-description {
+  color: var(--ion-color-tertiary); /* Gris para la descripción */
+  font-size: 0.9em;
+  margin-bottom: 15px; /* Espacio debajo de la descripción */
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limita la descripción a 2 líneas */
+  -webkit-box-orient: vertical;
+}
+
+.service-display-price {
   color: var(--ion-color-highlight);
-  font-size: 1em;
-  font-weight: 600;
+  font-size: 1.15em; /* Precio más grande y prominente */
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 20px; /* Más espacio antes del botón */
 }
 
-/* Sección de Ubicación (se mantiene) */
+.reserve-button {
+  --background: var(--ion-color-highlight); /* Fondo dorado */
+  --color: var(--ion-color-primary); /* Texto negro */
+  --border-radius: 8px;
+  height: 48px; /* Altura estándar de botón */
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(218, 165, 32, 0.4); /* Sombra dorada */
+  font-size: 1.1em;
+  margin-top: auto;
+}
+
+.reserve-button:hover {
+  --background: darken(var(--ion-color-highlight), 5%); /* Efecto hover */
+}
+
+
+/* Sección de Ubicación */
 .location-section {
-  padding: 10%;
   text-align: center;
   padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 .location-section p {
@@ -184,64 +231,125 @@
   font-size: 1em;
 }
 
+/* -------------------- ESTILOS DE MODALES (DEVUELTOS A DEFAULTS) -------------------- */
+/* Se eliminan todas las reglas personalizadas para ion-modal, ion-header, ion-content dentro de modal */
+/* Solo se mantienen los estilos para .barber-card y sus elementos, y los botones de navegación */
 
-/* Estilos para el modal en general */
-ion-modal {
-  /* Establece el fondo del modal en sí */
-  --background: #000000; /* Blanco puro */
-  /* Si el modo es "md" (Material Design), también ajusta esto */
-  --background-rgb: 255, 255, 255;
-  
-  /* Opcional: Ajusta el borde y la sombra si lo deseas, para que combine con el blanco */
-  --border-radius: 12px; 
-  --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  --width: 70vw;
-}
-
-/* Estilos para el contenido del modal (ion-content) */
-ion-modal ion-content {
-  /* Asegura que el contenido también sea blanco */
-  --background: #000000; /* Blanco puro */
-  --background-rgb: 255, 255, 255;
-}
-
-/* Estilos para el encabezado del modal (ion-header) */
-ion-modal ion-header {
-  /* Fondo del encabezado a blanco o un tono claro para que combine */
-  background: #000000; /* Blanco puro */
-  /* Si tienes un toolbar dentro del header, también puedes estilizarlo */
-  ion-toolbar {
-    --background: #000000; /* Blanco para el toolbar */
-    --background-rgb: 255, 255, 255;
-    --color: #ffffff; /* Color del texto y los iconos dentro del toolbar (ej: título, botones) */
-  }
-}
-
+/* Estilos de las tarjetas de barbero (dentro del modal) */
 .barber-card {
-  background-color: #f2f2f2;
-  padding: 23px;
-  color: #000;
-  width: 100%;
-  height: 200px;
+  background-color: var(--ion-color-secondary);
+  border-radius: 10px;
+  padding: 15px 10px;
   text-align: center;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 3px solid transparent;
+  width: 100%;
+  height: 100%;
+  max-width: 160px;
+  margin: 0 auto;
+}
+
+.barber-card.selected {
+  border-color: var(--ion-color-highlight);
+  box-shadow: 0 4px 15px rgba(218, 165, 32, 0.6);
+  transform: scale(1.03);
 }
 
 .barber-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.barber-card img{
+.barber-avatar {
+  width: 100px;
+  height: 100px;
+  background-color: var(--ion-color-tertiary);
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+  overflow: hidden;
+  border: 2px solid var(--ion-color-primary);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+.barber-avatar img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
 }
 
-/* Media Queries (se mantienen, con posibles ajustes para modales si es necesario) */
-@media (max-width: 480px) {
+.barber-card p {
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  margin: 0;
+  font-size: 1.1em;
+}
+
+/* Estilos de los inputs y botones de navegación dentro de los modales */
+/* Estos se mantienen para dar un aspecto consistente dentro de los modales por defecto */
+.modal-select-input,
+.modal-input {
+  margin-bottom: 20px;
+  --background: var(--ion-color-secondary);
+  --border-radius: 8px;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --color: var(--ion-color-primary);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+
+  --highlight-background: transparent;
+  --highlight-color: var(--ion-color-highlight);
+  --highlight-border-width: 2px;
+}
+
+.modal-select-input ion-select,
+.modal-input ion-input {
+  --color: var(--ion-color-primary);
+  --placeholder-color: var(--ion-color-tertiary);
+  font-size: 1.1em;
+}
+
+.modal-select-input .select-text,
+.modal-input .input-wrapper {
+  color: var(--ion-color-primary);
+  font-weight: 500;
+}
+
+.modal-select-input ion-select::part(icon) {
+  color: var(--ion-color-primary);
+  opacity: 1;
+}
+
+.modal-next-button,
+.modal-reserve-button {
+  --background: var(--ion-color-highlight);
+  --color: var(--ion-color-primary);
+  --border-radius: 8px;
+  font-weight: 600;
+  height: 50px;
+  margin-top: 25px;
+  box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
+  font-size: 1.1em;
+}
+
+.modal-next-button:hover,
+.modal-reserve-button:hover {
+  --background: darken(var(--ion-color-highlight), 5%);
+}
+
+.info-text {
+  color: var(--ion-color-primary);
+  font-size: 0.95em;
+  text-align: justify;
+  margin-top: 25px;
+  padding: 0 5px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Media Queries (Ajustados para Bootstrap) */
+@media (max-width: 575.98px) { /* Extra small devices (portrait phones) */
   .header-buttons ion-button {
     min-width: 100px;
     padding-left: 5px;
@@ -257,28 +365,33 @@ ion-modal ion-header {
     padding: 0 10px;
   }
 
-
+  .carousel-section, .location-section {
+    padding: 5%;
+  }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 576px) and (max-width: 767.98px) { /* Small devices (landscape phones) */
+  /* Services: 2 per row */
+  /* Barber: 2 per row */
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { /* Medium devices (tablets) */
   .header-logo {
     height: 80px;
   }
-
   .carousel-image {
     height: 350px;
   }
-
-  .services-grid {
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-
+  /* Services: col-md-4 -> 3 per row */
+  /* Barber: col-md-4 -> 3 per row (or col-md-6 for 2 per row if strictly desired) */
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 992px) and (max-width: 1199.98px) { /* Large devices (desktops) */
+  /* Services: col-lg-3 -> 4 per row */
+  /* Barber: col-lg-3 -> 4 per row (or col-lg-4 for 3 per row) */
+}
+
+@media (min-width: 1200px) { /* Extra large devices (large desktops) */
   .main-content {
     padding: 30px;
   }

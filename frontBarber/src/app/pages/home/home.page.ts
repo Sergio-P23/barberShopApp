@@ -1,12 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonMenuButton, IonModal, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonIcon, IonGrid, IonCol, IonRow } from '@ionic/angular/standalone'; // Importa nuevos componentes Ionic
+import {
+  IonContent, IonHeader, IonToolbar, IonButtons, IonButton,
+  IonModal, IonTitle, IonSelect, IonSelectOption, IonItem,
+  IonInput, IonIcon, IonGrid, IonCol, IonRow
+} from '@ionic/angular/standalone';
 
 import { RouterModule } from '@angular/router';
-import { addIcons } from 'ionicons'; // Importa addIcons
-// Importa los iconos necesarios para los botones del header y los inputs del modal
-import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBackOutline, menuOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBackOutline } from 'ionicons/icons';
+
+// Definición de interfaces para mejor tipado (opcional, pero buena práctica)
+interface Servicio {
+  id: number;
+  titulo: string;
+  descripcion: string;
+  precio: string;
+  imagen: string;
+}
+
+interface Barbero {
+  id: number;
+  nombre: string;
+  foto: string;
+}
+
+interface Month {
+  value: number;
+  name: string;
+}
+
+interface Hour {
+  value: string; // Ej: "09:00"
+  display: string; // Ej: "9:00 AM"
+}
 
 
 @Component({
@@ -14,30 +42,77 @@ import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBack
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonRow, IonCol, IonGrid, 
+  imports: [
+    IonRow, IonCol, IonGrid,
     IonContent, IonHeader, IonToolbar, CommonModule, FormsModule, RouterModule,
-    IonButtons, IonButton, IonMenuButton, IonModal, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonIcon // Añade los componentes importados
+    IonButtons, IonButton, IonModal, IonTitle, IonSelect, IonSelectOption, IonItem, IonInput, IonIcon
   ]
 })
 export class HomePage implements OnInit {
 
-  isLoggedIn: boolean = false; // Variable booleana para controlar el estado de login
+  // Arreglo para almacenar la información de los servicios
+  servicios: Servicio[] = [
+    {
+      id: 1,
+      titulo: 'Corte Clásico',
+      descripcion: 'Corte de cabello tradicional para hombre, estilo moderno o clásico.',
+      precio: '$20.000 COP',
+      imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ14SkoSDLCRkxAobxI8Z4YzO1Vis3ik9uwsg&s'
+    },
+    {
+      id: 2,
+      titulo: 'Arreglo de Barba',
+      descripcion: 'Perfilado y afeitado profesional con toalla caliente y productos de alta calidad.',
+      precio: '$15.000 COP',
+      imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0mYPjDp5GOw3Lotl1LguEiYNN8z9SU2eXaw&s'
+    },
+    {
+      id: 3,
+      titulo: 'Tintura de Cabello',
+      descripcion: 'Aplicación de color para cubrir canas o cambiar el look, según el estilo deseado.',
+      precio: '$50.000 COP',
+      imagen: 'https://i.pinimg.com/736x/e8/35/7b/e8357b776553cc13da123651309a83a7.jpg'
+    },
+    {
+      id: 4,
+      titulo: 'Diseño de Cejas',
+      descripcion: 'Diseño y depilación de cejas para resaltar la mirada masculina.',
+      precio: '$15.000 COP',
+      imagen: 'https://i.pinimg.com/1200x/05/f0/27/05f0271b699f734621834da08fcf4f6b.jpg'
+    },
+  ];
 
-  // Variables para controlar la visibilidad de los modales
+  // Arreglo para almacenar la información de los barberos
+  barberos: Barbero[] = [
+    { id: 1, nombre: 'Pepe', foto: 'https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=PEPE' },
+    { id: 2, nombre: 'María', foto: 'https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=MARIA' },
+    { id: 3, nombre: 'Juan', foto: 'https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=JUAN' },
+    { id: 4, nombre: 'Juan 2', foto: 'https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=JUAN2' },
+    // Puedes añadir más barberos aquí
+  ];
+
+  // Arreglos para la selección de fecha y hora
+  availableYears: number[] = [];
+  availableMonths: Month[] = [];
+  availableDays: number[] = [];
+  availableHours: Hour[] = [];
+
   isBarberModalOpen: boolean = false;
   isDateTimeModalOpen: boolean = false;
   isInfoModalOpen: boolean = false;
 
-  // Variables para almacenar selecciones (ejemplo básico, en un caso real usarías más lógica)
-  selectedBarber: string | null = null;
-  // selectedDate: string | null = null;
-  // selectedTime: string | null = null;
+  selectedService: Servicio | null = null;
+  selectedBarber: Barbero | null = null; // selectedBarber ahora es un objeto Barbero
+  selectedYear: number | null = null; // Cambiado a number para los años
+  selectedMonth: number | null = null; // Cambiado a number para los meses
+  selectedDay: number | null = null;
+  selectedTime: string | null = null;
+  customerPhone: string = '';
+  customerName: string = '';
 
 
   constructor() {
-    // Añade los iconos que se usarán en esta página
     addIcons({
-      menuOutline, // Icono de hamburguesa
       personOutline,
       callOutline,
       mailOutline,
@@ -47,40 +122,54 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    // Aquí puedes simular si el usuario está logeado.
-    // En una aplicación real, esto vendría de un servicio de autenticación.
-    // Por ahora, lo dejamos en 'false' para ver el comportamiento por defecto.
-    // this.isLoggedIn = true; // Descomenta para probar el estado logeado
+    this.populateDateTimeOptions();
   }
 
-  // Métodos para manejar los modales
+  // Método para llenar las opciones de años, meses, días y horas
+  populateDateTimeOptions() {
+    // Años: Actual + próximos 2 años
+    const currentYear = new Date().getFullYear();
+    for (let i = 0; i < 3; i++) {
+      this.availableYears.push(currentYear + i);
+    }
 
-  openBookingModal() {
-    if (this.isLoggedIn) {
-      this.isBarberModalOpen = true; // Abre el primer modal (selección de barbero)
-    } else {
-      // Si el usuario no está logeado, podrías redirigirlo a la página de login
-      // o mostrar un mensaje. Por ahora, solo alertamos.
-      alert('Para agendar una cita, por favor inicia sesión o regístrate.');
-      // O redirigir: this.router.navigateByUrl('/auth/login');
+    // Meses
+    this.availableMonths = [
+      { value: 1, name: 'Enero' }, { value: 2, name: 'Febrero' }, { value: 3, name: 'Marzo' },
+      { value: 4, name: 'Abril' }, { value: 5, name: 'Mayo' }, { value: 6, name: 'Junio' },
+      { value: 7, name: 'Julio' }, { value: 8, name: 'Agosto' }, { value: 9, name: 'Septiembre' },
+      { value: 10, name: 'Octubre' }, { value: 11, name: 'Noviembre' }, { value: 12, name: 'Diciembre' }
+    ];
+
+    // Días (por simplicidad, 1-31. En un sistema real se calcularía por mes/año)
+    for (let i = 1; i <= 31; i++) {
+      this.availableDays.push(i);
+    }
+
+    // Horas (ejemplo de 9 AM a 6 PM, cada hora)
+    for (let i = 9; i <= 18; i++) {
+      const hourValue = `${String(i).padStart(2, '0')}:00`;
+      const displayHour = i > 12 ? `${i - 12}:00 PM` : `${i}:00 AM`;
+      this.availableHours.push({ value: hourValue, display: displayHour });
     }
   }
 
-  // --- Lógica del Modal de Barbero ---
-  selectBarber(barberName: string) {
-    // Aquí puedes añadir lógica para resaltar el barbero seleccionado si lo deseas
-    // Por ejemplo, usando una variable 'selectedBarber' y aplicando una clase 'selected' en el HTML
-    this.selectedBarber = barberName;
-    console.log('Barbero seleccionado:', this.selectedBarber);
+  openBookingModal(servicio: Servicio) {
+    this.selectedService = servicio;
+    console.log('Servicio seleccionado para reservar:', this.selectedService);
+    this.isBarberModalOpen = true;
+  }
 
-    // Para aplicar la clase 'selected' dinámicamente en el HTML, puedes usar ngClass:
-    // <div class="barber-card" [ngClass]="{'selected': selectedBarber === 'Pepe'}" (click)="selectBarber('Pepe')">
+  // --- Lógica del Modal de Barbero ---
+  selectBarber(barber: Barbero) { // Ahora recibe un objeto Barbero
+    this.selectedBarber = barber;
+    console.log('Barbero seleccionado:', this.selectedBarber.nombre);
   }
 
   confirmBarberSelection() {
     if (this.selectedBarber) {
-      this.isBarberModalOpen = false; // Cierra el modal de barbero
-      this.isDateTimeModalOpen = true; // Abre el modal de fecha y hora
+      this.isBarberModalOpen = false;
+      this.isDateTimeModalOpen = true;
     } else {
       alert('Por favor, selecciona un barbero.');
     }
@@ -88,44 +177,66 @@ export class HomePage implements OnInit {
 
   cancelBarberSelection() {
     this.isBarberModalOpen = false;
-    this.selectedBarber = null; // Reinicia la selección
+    this.selectedBarber = null;
+    this.selectedService = null;
   }
 
   // --- Lógica del Modal de Fecha y Hora ---
   confirmDateTimeSelection() {
-    // Aquí podrías validar que se hayan seleccionado año, mes, día y hora
-    // if (this.selectedYear && this.selectedMonth && this.selectedDay && this.selectedHour) {
-      this.isDateTimeModalOpen = false; // Cierra el modal de fecha/hora
-      this.isInfoModalOpen = true; // Abre el modal de información final
-    // } else {
-    //   alert('Por favor, selecciona una fecha y hora válidas.');
-    // }
+    if (this.selectedYear && this.selectedMonth && this.selectedDay && this.selectedTime) {
+      this.isDateTimeModalOpen = false;
+      this.isInfoModalOpen = true;
+    } else {
+      alert('Por favor, selecciona Año, Mes, Día y Hora para tu cita.');
+    }
   }
 
   cancelDateTimeSelection() {
     this.isDateTimeModalOpen = false;
-    // Reiniciar selecciones de fecha/hora
+    this.selectedYear = null;
+    this.selectedMonth = null;
+    this.selectedDay = null;
+    this.selectedTime = null;
+    this.resetBookingProcess();
   }
 
   // --- Lógica del Modal de Información y Reserva ---
   makeReservation() {
-    // Aquí iría la lógica para enviar la reserva a tu backend
-    alert('¡Cita reservada con éxito! Nos pondremos en contacto contigo.');
-    this.isInfoModalOpen = false; // Cierra el último modal
-    // Reiniciar todos los estados de los modales y selecciones
-    this.resetBookingProcess();
+    if (this.customerPhone && this.customerName) {
+        console.log('Reserva a enviar:', {
+            service: this.selectedService?.titulo,
+            barber: this.selectedBarber?.nombre, // Accede al nombre del barbero
+            year: this.selectedYear,
+            month: this.selectedMonth,
+            day: this.selectedDay,
+            time: this.selectedTime,
+            phone: this.customerPhone,
+            name: this.customerName
+        });
+        alert(`¡Cita para ${this.selectedService?.titulo} con ${this.selectedBarber?.nombre} reservada con éxito! Nos pondremos en contacto contigo.`);
+        this.isInfoModalOpen = false;
+        this.resetBookingProcess();
+    } else {
+        alert('Por favor, ingresa tu número de Celular y tu Nombre.');
+    }
   }
 
   cancelInfo() {
     this.isInfoModalOpen = false;
-    this.resetBookingProcess(); // Reinicia todo el proceso
+    this.resetBookingProcess();
   }
 
   resetBookingProcess() {
     this.isBarberModalOpen = false;
     this.isDateTimeModalOpen = false;
     this.isInfoModalOpen = false;
+    this.selectedService = null;
     this.selectedBarber = null;
-    // Reiniciar otras variables de selección si las tienes
+    this.selectedYear = null;
+    this.selectedMonth = null;
+    this.selectedDay = null;
+    this.selectedTime = null;
+    this.customerPhone = '';
+    this.customerName = '';
   }
 }

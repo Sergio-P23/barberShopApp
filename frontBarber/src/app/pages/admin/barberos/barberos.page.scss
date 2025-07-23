@@ -1,4 +1,25 @@
-/* Encabezado (se mantiene) */
+// Definimos la variable SCSS para poder usar darken()
+$gris-claro-scss: #f0f0f0;
+
+/* Variables de Colores (igual que en servicios.page.scss, asegúrate de que sean coherentes o definidas globalmente) */
+:root {
+  --ion-color-primary: #000000; /* Negro principal */
+  --ion-color-primary-contrast: #ffffff; /* Contraste para texto en negro */
+  --ion-color-secondary: #f0f0f0; /* Gris claro para fondos */
+  --ion-color-tertiary: #a0a0a0; /* Gris medio */
+  --ion-color-highlight: #DAA520; /* Dorado para resaltar */
+
+  /* Variables específicas para administración (iguales) */
+  --admin-card-bg: var(--ion-color-primary-contrast);
+  --admin-card-border: #e0e0e0;
+  --admin-button-edit: #28a745; /* Verde para editar */
+  --admin-button-delete: #dc3545; /* Rojo para borrar */
+  --admin-button-cancel: var(--ion-color-tertiary);
+}
+
+/* -------------------- HEADER (ESTILOS COMPARTIDOS CON SERVICIOS.PAGE.SCSS) -------------------- */
+// Idealmente, estos estilos deberían estar en un archivo CSS global o en un componente de header compartido.
+// Por ahora, se repiten para asegurar que funcione aquí.
 .main-header {
   --background: var(--ion-color-primary);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -8,7 +29,7 @@
   --background: var(--ion-color-primary);
   color: var(--ion-color-primary-contrast);
   padding: 0 16px;
-  height: 80px;
+  height: 60px;
   display: flex;
   align-items: center;
 }
@@ -25,272 +46,454 @@
 .header-logo {
   height: 60px;
   object-fit: contain;
-  /* margin-right: 48px; /* Considerar si este margen es necesario o el gap en header-content */
 }
 
 .header-logged-in-section {
   display: flex;
   align-items: center;
-  gap: 10px; /* Espacio entre los botones o entre logo y botón de menú */
+  gap: 10px;
 }
 
 .menu-button-custom {
-  --color: var(--ion-color-highlight); /* Color dorado para el icono de hamburguesa */
-  font-size: 2.5em; /* Tamaño del icono */
+  --color: var(--ion-color-highlight);
+  font-size: 2.5em;
   --padding-end: 0;
   --padding-start: 0;
 }
 
-.menu-button-fotter {
-  font-size: 1.5rem; /* Tamaño del icono */
-  text-align: center;
-  margin-top: 400px;
-}
-
-.btn-primary-solid {
-  --background: var(--ion-color-highlight);
-  --color: var(--ion-color-primary);
-}
-
-.register-link-text { /* Nueva clase para el texto del enlace de registro */
-  color: var(--ion-color-highlight); /* Enlace dorado */
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.btn-primary-solid {
-  --background: var(--ion-color-highlight);
-  --color: var(--ion-color-primary);
-}
-
-
-
-//contenido
+/* -------------------- CONTENIDO PRINCIPAL DE BARBEROS ADMIN -------------------- */
 .main-content {
   --background: var(--ion-color-secondary);
-  padding: 0px;
+  padding: 0;
 }
 
-.services-section {
-  margin-bottom: 30px;
+.barbers-admin-section { /* Nueva clase para la sección principal de barberos */
+  padding: 20px;
+  background-color: var(--ion-color-secondary);
   text-align: center;
 }
 
-.services-grid {
-  background-color: #fff;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, max-content));
-  gap: 20px;
-  justify-content: center;
-  
-}
-
-.section-title {
+.section-title { /* Mismo estilo que el título de servicios admin */
   color: var(--ion-color-primary);
-  font-size: 1.8em;
+  font-size: 2em;
   font-weight: bold;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   position: relative;
   padding-bottom: 10px;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.service-card {
-  background-color: var(--ion-color-primary-contrast);
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.section-title::after { /* Línea dorada bajo el título */
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--ion-color-highlight);
+  border-radius: 2px;
+}
+
+.barbers-admin-grid { /* Nueva clase para la grilla de barberos */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* 2 columnas en móvil, más en desktop */
+  gap: 25px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto 30px auto;
+}
+
+.barber-admin-card { /* Nueva clase para cada tarjeta de barbero */
+  background-color: var(--admin-card-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 15px;
   text-align: center;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  cursor: pointer; /* Añadir cursor de puntero para indicar que es clickeable */
-  
-  height: 500px;
-  max-width: 400px;
-  margin-left: 50px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 250px; /* Altura mínima ajustada para barbero */
+  justify-content: space-between; /* Para empujar el nombre y botones */
 }
 
-.service-card:hover {
+.barber-admin-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al pasar el mouse */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.service-image {
+.barber-image-container {
+  width: 140px; /* Tamaño más grande para la foto de barbero */
+  height: 140px;
+  border-radius: 5%;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border: 1px solid var(--ion-color-primary); /* Borde negro alrededor de la foto */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.barber-admin-image {
   width: 100%;
-  height: 300px;
+  height: 100%;
   object-fit: cover;
-  object-position: center top;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  display: block;
 }
 
-.service-title {
-  color: var(--ion-color-primary);
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 50px;
-}
-
-.botones {
+.barber-details {
+  flex-grow: 1;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  max-width: 350px;
-
+  align-items: center;
   justify-content: center;
-  margin: 0 auto;            
+  margin-bottom: 15px;
 }
 
-
-//modal confirmacion
-.modal-confirmacion::part(content) {
-  --background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(218,165,32, 0.3);
-  padding: 20px;
-  max-width: 300px;
-  max-height: 450px;
-  margin: auto;
-}
-
-.modal-style {
-  --background: #fff;
-  --color: #000;
-  --border-radius: 12px;
-  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.modal-content {
+.barber-admin-name {
+  color: var(--ion-color-primary);
+  font-size: 1.4em; /* Nombre más grande */
+  font-weight: bold;
+  margin: 0;
   text-align: center;
-  background-color: #fff;
 }
 
-.modal-botones {
+.barber-actions { /* Mismos estilos que los de servicios */
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   gap: 10px;
-  margin-top: 150px;
+  width: 100%;
+  margin-top: auto;
 }
 
+.action-button { /* Botones circulares con iconos */
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --min-width: 40px;
+  --height: 40px;
+ width: 100px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-//editar
+.action-button ion-icon {
+  font-size: 1.3em;
+  color: var(--ion-color-primary-contrast);
+}
 
-//modal editar
+.edit-button {
+  --background: var(--admin-button-edit);
+}
 
-.modal-editar::part(content) {
-  --background: #ffffff;
+.delete-button {
+  --background: var(--admin-button-delete);
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón flotante para agregar barbero */
+ion-fab-button.add-barber-fab-button { /* Nueva clase */
+  --background: var(--ion-color-highlight);
+  --color: var(--ion-color-primary);
+  --box-shadow: 0 4px 10px rgba(218, 165, 32, 0.4);
+  width: 56px;
+  height: 56px;
+}
+
+ion-fab-button.add-barber-fab-button ion-icon {
+  font-size: 2em;
+}
+
+/* -------------------- MODAL DE CONFIRMACIÓN DE BORRADO (COMPARTIDO) -------------------- */
+// Estos estilos pueden ser globalizados si se usan en más de 2 modales.
+// Por ahora, se mantienen aquí pero se refactorizaron las clases para ser genéricas.
+.confirmation-modal::part(content) {
+  --background: var(--ion-color-primary-contrast);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(218,165,32, 0.3);
-  padding: 20px;
-  max-width: 500px;
-  max-height: 450px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  max-width: 350px;
+  max-height: 300px;
   margin: auto;
 }
 
-.modal-editar-header {
-  --background: rgb(255, 255, 255);
-  --color: rgb(11, 4, 4);
+.modal-header-borrar {
+  --background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  border-radius: 12px 12px 0 0;
+  border-bottom: 1px solid var(--ion-color-tertiary);
+}
+
+.modal-header-borrar ion-title {
+  color: var(--ion-color-primary-contrast);
+  font-size: 1.2em;
+  font-weight: bold;
   text-align: center;
-} 
-
-.modal-editar-content{
-  --background: rgb(255, 255, 255);
-  --color: rgb(11, 4, 4);
-  --max-width: 500px;
-  --max-height: 90vh;
-  --border-radius: 16px;
 }
 
-.input-grid {
-  display: grid;
-  grid-template-columns: 1fr; /* Por defecto, una columna en móviles */
-  gap: 15px; /* Espacio entre los campos */
-  margin-bottom: 20px; /* Espacio antes del botón de registro */
-  padding-top: 30px;
+.modal-content-inner {
+  --background: var(--ion-color-primary-contrast);
+  color: var(--ion-color-primary);
+  text-align: center;
+  padding: 25px;
 }
 
-/* Estilos para los campos de entrada individuales (se mantienen en general) */
-.editar-input {
-  margin-bottom: 8px; /* Mantener margen inferior para espaciado vertical */
-  --background: var(--ion-color-secondary);
-  --border-radius: 12px;
-  --padding-start: 15px;
-  --padding-end: 15px;
-  --color: var(--ion-color-primary);
-  width: 100%; /* Asegura que cada item ocupe el espacio de su columna */
-
-  --border-style: none;
-  --inner-padding-end: 0;
-  
+.confirmation-message {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--ion-color-primary);
 }
 
-.editar-input ion-input {
-  --color: var(--ion-color-primary);
-  --placeholder-color: var(--ion-color-tertiary);
-  font-size: 16px;
+.barber-name-to-delete { /* Clase específica para el nombre del barbero a borrar */
+  font-size: 1.3em;
+  color: var(--ion-color-highlight);
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
-.editar-input ion-icon {
-  color: var(--ion-color-tertiary);
-}
-
-.modal-editar-botones {
-  margin-top: 24px;
+.modal-action-buttons {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-top: 20px;
 }
 
-.image-preview {
+.cancel-button {
+  --background: var(--ion-color-tertiary);
+  --color: var(--ion-color-primary-contrast);
+  --border-radius: 8px;
+  height: 45px;
+  font-weight: 600;
+}
+
+.delete-confirm-button {
+  --background: var(--admin-button-delete);
+  --color: var(--ion-color-primary-contrast);
+  --border-radius: 8px;
+  height: 45px;
+  font-weight: 600;
+}
+
+/* -------------------- MODAL DE EDITAR/CREAR BARBERO -------------------- */
+.edit-barber-modal::part(content) { /* Nueva clase para el modal de barbero */
+  --background: var(--ion-color-primary-contrast);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  max-width: 450px; /* Ancho ajustado para barbero */
+  max-height: 90vh;
+  margin: auto;
+  overflow: hidden;
+}
+
+.modal-edit-header { /* Compartido */
+  --background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  border-radius: 12px 12px 0 0;
+  border-bottom: 1px solid var(--ion-color-tertiary);
+}
+
+.modal-edit-header ion-title { /* Compartido */
+  color: var(--ion-color-primary-contrast);
+  font-size: 1.3em;
+  font-weight: bold;
   text-align: center;
-  margin: 16px 0;
 }
 
-ion-note {
-  margin-left: 16px;
-  font-size: 12px;
+.modal-edit-content { /* Compartido */
+  --background: var(--ion-color-primary-contrast);
+  color: var(--ion-color-primary);
+  padding: 25px;
+  overflow-y: auto;
 }
 
-.ion-invalid {
-  --border-color: var(--ion-color-danger);
-  --color: var(--ion-color-danger);
+.modal-input-item { /* Compartido */
+  margin-bottom: 18px;
+  --background: var(--ion-color-secondary);
+  --border-radius: 8px;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --color: var(--ion-color-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  --highlight-background: transparent;
+  --highlight-color: var(--ion-color-highlight);
+  --highlight-border-width: 2px;
+}
+
+.modal-input-item ion-label { /* Compartido */
+  color: var(--ion-color-primary);
+  font-weight: 500;
+  font-size: 0.95em;
+  margin-bottom: 5px;
+}
+
+.modal-input-item ion-input,
+.modal-input-item ion-textarea { /* Compartido */
+  --color: var(--ion-color-primary);
+  --placeholder-color: var(--ion-color-tertiary);
+  font-size: 1em;
+}
+
+.required-star { /* Compartido */
+  color: var(--admin-button-delete);
+  margin-left: 3px;
+}
+
+ion-note { /* Compartido */
+  margin-left: 15px;
+  font-size: 0.85em;
+  color: var(--admin-button-delete);
+  display: block;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.file-input-wrapper { /* Compartido */
+  padding-bottom: 15px;
 }
 
 input[type="file"] {
   width: 100%;
-  padding: 8px;
-  border: 2px dashed #ccc;
+  padding: 12px;
+  border: 2px dashed var(--ion-color-tertiary);
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
-  transition: border-color 0.3s;
+  background-color: $gris-claro-scss; /* Usa la variable SCSS */
+  color: var(--ion-color-primary);
+  transition: border-color 0.3s, background-color 0.3s;
 }
 
 input[type="file"]:hover {
-  border-color: var(--ion-color-primary);
+  border-color: var(--ion-color-highlight);
+  background-color: darken($gris-claro-scss, 3%); /* Usa la variable SCSS */
 }
 
-/* Scroll del modal principal */
-.modal-editar-content {
-  /* Scroll para Firefox */
-  scrollbar-width: thin;
-  scrollbar-color: #cbd5e0 transparent;
+.image-preview-container { /* Compartido */
+  position: relative;
+  width: 100%;
+  max-width: 250px;
+  margin: 20px auto 30px auto;
+  border: 1px solid var(--ion-color-tertiary);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Scroll para Webkit (Chrome, Safari, Edge) */
-.modal-editar-content::-webkit-scrollbar {
-  width: 6px;
+.preview-image { /* Compartido */
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
 }
 
-.modal-editar-content::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.modal-editar-content::-webkit-scrollbar-thumb {
-  background-color: #cbd5e0;
-  border-radius: 3px;
+.remove-image-button { /* Compartido */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  --background: rgba(0, 0, 0, 0.7);
+  --color: var(--ion-color-primary-contrast);
+  --border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.4em;
+  z-index: 10;
   transition: background-color 0.2s ease;
 }
 
-.modal-editar-content::-webkit-scrollbar-thumb:hover {
-  background-color: #a0aec0;
+.remove-image-button:hover {
+  --background: var(--admin-button-delete);
+}
+
+.modal-edit-action-buttons { /* Compartido */
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.save-button { /* Compartido */
+  --background: var(--ion-color-highlight);
+  --color: var(--ion-color-primary);
+  --border-radius: 8px;
+  height: 48px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(218, 165, 32, 0.4);
+}
+
+.save-button ion-icon { /* Compartido */
+  color: var(--ion-color-primary);
+}
+
+.save-button:disabled { /* Compartido */
+  opacity: 0.6;
+}
+
+.cancel-edit-button { /* Compartido */
+  --background: transparent;
+  --color: var(--ion-color-tertiary);
+  --border-color: var(--ion-color-tertiary);
+  --border-radius: 8px;
+  height: 48px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.cancel-edit-button:hover { /* Compartido */
+  --color: var(--ion-color-primary);
+  --border-color: var(--ion-color-primary);
+}
+
+.cancel-edit-button ion-icon { /* Compartido */
+  color: var(--ion-color-tertiary);
+}
+
+/* -------------------- Media Queries (COMPARTIDO Y AJUSTADO) -------------------- */
+@media (max-width: 480px) {
+  .barbers-admin-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Más compacto para móviles */
+    gap: 15px;
+  }
+
+  .barber-admin-card {
+    min-height: unset;
+  }
+
+  .confirmation-modal::part(content) {
+    width: 90%;
+  }
+  .edit-barber-modal::part(content) {
+    width: 95%;
+  }
+
+  .modal-edit-content {
+    padding: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .barbers-admin-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Más columnas en tablet */
+    gap: 30px;
+  }
+
+  .modal-edit-action-buttons {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .modal-edit-action-buttons ion-button {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .barbers-admin-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Más columnas en desktop grande */
+  }
 }

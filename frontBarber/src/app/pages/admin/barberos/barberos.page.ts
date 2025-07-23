@@ -1,25 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { IonicModule } from '@ionic/angular'; // Este importa TODO lo de Ionic
+import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
+import { addIcons } from 'ionicons';
+// Iconos específicos para esta página
 import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonMenu,
-  IonMenuButton,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/angular/standalone';
+  menuOutline, logOutOutline, createOutline, trashOutline, add, saveOutline, closeOutline
+} from 'ionicons/icons';
 
-import { addIcons } from 'ionicons'; // Importa addIcons
-import { menuOutline, logOutOutline } from 'ionicons/icons';
+
 
 @Component({
   selector: 'app-barberos',
@@ -31,39 +24,53 @@ import { menuOutline, logOutOutline } from 'ionicons/icons';
     IonicModule,
     RouterModule,
     ReactiveFormsModule,
+    FormsModule,
+  
   ]
 })
 export class BarberosPage implements OnInit {
 
-  constructor(private fb: FormBuilder,) {
+  constructor(private fb: FormBuilder) {
     this.inicializarFormulario();
     addIcons({
-      menuOutline, // Icono de hamburguesa
-      logOutOutline
-      
-        });
-   }
-
-  ngOnInit() {
+      menuOutline,
+      logOutOutline,
+      createOutline,
+      trashOutline,
+      add, // Icono para el FAB
+      saveOutline,
+      closeOutline
+    });
   }
+
+  ngOnInit() { }
 
   barberos = [
     {
       id: 1,
       nombre: 'Carlos Sánchez',
-      foto: 'https://www.giomrbarber.com/wp-content/uploads/2022/11/giovanny-hernandez.jpg'
+      foto: 'https://images.unsplash.com/photo-1596434311145-c4199c08006e?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       id: 2,
       nombre: 'Luis Pérez',
-      foto: 'https://thumbs.dreamstime.com/b/barberos-de-edad-p…zados-en-la-peluquer%C3%ADa-moderna-231500500.jpg'
-    }
+      foto: 'https://images.unsplash.com/photo-1614995955619-a67b53a06180?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    },
+    {
+      id: 3,
+      nombre: 'Sofía Ramirez',
+      foto: 'https://images.unsplash.com/photo-1621609764095-f28876e5dce4?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    },
+    {
+      id: 4,
+      nombre: 'Juan David',
+      foto: 'https://images.unsplash.com/photo-1621609764095-f28876e5dce4?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    },
   ];
 
   mostrarModalBorrar = false;
   barberoSeleccionado: any = null;
 
-   // Variables para el modal y formulario
   mostrarModalEditar = false;
   editarForm!: FormGroup;
   fotoPreview: string | null = null;
@@ -79,20 +86,8 @@ export class BarberosPage implements OnInit {
   borrar() {
     this.barberos = this.barberos.filter(b => b.id !== this.barberoSeleccionado.id);
     this.mostrarModalBorrar = false;
+    this.barberoSeleccionado = null;
   }
-
-  crear() {
-    const nuevoId = Math.max(...this.barberos.map(b => b.id)) + 1;
-    const nuevoBarbero = {
-      id: nuevoId,
-      nombre: 'Nuevo Barbero',
-      foto: 'https://tse3.mm.bing.net/th/id/OIP.YbjJkPQmvm-LdJniAhJ78gHaG8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3'
-    };
-    this.barberos.push(nuevoBarbero);
-  }
-
-  //////////
-
 
   // Inicializar el formulario reactivo
   inicializarFormulario() {
@@ -101,43 +96,30 @@ export class BarberosPage implements OnInit {
     });
   }
 
-  // Abrir modal para editar un servicio específico
+  // Abrir modal para editar un barbero específico
   abrirModalEditar(barbero: any) {
-    this.barberoActual = { ...barbero }; // Copia del barbero actual
-    
-    // Cargar datos en el formulario carga datos
+    this.barberoActual = { ...barbero };
     this.editarForm.patchValue({
       nombre: barbero.nombre,
     });
-    
-    // Resetear foto
     this.fotoPreview = barbero.foto || null;
     this.fotoFile = null;
-    
     this.mostrarModalEditar = true;
   }
 
   // Manejar selección de archivo
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    
     if (file) {
-      // Validar tipo de archivo
       if (!file.type.startsWith('image/')) {
-        // Mostrar toast de error
         console.error('Por favor selecciona una foto válida');
         return;
       }
-
-      // Validar tamaño (máximo 5MB)
       if (file.size > 5 * 1024 * 1024) {
         console.error('La foto no puede superar los 5MB');
         return;
       }
-
       this.fotoFile = file;
-      
-      // Crear preview
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.fotoPreview = e.target.result;
@@ -146,48 +128,53 @@ export class BarberosPage implements OnInit {
     }
   }
 
-  // Eliminar imagen seleccionada
+  // Eliminar foto seleccionada
   eliminarImagen() {
     this.fotoPreview = null;
     this.fotoFile = null;
-    
-    // Resetear el input file
     const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
     if (fileInput) {
       fileInput.value = '';
     }
   }
 
-  // Guardar cambios
+  // Guardar cambios o crear nuevo barbero
   guardarCambios() {
     if (this.editarForm.valid) {
-    this.guardando = true;
+      this.guardando = true;
+      const datosEditados = this.editarForm.value;
 
-    // Extraer datos del formulario
-    const datosEditados = this.editarForm.value;
+      // Si barberoActual tiene ID, estamos editando
+      if (this.barberoActual && this.barberoActual.id) {
+        const index = this.barberos.findIndex(b => b.id === this.barberoActual.id);
+        if (index !== -1) {
+          this.barberos[index] = {
+            ...this.barberos[index],
+            ...datosEditados,
+            foto: this.fotoPreview || this.barberos[index].foto
+          };
+        }
+      } else { // Si barberoActual es null o no tiene ID, estamos creando uno nuevo
+        const nuevoId = Math.max(...this.barberos.map(b => b.id)) + 1;
+        const barberoAñadido = {
+          id: nuevoId,
+          nombre: datosEditados.nombre,
+          foto: this.fotoPreview || 'https://via.placeholder.com/150' // Foto por defecto
+        };
+        this.barberos.push(barberoAñadido);
+      }
 
-    // Actualizar servicio directamente en el array
-    const index = this.barberos.findIndex(s => s.id === this.barberoActual.id);
-    if (index !== -1) {
-      this.barberos[index] = {
-        ...this.barberos[index],
-        ...datosEditados,
-        foto: this.fotoPreview || this.barberos[index].foto
-      };
+      this.mostrarModalEditar = false;
+      this.barberoActual = null;
+      this.fotoPreview = null;
+      this.fotoFile = null;
+      this.editarForm.reset();
+      this.guardando = false;
+    } else {
+      Object.keys(this.editarForm.controls).forEach(key => {
+        this.editarForm.get(key)?.markAsTouched();
+      });
     }
-
-    // Cerrar modal y limpiar
-    this.mostrarModalEditar = false;
-    this.barberoActual = null;
-    this.fotoPreview = null;
-    this.fotoFile = null;
-    this.editarForm.reset();
-    this.guardando = false;
-  } else {
-    Object.keys(this.editarForm.controls).forEach(key => {
-      this.editarForm.get(key)?.markAsTouched();
-    });
-  }
   }
 
   // Cancelar edición
@@ -199,4 +186,12 @@ export class BarberosPage implements OnInit {
     this.barberoActual = null;
   }
 
+  // Abrir modal para crear un nuevo barbero
+  crear() {
+    this.barberoActual = null; // Indica que es un nuevo barbero
+    this.fotoPreview = null;
+    this.fotoFile = null;
+    this.inicializarFormulario(); // Reinicia el formulario para un nuevo barbero
+    this.mostrarModalEditar = true;
+  }
 }

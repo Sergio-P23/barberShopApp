@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular'; // Este importa TODO lo de Ionic
 import { addIcons } from 'ionicons'; // Importa addIcons
 import { menuOutline, logOutOutline, calendarOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
+import { SideMenuComponent } from 'src/app/components/side-menu/side-menu.component';
 
 @Component({
   selector: 'app-reservas',
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     IonicModule,
     RouterModule,
-    FormsModule,]
+    FormsModule,
+  SideMenuComponent]
 })
 export class ReservasPage implements OnInit {
 
