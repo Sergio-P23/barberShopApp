@@ -82,6 +82,26 @@
               El nombre es obligatorio y debe tener al menos 3 caracteres.
             </ion-note>
 
+            <ion-item class="modal-input-item">
+              <ion-label position="stacked">Correo <span class="required-star">*</span></ion-label>
+              <ion-input type="email" formControlName="correo" placeholder="Ingresa el correo del barbero"
+                [class.ion-invalid]="editarForm.get('correo')?.invalid && editarForm.get('correo')?.touched">
+              </ion-input>
+            </ion-item>
+            <ion-note color="danger" *ngIf="editarForm.get('correo')?.invalid && editarForm.get('correo')?.touched">
+              El correo es obligatorio.
+            </ion-note>
+            
+            <ion-item class="modal-input-item">
+              <ion-label position="stacked">Contraseña <span class="required-star">*</span></ion-label>
+              <ion-input type="text" formControlName="contraseña" placeholder="Ingresa la contraseña del barbero"
+                [class.ion-invalid]="editarForm.get('contraseña')?.invalid && editarForm.get('contraseña')?.touched">
+              </ion-input>
+            </ion-item>
+            <ion-note color="danger" *ngIf="editarForm.get('contraseña')?.invalid && editarForm.get('contraseña')?.touched">
+              La contraseña es obligatoria.
+            </ion-note>
+
             <ion-item class="modal-input-item file-input-wrapper">
               <ion-label position="stacked">Foto del barbero</ion-label>
               <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput>

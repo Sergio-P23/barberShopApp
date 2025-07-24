@@ -49,22 +49,30 @@ export class BarberosPage implements OnInit {
     {
       id: 1,
       nombre: 'Carlos Sánchez',
-      foto: 'https://images.unsplash.com/photo-1596434311145-c4199c08006e?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+      foto: 'https://images.squarespace-cdn.com/content/v1/6221649741ec3a06ecd99f53/1646359598438-K4U2BJH9GLDZ9DO19NX9/_DSC1144+2.jpg?format=1000w',
+      correo: 'carlossanchez@gmail.com' ,
+      contraseña: '123' 
     },
     {
       id: 2,
       nombre: 'Luis Pérez',
-      foto: 'https://images.unsplash.com/photo-1614995955619-a67b53a06180?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+      foto: 'https://th.bing.com/th/id/R.133099d40cb1df5f2740591798752e32?rik=BKO6PxHI%2fCanuw&riu=http%3a%2f%2fbarberosbarberias.com%2fassets%2fimg%2fGaleria%2fdani_colombia.webp&ehk=gavSAr7Tg%2bDzCtmKupSpTZG8MtUDqvDjPfUnLluTZk0%3d&risl=&pid=ImgRaw&r=0',
+      correo: 'luisperez@gmail.com' ,
+      contraseña: '456'  
     },
     {
       id: 3,
       nombre: 'Sofía Ramirez',
-      foto: 'https://images.unsplash.com/photo-1621609764095-f28876e5dce4?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+      foto: 'https://www.elespectador.com/resizer/RyHY-KnNENTkRpmat3fTYn8gHLc=/920x613/filters:format(jpeg)/cloudfront-us-east-1.images.arcpublishing.com/elespectador/OMTV66O42RAMZILNY6MVVHCF7E.jpg',
+      correo: 'sofiaramirez@gmail.com' ,
+      contraseña: '789' 
     },
     {
       id: 4,
       nombre: 'Juan David',
-      foto: 'https://images.unsplash.com/photo-1621609764095-f28876e5dce4?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+      foto: 'https://tse1.mm.bing.net/th/id/OIP.2GjjHEG8IvcAPJDx8SYcNwHaEz?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
+      correo: 'juandavid@gmail.com' ,
+      contraseña: '1011' 
     },
   ];
 
@@ -93,6 +101,8 @@ export class BarberosPage implements OnInit {
   inicializarFormulario() {
     this.editarForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
+      correo: ['', [Validators.required, Validators.email]],
+      contraseña: ['', [Validators.required, Validators.minLength(3)]]
     });
   }
 
@@ -101,6 +111,8 @@ export class BarberosPage implements OnInit {
     this.barberoActual = { ...barbero };
     this.editarForm.patchValue({
       nombre: barbero.nombre,
+      correo: barbero.correo,
+      contraseña: barbero.contraseña
     });
     this.fotoPreview = barbero.foto || null;
     this.fotoFile = null;
@@ -159,7 +171,10 @@ export class BarberosPage implements OnInit {
         const barberoAñadido = {
           id: nuevoId,
           nombre: datosEditados.nombre,
+          correo: datosEditados.correo,
+          contraseña: datosEditados.contraseña,
           foto: this.fotoPreview || 'https://via.placeholder.com/150' // Foto por defecto
+          
         };
         this.barberos.push(barberoAñadido);
       }
