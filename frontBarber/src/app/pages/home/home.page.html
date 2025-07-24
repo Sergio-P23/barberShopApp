@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div class="header-content container-fluid">
       <img src="../../../assets/logoOne.jpg" alt="Logo de la Barbería" class="header-logo" />
-      
+
 
       <div class="header-auth-section">
         <div class="header-buttons">
@@ -16,9 +16,9 @@
 
 <ion-content [fullscreen]="false" class="main-content">
 
-  
 
-  
+
+
   <div class="carousel-section">
     <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-    <div class="container text-center">
+  <div class="container text-center">
     <div class="p-5">
       <h1 class="display-5 fw-bold text-warning mb-4">¡Bienvenido a Sky's the Limit!</h1>
       <p class="lead text-dark">
@@ -81,7 +81,6 @@
     <div class="map-container">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d994.0793756347697!2d-74.22916665714494!3d4.71480406015289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f780350454521%3A0x1f9e28adf4b57fd3!2sCra.%2012%20%23%209A-14%2C%20Mosquera%2C%20Cundinamarca!5e0!3m2!1ses-419!2sco!4v1753302143673!5m2!1ses-419!2sco"
-
         width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade">
       </iframe>
@@ -90,14 +89,19 @@
 
 </ion-content>
 
-<ion-modal [isOpen]="isBarberModalOpen"> <ng-template>
+<ion-modal [isOpen]="isBarberModalOpen" class="modal-select-barber">
+  <ng-template class="modal-select-barber">
     <ion-header> <ion-toolbar>
-        <ion-title>Seleccione el barbero de su preferencia</ion-title>
+        <ion-title>
+          <span class="title-custom">Seleccione el barbero de su preferencia</span>
+        </ion-title>
         <ion-buttons slot="end">
-          <ion-button (click)="cancelBarberSelection()">Cerrar</ion-button> </ion-buttons>
+          <ion-button (click)="cancelBarberSelection()"><span style="color: white;">Cerrar</span></ion-button>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"> <div class="container">
+    <ion-content class="ion-padding">
+      <div class="container">
         <div class="row justify-content-center">
           <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let barber of barberos">
             <div class="barber-card" [class.selected]="selectedBarber?.id === barber.id" (click)="selectBarber(barber)">
@@ -114,19 +118,39 @@
   </ng-template>
 </ion-modal>
 
+<!-- alerta seleccionar barbero -->
+<ion-modal [isOpen]="isAlertSelectBarberModalOpen" class="barber-select-modal" (didDismiss)="cerrarModal()">
+  <ng-template>
+    <ion-content class="modal-content ion-padding">
+      <div class="icon-wrapper">
+        <ion-icon name="alert-circle-outline" class="alert-icon"></ion-icon>
+      </div>
+      <p class="alert-select-message">Por favor, selecciona un barbero.</p>
+
+      <div class="modal-action-buttons">
+        <ion-button expand="block" class="accept-button" (click)="cerrarModal()">Aceptar</ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
 <ion-modal [isOpen]="isDateTimeModalOpen"> <ng-template>
     <ion-header> <ion-toolbar>
-        <ion-title>Seleccione el día de su cita</ion-title>
+        <ion-title>
+          <span class="title-custom">Seleccione el día de su cita</span>
+        </ion-title>
         <ion-buttons slot="end">
-          <ion-button (click)="cancelDateTimeSelection()">Cerrar</ion-button> </ion-buttons>
+          <ion-button (click)="cancelDateTimeSelection()"><span style="color: white;">Cerrar</span></ion-button> </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"> <ion-item> <ion-select label="Año" labelPlacement="floating" [(ngModel)]="selectedYear">
+    <ion-content class="ion-padding"> <ion-item> <ion-select label="Año" labelPlacement="floating"
+          [(ngModel)]="selectedYear">
           <ion-select-option *ngFor="let year of availableYears" [value]="year">{{ year }}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item> <ion-select label="Mes" labelPlacement="floating" [(ngModel)]="selectedMonth">
-          <ion-select-option *ngFor="let month of availableMonths" [value]="month.value">{{ month.name }}</ion-select-option>
+          <ion-select-option *ngFor="let month of availableMonths" [value]="month.value">{{ month.name
+            }}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item> <ion-select label="Día" labelPlacement="floating" [(ngModel)]="selectedDay">
@@ -134,13 +158,16 @@
         </ion-select>
       </ion-item>
       <ion-item> <ion-select label="Hora" labelPlacement="floating" [(ngModel)]="selectedTime">
-          <ion-select-option *ngFor="let hour of availableHours" [value]="hour.value">{{ hour.display }}</ion-select-option>
+          <ion-select-option *ngFor="let hour of availableHours" [value]="hour.value">{{ hour.display
+            }}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-button expand="block" class="modal-next-button" (click)="confirmDateTimeSelection()">SIGUIENTE</ion-button>
     </ion-content>
   </ng-template>
 </ion-modal>
+
+<!-- alerta seleccionar fecha -->
 
 <ion-modal [isOpen]="isInfoModalOpen"> <ng-template>
     <ion-header> <ion-toolbar>
@@ -149,7 +176,8 @@
           <ion-button (click)="cancelInfo()">Cerrar</ion-button> </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"> <ion-item> <ion-input type="tel" label="Celular" labelPlacement="floating" [(ngModel)]="customerPhone"></ion-input>
+    <ion-content class="ion-padding"> <ion-item> <ion-input type="tel" label="Celular" labelPlacement="floating"
+          [(ngModel)]="customerPhone"></ion-input>
       </ion-item>
       <ion-item> <ion-input type="text" label="Nombre" labelPlacement="floating" [(ngModel)]="customerName"></ion-input>
       </ion-item>

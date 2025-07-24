@@ -9,7 +9,7 @@ import {
 
 import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBackOutline } from 'ionicons/icons';
+import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBackOutline, alertCircleOutline } from 'ionicons/icons';
 
 // Definición de interfaces para mejor tipado (opcional, pero buena práctica)
 interface Servicio {
@@ -84,10 +84,10 @@ export class HomePage implements OnInit {
 
   // Arreglo para almacenar la información de los barberos
   barberos: Barbero[] = [
-    { id: 1, nombre: 'Pepe', foto: 'https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=PEPE' },
-    { id: 2, nombre: 'María', foto: 'https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=MARIA' },
-    { id: 3, nombre: 'Juan', foto: 'https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=JUAN' },
-    { id: 4, nombre: 'Juan 2', foto: 'https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=JUAN2' },
+    { id: 1, nombre: 'Pepe', foto: 'https://images.squarespace-cdn.com/content/v1/6221649741ec3a06ecd99f53/1646359598438-K4U2BJH9GLDZ9DO19NX9/_DSC1144+2.jpg?format=1000w' },
+    { id: 2, nombre: 'María', foto: 'https://www.elespectador.com/resizer/RyHY-KnNENTkRpmat3fTYn8gHLc=/920x613/filters:format(jpeg)/cloudfront-us-east-1.images.arcpublishing.com/elespectador/OMTV66O42RAMZILNY6MVVHCF7E.jpg' },
+    { id: 3, nombre: 'Juan', foto: 'https://th.bing.com/th/id/R.133099d40cb1df5f2740591798752e32?rik=BKO6PxHI%2fCanuw&riu=http%3a%2f%2fbarberosbarberias.com%2fassets%2fimg%2fGaleria%2fdani_colombia.webp&ehk=gavSAr7Tg%2bDzCtmKupSpTZG8MtUDqvDjPfUnLluTZk0%3d&risl=&pid=ImgRaw&r=0' },
+    { id: 4, nombre: 'Juan 2', foto: 'https://tse1.mm.bing.net/th/id/OIP.2GjjHEG8IvcAPJDx8SYcNwHaEz?r=0&rs=1&pid=ImgDetMain&o=7&rm=3' },
     // Puedes añadir más barberos aquí
   ];
 
@@ -100,6 +100,8 @@ export class HomePage implements OnInit {
   isBarberModalOpen: boolean = false;
   isDateTimeModalOpen: boolean = false;
   isInfoModalOpen: boolean = false;
+  isAlertSelectBarberModalOpen: boolean = false;
+
 
   selectedService: Servicio | null = null;
   selectedBarber: Barbero | null = null; // selectedBarber ahora es un objeto Barbero
@@ -117,7 +119,8 @@ export class HomePage implements OnInit {
       callOutline,
       mailOutline,
       lockClosedOutline,
-      chevronBackOutline
+      chevronBackOutline,
+      alertCircleOutline
     });
   }
 
@@ -171,9 +174,13 @@ export class HomePage implements OnInit {
       this.isBarberModalOpen = false;
       this.isDateTimeModalOpen = true;
     } else {
-      alert('Por favor, selecciona un barbero.');
+      this.isAlertSelectBarberModalOpen = true;
     }
   }
+
+  cerrarModal() {
+  this.isAlertSelectBarberModalOpen = false;
+}
 
   cancelBarberSelection() {
     this.isBarberModalOpen = false;
