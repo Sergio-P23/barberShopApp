@@ -10,15 +10,30 @@
  */
 
  //css popover de modal selecionar fecha
- ion-popover::part(content) ion-item{
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+ ion-popover::part(content){
+  --background-color: rgb(253, 249, 249);
+  border-radius: 15px;
+  // box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 ion-radio {
   color: #d8ab07;
+  background: transparent !important;
 }
+
+ion-select-popover ion-item {
+  --inner-border-width: 0;
+  --border-width: 0;
+  border: none !important;
+  --background: white;
+}
+
+ion-select-popover ion-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  --background: white; 
+}
+
 
 //
 

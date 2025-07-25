@@ -314,18 +314,25 @@
 .modal-input-item {
   margin-top: 10px;
   margin-bottom: 18px;
-  --background: rgb(64, 63, 58);
+  --background: rgb(255, 255, 255);
   --border-radius: 8px;
   --padding-start: 15px;
   --padding-end: 15px;
-  --color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --color: rgb(0, 0, 0);
 
-  --highlight-background: transparent;
-  --highlight-color: var(--ion-color-highlight);
-  --highlight-border-width: 2px;
 }
 
+
+
+
+// /* Quitar líneas divisorias entre las opciones del ion-select-popover */
+// ion-select-popover ion-item {
+//   --inner-border-width: 0;
+//   --border-width: 0;
+//   border-bottom: none !important; /* seguridad extra */
+//   --padding-top: 12px;
+//   --padding-bottom: 12px;
+// }
 
 
 
