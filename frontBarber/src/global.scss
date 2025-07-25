@@ -9,7 +9,18 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
- 
+ //css popover de modal selecionar fecha
+ ion-popover::part(content) ion-item{
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+ion-radio {
+  color: #d8ab07;
+}
+
+//
 
 :root {
   --ion-color-primary: #000000; /* Negro principal */

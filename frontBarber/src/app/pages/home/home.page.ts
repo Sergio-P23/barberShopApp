@@ -100,7 +100,10 @@ export class HomePage implements OnInit {
   isBarberModalOpen: boolean = false;
   isDateTimeModalOpen: boolean = false;
   isInfoModalOpen: boolean = false;
+
   isAlertSelectBarberModalOpen: boolean = false;
+  isAlertSelectDateModalOpen: boolean = false;
+  isAlertInfoModalOpen: boolean = false;
 
 
   selectedService: Servicio | null = null;
@@ -180,6 +183,8 @@ export class HomePage implements OnInit {
 
   cerrarModal() {
   this.isAlertSelectBarberModalOpen = false;
+  this.isAlertSelectDateModalOpen = false;
+  this.isAlertInfoModalOpen = false;
 }
 
   cancelBarberSelection() {
@@ -194,7 +199,7 @@ export class HomePage implements OnInit {
       this.isDateTimeModalOpen = false;
       this.isInfoModalOpen = true;
     } else {
-      alert('Por favor, selecciona Año, Mes, Día y Hora para tu cita.');
+      this.isAlertSelectDateModalOpen = true;
     }
   }
 
@@ -224,7 +229,7 @@ export class HomePage implements OnInit {
         this.isInfoModalOpen = false;
         this.resetBookingProcess();
     } else {
-        alert('Por favor, ingresa tu número de Celular y tu Nombre.');
+        this.isAlertInfoModalOpen = true;
     }
   }
 

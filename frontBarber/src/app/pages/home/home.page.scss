@@ -249,7 +249,7 @@
 }
 
 
-/* -------------------- MODAL ALERTA SELECCIONAR BARBERO -------------------- */
+/* -------------------- MODAL ALERTA -------------------- */
 .barber-select-modal::part(content) {
   --background: var(--ion-color-primary-contrast);
   border-radius: 12px;
@@ -301,6 +301,28 @@
   height: 45px;
   font-weight: 600;
 }
+
+/* -------------------- MODAL SELECCIONAR FECHA -------------------- */
+.modal-input-item {
+  margin-top: 10px;
+  margin-bottom: 18px;
+  --background: rgb(64, 63, 58);
+  --border-radius: 8px;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  --highlight-background: transparent;
+  --highlight-color: var(--ion-color-highlight);
+  --highlight-border-width: 2px;
+}
+
+
+
+
+
+
 
 /* Estilos de las tarjetas de barbero (dentro del modal) */
 .barber-card {
@@ -395,7 +417,7 @@
   --border-radius: 8px;
   font-weight: 600;
   height: 50px;
-  margin-top: 25px;
+  margin-top: 35px;
   box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
   font-size: 1.1em;
 }
@@ -406,7 +428,7 @@
 }
 
 .info-text {
-  color: var(--ion-color-primary);
+  color: white;
   font-size: 0.95em;
   text-align: justify;
   margin-top: 25px;
