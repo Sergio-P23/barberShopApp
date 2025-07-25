@@ -231,7 +231,7 @@
 /* Se eliminan todas las reglas personalizadas para ion-modal, ion-header, ion-content dentro de modal */
 /* Solo se mantienen los estilos para .barber-card y sus elementos, y los botones de navegación */
 
-/* -------------------- MODAL SELECCIONAR BARBERO -------------------- */
+/* -------------------- MODAL SELECCION -------------------- */
 .title-custom{
   white-space: normal !important;
   overflow: visible !important;
@@ -241,8 +241,8 @@
   max-width: 100% !important;
 }
 
-.modal-select-barber::part(content) {
-  border-radius: 5px;
+.modal-select-opc::part(content) {
+  border-radius: 10px;
   max-width: 600px;
   margin: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.582);
@@ -255,8 +255,8 @@
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   padding: 0;
-  max-width: 300px;
-  max-height: 350px;
+  max-width: 350px;
+  max-height: 400px;
   margin: auto;
 
 }
@@ -270,8 +270,16 @@
 
 .alert-icon {
   padding-top: 35px;
-  font-size: 48px;
+  font-size: 60px;
   color: #ff3b30;
+  display: block;
+  margin: 0 auto 16px auto;
+}
+
+.alert-icon-succes{
+  padding-top: 35px;
+  font-size: 70px;
+  color: #e9ae0d;
   display: block;
   margin: 0 auto 16px auto;
 }

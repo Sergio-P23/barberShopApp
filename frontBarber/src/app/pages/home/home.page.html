@@ -90,9 +90,9 @@
 </ion-content>
 
 <!-- modal seleccionar barbero -->
-<ion-modal [isOpen]="isBarberModalOpen" class="modal-select-barber">
-  <ng-template class="modal-select-barber">
-    <ion-header> 
+<ion-modal [isOpen]="isBarberModalOpen" class="modal-select-opc">
+  <ng-template>
+    <ion-header>
       <ion-toolbar>
         <ion-title>
           <span class="title-custom">Seleccione el barbero de su preferencia</span>
@@ -116,7 +116,7 @@
           </div>
         </div>
       </div>
-      
+
       <ion-button expand="block" class="modal-next-button" (click)="confirmBarberSelection()">SIGUIENTE</ion-button>
     </ion-content>
   </ng-template>
@@ -125,7 +125,8 @@
 <!-- alerta seleccionar barbero -->
 <ion-modal [isOpen]="isAlertSelectBarberModalOpen" class="barber-select-modal" (didDismiss)="cerrarModal()">
   <ng-template>
-    <ion-content class="modal-content ion-padding">
+
+    <div class="modal-content ion-padding">
       <div class="icon-wrapper">
         <ion-icon name="alert-circle-outline" class="alert-icon"></ion-icon>
       </div>
@@ -134,13 +135,14 @@
       <div class="modal-action-buttons">
         <ion-button expand="block" class="accept-button" (click)="cerrarModal()">Aceptar</ion-button>
       </div>
-    </ion-content>
+    </div>
   </ng-template>
 </ion-modal>
 
 <!-- modal seleccionar fecha -->
-<ion-modal [isOpen]="isDateTimeModalOpen"> <ng-template>
-    <ion-header> 
+<ion-modal [isOpen]="isDateTimeModalOpen" class="modal-select-opc">
+  <ng-template>
+    <ion-header>
       <ion-toolbar>
         <ion-title>
           <span class="title-custom">Seleccione el día de su cita</span>
@@ -151,29 +153,31 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding"> 
+    <ion-content class="ion-padding">
 
-      <ion-item class="modal-input-item"> 
+      <ion-item class="modal-input-item">
         <ion-select interface="popover" label="Año" labelPlacement="floating" [(ngModel)]="selectedYear">
           <ion-select-option *ngFor="let year of availableYears" [value]="year">{{ year }}</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item class="modal-input-item"> 
+      <ion-item class="modal-input-item">
         <ion-select interface="popover" label="Mes" labelPlacement="floating" [(ngModel)]="selectedMonth">
-          <ion-select-option *ngFor="let month of availableMonths" [value]="month.value">{{ month.name}}</ion-select-option>
+          <ion-select-option *ngFor="let month of availableMonths" [value]="month.value">{{
+            month.name}}</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item class="modal-input-item"> 
+      <ion-item class="modal-input-item">
         <ion-select interface="popover" label="Día" labelPlacement="floating" [(ngModel)]="selectedDay">
           <ion-select-option *ngFor="let day of availableDays" [value]="day">{{ day }}</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item class="modal-input-item"> 
+      <ion-item class="modal-input-item">
         <ion-select interface="popover" label="Hora" labelPlacement="floating" [(ngModel)]="selectedTime">
-          <ion-select-option *ngFor="let hour of availableHours" [value]="hour.value">{{ hour.display}}</ion-select-option>
+          <ion-select-option *ngFor="let hour of availableHours" [value]="hour.value">{{
+            hour.display}}</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -185,7 +189,7 @@
 <!-- alerta seleccionar fecha -->
 <ion-modal [isOpen]="isAlertSelectDateModalOpen" class="barber-select-modal" (didDismiss)="cerrarModal()">
   <ng-template>
-    <ion-content class="modal-content ion-padding">
+    <div class="modal-content ion-padding">
       <div class="icon-wrapper">
         <ion-icon name="alert-circle-outline" class="alert-icon"></ion-icon>
       </div>
@@ -194,27 +198,28 @@
       <div class="modal-action-buttons">
         <ion-button expand="block" class="accept-button" (click)="cerrarModal()">Aceptar</ion-button>
       </div>
-    </ion-content>
+    </div>
   </ng-template>
 </ion-modal>
 
 
 <!-- modal ifno -->
-<ion-modal [isOpen]="isInfoModalOpen"> <ng-template>
-    <ion-header> 
+<ion-modal [isOpen]="isInfoModalOpen" class="modal-select-opc">
+  <ng-template>
+    <ion-header>
       <ion-toolbar>
         <ion-title>Información</ion-title>
         <ion-buttons slot="end">
-          <ion-button (click)="cancelInfo()">Cerrar</ion-button> 
+          <ion-button (click)="cancelInfo()"><span style="color: white;">Cerrar</span></ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"> 
-      
-      <ion-item class="modal-input-item"> 
+    <ion-content class="ion-padding">
+
+      <ion-item class="modal-input-item">
         <ion-input type="tel" label="Celular" labelPlacement="floating" [(ngModel)]="customerPhone"></ion-input>
       </ion-item>
-      <ion-item class="modal-input-item"> 
+      <ion-item class="modal-input-item">
         <ion-input type="text" label="Nombre" labelPlacement="floating" [(ngModel)]="customerName"></ion-input>
       </ion-item>
 
@@ -231,15 +236,32 @@
 <!-- alerta infoPersonal -->
 <ion-modal [isOpen]="isAlertInfoModalOpen" class="barber-select-modal" (didDismiss)="cerrarModal()">
   <ng-template>
-    <ion-content class="modal-content ion-padding">
+    <div class="modal-content ion-padding">
       <div class="icon-wrapper">
         <ion-icon name="alert-circle-outline" class="alert-icon"></ion-icon>
       </div>
-      <p class="alert-select-message">Por favor, ingresa tu número de celular y tu nombre para finalizar tu agendamiento.</p>
+      <p class="alert-select-message">Por favor, ingresa tu número de celular y tu nombre para finalizar tu
+        agendamiento.</p>
 
       <div class="modal-action-buttons">
         <ion-button expand="block" class="accept-button" (click)="cerrarModal()">Aceptar</ion-button>
       </div>
-    </ion-content>
+    </div>
+  </ng-template>
+</ion-modal>
+
+<!-- alerta cita agendada -->
+<ion-modal [isOpen]="isAlertSuccesModalOpen" class="barber-select-modal" (didDismiss)="cerrarModalSucces()">
+  <ng-template>
+    <div class="modal-content ion-padding">
+      <div class="icon-wrapper">
+        <ion-icon name="checkmark-circle-outline" class="alert-icon-succes"></ion-icon>
+      </div>
+      <p class="alert-select-message">¡Cita para {{ selectedService?.titulo }} con {{ selectedBarber?.nombre }} reservada con éxito! Nos pondremos en contacto contigo.</p>
+
+      <div class="modal-action-buttons">
+        <ion-button style="--background: rgb(220, 182, 58);" expand="block" class="accept-button" (click)="cerrarModalSucces()">De acuerdo</ion-button>
+      </div>
+    </div>
   </ng-template>
 </ion-modal>

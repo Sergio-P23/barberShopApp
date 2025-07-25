@@ -9,7 +9,7 @@ import {
 
 import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBackOutline, alertCircleOutline } from 'ionicons/icons';
+import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBackOutline, alertCircleOutline, checkmarkCircleOutline } from 'ionicons/icons';
 
 // Definición de interfaces para mejor tipado (opcional, pero buena práctica)
 interface Servicio {
@@ -104,6 +104,7 @@ export class HomePage implements OnInit {
   isAlertSelectBarberModalOpen: boolean = false;
   isAlertSelectDateModalOpen: boolean = false;
   isAlertInfoModalOpen: boolean = false;
+  isAlertSuccesModalOpen: boolean = false;
 
 
   selectedService: Servicio | null = null;
@@ -123,7 +124,8 @@ export class HomePage implements OnInit {
       mailOutline,
       lockClosedOutline,
       chevronBackOutline,
-      alertCircleOutline
+      alertCircleOutline,
+      checkmarkCircleOutline
     });
   }
 
@@ -187,6 +189,11 @@ export class HomePage implements OnInit {
   this.isAlertInfoModalOpen = false;
 }
 
+cerrarModalSucces() {
+  this.isAlertSuccesModalOpen = false;
+  this.resetBookingProcess(); // Solo limpiamos los datos aquí
+}
+
   cancelBarberSelection() {
     this.isBarberModalOpen = false;
     this.selectedBarber = null;
@@ -225,9 +232,10 @@ export class HomePage implements OnInit {
             phone: this.customerPhone,
             name: this.customerName
         });
-        alert(`¡Cita para ${this.selectedService?.titulo} con ${this.selectedBarber?.nombre} reservada con éxito! Nos pondremos en contacto contigo.`);
+        this.isAlertSuccesModalOpen = true;
+        // alert(`¡Cita para ${this.selectedService?.titulo} con ${this.selectedBarber?.nombre} reservada con éxito! Nos pondremos en contacto contigo.`);
         this.isInfoModalOpen = false;
-        this.resetBookingProcess();
+        // this.resetBookingProcess();
     } else {
         this.isAlertInfoModalOpen = true;
     }
