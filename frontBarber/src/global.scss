@@ -12,12 +12,12 @@
  //css popover de modal selecionar fecha
  ion-popover::part(content){
   --background-color: rgb(253, 249, 249);
-  border-radius: 15px;
-  // box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border-radius: 1px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.485);
 }
 
 ion-radio {
-  color: #d8ab07;
+  color: #000000;
   background: transparent !important;
 }
 
