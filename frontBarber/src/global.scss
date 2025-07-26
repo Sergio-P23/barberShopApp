@@ -35,6 +35,18 @@ ion-select-popover ion-list {
 }
 
 
+ion-popover.select-popover {
+  .sc-ion-select-popover-md {
+    .item-radio-checked {
+      --background: #daa520 !important;
+      --background-focused: #0054e9;
+      --background-focused-opacity: 0.2;
+      --background-hover: #0054e9;
+      --background-hover-opacity: 0.12;
+    }
+  }
+}
+
 //
 
 :root {
