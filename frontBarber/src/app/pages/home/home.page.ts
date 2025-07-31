@@ -11,6 +11,9 @@ import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBackOutline, alertCircleOutline, checkmarkCircleOutline } from 'ionicons/icons';
 
+import { ServicioService } from 'src/app/services/servicios/servicio.service';
+
+
 // Definición de interfaces para mejor tipado (opcional, pero buena práctica)
 interface Servicio {
   id: number;
@@ -52,34 +55,7 @@ export class HomePage implements OnInit {
 
   // Arreglo para almacenar la información de los servicios
   servicios: Servicio[] = [
-    {
-      id: 1,
-      titulo: 'Corte Clásico',
-      descripcion: 'Corte de cabello tradicional para hombre, estilo moderno o clásico.',
-      precio: '$20.000 COP',
-      imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ14SkoSDLCRkxAobxI8Z4YzO1Vis3ik9uwsg&s'
-    },
-    {
-      id: 2,
-      titulo: 'Arreglo de Barba',
-      descripcion: 'Perfilado y afeitado profesional con toalla caliente y productos de alta calidad.',
-      precio: '$15.000 COP',
-      imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0mYPjDp5GOw3Lotl1LguEiYNN8z9SU2eXaw&s'
-    },
-    {
-      id: 3,
-      titulo: 'Tintura de Cabello',
-      descripcion: 'Aplicación de color para cubrir canas o cambiar el look, según el estilo deseado.',
-      precio: '$50.000 COP',
-      imagen: 'https://i.pinimg.com/736x/e8/35/7b/e8357b776553cc13da123651309a83a7.jpg'
-    },
-    {
-      id: 4,
-      titulo: 'Diseño de Cejas',
-      descripcion: 'Diseño y depilación de cejas para resaltar la mirada masculina.',
-      precio: '$15.000 COP',
-      imagen: 'https://i.pinimg.com/1200x/05/f0/27/05f0271b699f734621834da08fcf4f6b.jpg'
-    },
+    
   ];
 
   // Arreglo para almacenar la información de los barberos
@@ -117,7 +93,7 @@ export class HomePage implements OnInit {
   customerName: string = '';
 
 
-  constructor() {
+  constructor(private servicioService: ServicioService) {
     addIcons({
       personOutline,
       callOutline,
@@ -131,6 +107,21 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.populateDateTimeOptions();
+    this.getAllServices();
+
+  }
+
+   getAllServices() {
+    this.servicioService.GetAllServices()
+      .subscribe({
+        next: res => {
+          console.log('✅ servicios OK:', res);
+          this.servicios = res;
+        },
+        error: err => {
+          console.error('❌ Error de servicios:', err);
+        }
+      });
   }
 
   // Método para llenar las opciones de años, meses, días y horas
