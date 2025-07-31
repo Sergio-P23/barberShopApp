@@ -17,6 +17,15 @@ export class ServicioService {
     return this.http.get(`${API_URL}/api/services`);
   }
 
+  DeleteService(id: number): Observable<any> {
+    let token = localStorage.getItem("token")
+     const headers = new HttpHeaders({
+      'Authorization': `Bearer ${ token }`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.delete(`${API_URL}/api/services/`+ id, {headers});
+  }
+
   // Endpoint 2: crear servicio
   PostServices(titulo: String, descripcion: String, precio: String, imagen: String): Observable<any> {
     let token = localStorage.getItem("token")

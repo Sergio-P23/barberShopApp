@@ -15,6 +15,16 @@ import { RouterModule } from '@angular/router';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ServicioService } from 'src/app/services/servicios/servicio.service';
+
+interface Servicio {
+  id: number;
+  titulo: string;
+  descripcion: string;
+  precio: string;
+  imagen: string;
+}
+
 
 @Component({
   selector: 'app-servicios',
@@ -27,7 +37,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-   
+
     // Si prefieres imports individuales para standalone, puedes reemplazar IonicModule con:
     // IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonTitle,
     // IonToolbar, IonList, IonItem, IonLabel, IonIcon, IonButton, IonModal,
@@ -36,7 +46,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class ServiciosPage implements OnInit {
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private servicioService: ServicioService) {
     this.inicializarFormulario();
 
     addIcons({
@@ -53,37 +63,40 @@ export class ServiciosPage implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getAllServices();
+  }
 
-  servicios = [
-    {
-      id: 1,
-      titulo: 'Corte Clásico',
-      descripcion: 'Corte de cabello tradicional para hombre, estilo moderno o clásico.',
-      precio: '$20.000 COP',
-      imagen: 'https://images.unsplash.com/photo-1596434311145-c4199c08006e?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    },
-    {
-      id: 2,
-      titulo: 'Arreglo de Barba',
-      descripcion: 'Perfilado y afeitado profesional con toalla caliente y productos de alta calidad.',
-      precio: '$15.000 COP',
-      imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0mYPjDp5GOw3Lotl1LguEiYNN8z9SU2eXaw&s'
-    },
-    {
-      id: 3,
-      titulo: 'Tintura de Cabello',
-      descripcion: 'Aplicación de color para cubrir canas o cambiar el look, según el estilo deseado.',
-      precio: '$50.000 COP',
-      imagen: 'https://i.pinimg.com/736x/e8/35/7b/e8357b776553cc13da123651309a83a7.jpg'
-    },
-    {
-      id: 4,
-      titulo: 'Diseño de Cejas',
-      descripcion: 'Diseño y depilación de cejas para resaltar la mirada masculina.',
-      precio: '$15.000 COP',
-      imagen: 'https://i.pinimg.com/1200x/05/f0/27/05f0271b699f734621834da08fcf4f6b.jpg'
-    },
+  getAllServices() {
+    this.servicioService.GetAllServices()
+      .subscribe({
+        next: res => {
+          console.log('✅ servicios OK:', res);
+          this.servicios = res;
+        },
+        error: err => {
+          console.error('❌ Error de servicios:', err);
+        }
+      });
+  }
+
+  deleteService() {
+    this.servicioService.DeleteService(this.servicioSeleccionado.id)
+      .subscribe({
+        next: res => {
+          console.log('✅ servicios borrado', res);
+          this.servicios = this.servicios.filter(s => s.id !== this.servicioSeleccionado.id);
+          this.mostrarModalBorrar = false;
+          this.servicioSeleccionado = null;
+        },
+        error: err => {
+          console.error('❌ Error de borrar servicios:', err);
+        }
+      });
+  }
+
+  servicios: Servicio[] = [
+
   ];
 
   mostrarModalBorrar = false;
@@ -120,11 +133,11 @@ export class ServiciosPage implements OnInit {
     const file = event.target.files[0];
     if (file) {
       if (!file.type.startsWith('image/')) {
-        console.error('Por favor selecciona una imagen válida');
+        alert('Por favor selecciona una imagen válida');
         return;
-      }
-      if (file.size > 5 * 1024 * 1024) {
-        console.error('La imagen no puede superar los 5MB');
+      } console.log(file.size)
+      if (file.size > 1000768) {
+        alert('La imagen no puede superar los 100kb');
         return;
       }
       this.imagenFile = file;
@@ -164,16 +177,24 @@ export class ServiciosPage implements OnInit {
             imagen: this.imagenPreview || this.servicios[index].imagen
           };
         }
-      } else { // Si servicioActual es null o no tiene ID, estamos creando uno nuevo
-        const nuevoId = Math.max(...this.servicios.map(s => s.id)) + 1; // Generar nuevo ID
-        const servicioAñadido = {
-          id: nuevoId,
-          titulo: datosEditados.titulo,
-          descripcion: datosEditados.descripcion,
-          precio: precioFormateado,
-          imagen: this.imagenPreview || 'https://via.placeholder.com/150' // Imagen por defecto si no se carga una
-        };
-        this.servicios.push(servicioAñadido);
+      } else {
+        this.servicioService.PostServices(datosEditados.titulo, datosEditados.descripcion, precioFormateado, this.imagenPreview || 'https://static.entori.jp/media/et/sample_img1.png')
+          .subscribe({
+            next: res => {
+              console.log('✅ servicio creado OK:', res);
+              const servicioAñadido = {
+                id: res.service.id,
+                titulo: datosEditados.titulo,
+                descripcion: datosEditados.descripcion,
+                precio: precioFormateado,
+                imagen: res.service.imagen || 'https://static.entori.jp/media/et/sample_img1.png' // Imagen por defecto si no se carga una
+              };
+              this.servicios.push(servicioAñadido);
+            },
+            error: err => {
+              console.error('❌ Error de servicio creado:', err);
+            }
+          });
       }
 
       this.mostrarModalEditar = false;
@@ -202,11 +223,11 @@ export class ServiciosPage implements OnInit {
     this.mostrarModalBorrar = true;
   }
 
-  borrar() {
-    this.servicios = this.servicios.filter(s => s.id !== this.servicioSeleccionado.id);
-    this.mostrarModalBorrar = false;
-    this.servicioSeleccionado = null;
-  }
+  // borrar() {
+  //   this.servicios = this.servicios.filter(s => s.id !== this.servicioSeleccionado.id);
+  //   this.mostrarModalBorrar = false;
+  //   this.servicioSeleccionado = null;
+  // }
 
   // Ahora el botón FAB "Agregar Servicio" usa este método 'crear()' para abrir el modal de edición
   crear() {
