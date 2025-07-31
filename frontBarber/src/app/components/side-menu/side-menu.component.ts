@@ -14,7 +14,7 @@ import {
 
 // Importa MenuController para una forma alternativa de controlar el menú si es necesario
 import { MenuController } from '@ionic/angular';
-
+import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -30,8 +30,9 @@ import { MenuController } from '@ionic/angular';
 })
 export class SideMenuComponent implements OnInit {
 
+  rol = null;
   // Opcional: inyectar MenuController para control más general del menú
-  constructor(private menuCtrl: MenuController) {
+  constructor(private menuCtrl: MenuController, public usuarioService : UsuarioService) {
     addIcons({
       logOutOutline,
       cutOutline,
@@ -41,6 +42,8 @@ export class SideMenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.rol = this.usuarioService.user.rol;
+    console.log(this.rol)
   }
 
 
