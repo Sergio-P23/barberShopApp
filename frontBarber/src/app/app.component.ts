@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { UsuarioService } from './services/usuarios/usuario.service';
 
 
 
@@ -10,6 +11,6 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
   imports: [IonApp, IonRouterOutlet, SideMenuComponent],
 })
 export class AppComponent {
-  constructor() {
+  constructor(public usuarioService: UsuarioService) {
   }
 }

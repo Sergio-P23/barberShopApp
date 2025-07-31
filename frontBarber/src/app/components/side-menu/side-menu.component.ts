@@ -30,7 +30,8 @@ import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
 })
 export class SideMenuComponent implements OnInit {
 
-  rol = null;
+
+  cargando = true
   // Opcional: inyectar MenuController para control más general del menú
   constructor(private menuCtrl: MenuController, public usuarioService : UsuarioService) {
     addIcons({
@@ -42,8 +43,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rol = this.usuarioService.user.rol;
-    console.log(this.rol)
+
   }
 
 

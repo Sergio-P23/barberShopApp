@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
 correo: string = '';
   password: string = '';
 
-  constructor(private usuarioService: UsuarioService, private router: Router, public menu : SideMenuComponent) {
+  constructor(private usuarioService: UsuarioService, private router: Router) {
     addIcons({
       mailOutline,
       lockClosedOutline,
@@ -43,8 +43,14 @@ correo: string = '';
           console.log('✅ Login OK:', res);
           this.usuarioService.user=res.user;
           localStorage.setItem("token", res.access_token)
-          this.router.navigate(['/admin/servicios']);
-          this.menu.ngOnInit()
+
+          if (res.user?.rol == 'administrador') {
+            this.router.navigate(['/admin/servicios']);
+          }else{
+            this.router.navigate(['/admin/reservas']);
+          }
+          
+        
         },
         error: err => {
           console.error('❌ Error de login:', err);
