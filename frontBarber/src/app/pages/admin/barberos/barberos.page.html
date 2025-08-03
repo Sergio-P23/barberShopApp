@@ -16,6 +16,8 @@
         </div>
         <div class="barber-details">
           <h3 class="barber-admin-name">{{barbero.nombre}}</h3>
+          <h3 class="barber-admin-name">{{barbero.celular}}</h3>
+
         </div>
         <div class="barber-actions">
           <ion-button fill="clear" size="small" class="action-button edit-button" (click)="abrirModalEditar(barbero)">
@@ -51,12 +53,13 @@
 
         <div class="modal-action-buttons">
           <ion-button expand="block" class="cancel-button" (click)="mostrarModalBorrar = false">Cancelar</ion-button>
-          <ion-button expand="block" class="delete-confirm-button" (click)="borrar()">Sí, borrar</ion-button>
+          <ion-button expand="block" class="delete-confirm-button" (click)="deleteBarber()">Sí, borrar</ion-button>
         </div>
       </ion-content>
     </ng-template>
   </ion-modal>
 
+ <!-- modal editar y crear barbero -->
   <ion-modal [isOpen]="mostrarModalEditar" class="edit-barber-modal" (didDismiss)="mostrarModalEditar = false">
     <ng-template>
       <ion-header class="modal-edit-header">
@@ -90,6 +93,16 @@
             </ion-item>
             <ion-note color="danger" *ngIf="editarForm.get('correo')?.invalid && editarForm.get('correo')?.touched">
               El correo es obligatorio.
+            </ion-note>
+
+            <ion-item class="modal-input-item">
+              <ion-label position="stacked">Celular <span class="required-star">*</span></ion-label>
+              <ion-input type="text" formControlName="celular" placeholder="Ingresa el celular del barbero"
+                [class.ion-invalid]="editarForm.get('celular')?.invalid && editarForm.get('celular')?.touched">
+              </ion-input>
+            </ion-item>
+            <ion-note color="danger" *ngIf="editarForm.get('celular')?.invalid && editarForm.get('celular')?.touched">
+              El celular es obligatorio y debe tener al menos 10 caracteres.
             </ion-note>
             
             <ion-item class="modal-input-item">

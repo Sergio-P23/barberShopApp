@@ -201,15 +201,6 @@ export class ServiciosPage implements OnInit {
             this.guardando = false;
           }
         });
-        // const index = this.servicios.findIndex(s => s.id === this.servicioActual.id);
-        // if (index !== -1) {
-        //   this.servicios[index] = {
-        //     ...this.servicios[index],
-        //     ...datosEditados,
-        //     precio: precioFormateado,
-        //     imagen: this.imagenPreview || this.servicios[index].imagen
-        //   };
-        // }
         //CREAR SEVICIO
       } else {
         this.servicioService.PostServices(datosEditados.titulo, datosEditados.descripcion, precioFormateado, this.imagenPreview || 'https://static.entori.jp/media/et/sample_img1.png')

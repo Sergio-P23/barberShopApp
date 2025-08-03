@@ -12,6 +12,18 @@ import {
   menuOutline, logOutOutline, createOutline, trashOutline, add, saveOutline, closeOutline
 } from 'ionicons/icons';
 
+import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
+import { BarberoService } from 'src/app/services/barberos/barbero.service';
+
+interface Barbero {
+  id: number;
+  nombre: string;
+  correo: string;
+  celular: string;
+  foto: string;
+  rol: string;
+  contraseña: string;
+}
 
 
 @Component({
@@ -25,12 +37,12 @@ import {
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-  
+
   ]
 })
 export class BarberosPage implements OnInit {
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private barberoService: BarberoService) {
     this.inicializarFormulario();
     addIcons({
       menuOutline,
@@ -43,38 +55,11 @@ export class BarberosPage implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getAllBarbers()
+  }
 
-  barberos = [
-    {
-      id: 1,
-      nombre: 'Carlos Sánchez',
-      foto: 'https://images.squarespace-cdn.com/content/v1/6221649741ec3a06ecd99f53/1646359598438-K4U2BJH9GLDZ9DO19NX9/_DSC1144+2.jpg?format=1000w',
-      correo: 'carlossanchez@gmail.com' ,
-      contraseña: '123' 
-    },
-    {
-      id: 2,
-      nombre: 'Luis Pérez',
-      foto: 'https://th.bing.com/th/id/R.133099d40cb1df5f2740591798752e32?rik=BKO6PxHI%2fCanuw&riu=http%3a%2f%2fbarberosbarberias.com%2fassets%2fimg%2fGaleria%2fdani_colombia.webp&ehk=gavSAr7Tg%2bDzCtmKupSpTZG8MtUDqvDjPfUnLluTZk0%3d&risl=&pid=ImgRaw&r=0',
-      correo: 'luisperez@gmail.com' ,
-      contraseña: '456'  
-    },
-    {
-      id: 3,
-      nombre: 'Sofía Ramirez',
-      foto: 'https://www.elespectador.com/resizer/RyHY-KnNENTkRpmat3fTYn8gHLc=/920x613/filters:format(jpeg)/cloudfront-us-east-1.images.arcpublishing.com/elespectador/OMTV66O42RAMZILNY6MVVHCF7E.jpg',
-      correo: 'sofiaramirez@gmail.com' ,
-      contraseña: '789' 
-    },
-    {
-      id: 4,
-      nombre: 'Juan David',
-      foto: 'https://tse1.mm.bing.net/th/id/OIP.2GjjHEG8IvcAPJDx8SYcNwHaEz?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
-      correo: 'juandavid@gmail.com' ,
-      contraseña: '1011' 
-    },
-  ];
+  barberos: Barbero[] = [];
 
   mostrarModalBorrar = false;
   barberoSeleccionado: any = null;
@@ -85,6 +70,44 @@ export class BarberosPage implements OnInit {
   fotoFile: File | null = null;
   barberoActual: any = null;
   guardando = false;
+
+  getAllBarbers() {
+    this.barberoService.GetAllBarbers()
+      .subscribe({
+        next: res => {
+          console.log('✅ barberos del back:', res);
+          // Mapear los datos a tu estructura esperada
+          this.barberos = res.map((b: any) => ({
+            id: b.id,
+            nombre: b.nombre,
+            correo: b.correo_usuario,
+            celular: b.celular_usuario,
+            foto: b.foto,
+            rol: 'barbero', // Asignación por defecto
+            contraseña: '' // No viene del backend
+          }));
+          this.barberos = res;
+        },
+        error: err => {
+          console.error('❌ Error traer barberos:', err);
+        }
+      });
+  }
+
+  deleteBarber(){
+    this.barberoService.DeleteBarber(this.barberoSeleccionado.id)
+    .subscribe({
+       next: res => {
+          console.log('✅ barbero borrado', res);
+          this.barberos = this.barberos.filter(s => s.id !== this.barberoSeleccionado.id);
+          this.mostrarModalBorrar = false;
+          this.barberoSeleccionado = null;
+        },
+        error: err => {
+          console.error('❌ Error de borrar servicios:', err);
+        }
+    });
+  }
 
   confirmarBorrado(barbero: any) {
     this.barberoSeleccionado = barbero;
@@ -102,6 +125,7 @@ export class BarberosPage implements OnInit {
     this.editarForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       correo: ['', [Validators.required, Validators.email]],
+      celular: ['', [Validators.required, Validators.minLength(10)]],
       contraseña: ['', [Validators.required, Validators.minLength(3)]]
     });
   }
@@ -167,16 +191,38 @@ export class BarberosPage implements OnInit {
           };
         }
       } else { // Si barberoActual es null o no tiene ID, estamos creando uno nuevo
-        const nuevoId = Math.max(...this.barberos.map(b => b.id)) + 1;
-        const barberoAñadido = {
-          id: nuevoId,
+
+        const nuevoBarbero = {
           nombre: datosEditados.nombre,
           correo: datosEditados.correo,
-          contraseña: datosEditados.contraseña,
-          foto: this.fotoPreview || 'https://via.placeholder.com/150' // Foto por defecto
-          
+          celular: datosEditados.celular,
+          password: datosEditados.contraseña,
+          foto: this.fotoPreview || 'https://img.freepik.com/iconos-gratis/seguidor_318-745495.jpg', // Foto por defecto
+          rol: 'barbero'
         };
-        this.barberos.push(barberoAñadido);
+
+        this.usuarioService.crearUsuario(nuevoBarbero)
+          .subscribe({
+            next: (res) => {
+              console.log('✅ Barbero creado en backend:', res);
+              
+              const barberoAñadido = {
+                id: res.service.id,
+                nombre: nuevoBarbero.nombre,
+                correo: nuevoBarbero.correo,
+                celular: nuevoBarbero.celular,
+                contraseña: datosEditados.contraseña,
+                foto: nuevoBarbero.foto,
+                rol: 'barbero'
+              };
+
+              this.barberos.push(barberoAñadido);
+            },
+            error: (err) => {
+              console.error('❌ Error al crear barbero:', err);
+              this.guardando = false;
+            }
+          })
       }
 
       this.mostrarModalEditar = false;

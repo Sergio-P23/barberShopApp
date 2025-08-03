@@ -28,7 +28,7 @@ export class UsuarioService{
     correo: string,
     password: string,
     rol: string,
-    foto_perfil: string
+    foto: string
   }): Observable<any> {
     return this.http.post(`${API_URL}/api/auth/register`, data);
   }
