@@ -44,6 +44,7 @@
     </ion-fab-button>
   </ion-fab>
 
+  <!-- Modal borrar -->
   <ion-modal [isOpen]="mostrarModalBorrar" class="confirmation-modal" (didDismiss)="mostrarModalBorrar = false">
     <ng-template>
       <ion-header class="modal-header-borrar">
@@ -66,6 +67,7 @@
     </ng-template>
   </ion-modal>
 
+  <!-- Modal editar -->
   <ion-modal [isOpen]="mostrarModalEditar" class="edit-service-modal" (didDismiss)="mostrarModalEditar = false">
     <ng-template>
       <ion-header class="modal-edit-header">

@@ -17,28 +17,45 @@ export class ServicioService {
     return this.http.get(`${API_URL}/api/services`);
   }
 
-  DeleteService(id: number): Observable<any> {
-    let token = localStorage.getItem("token")
-     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${ token }`,
-      'Content-Type': 'application/json'
-    });
-    return this.http.delete(`${API_URL}/api/services/`+ id, {headers});
-  }
-
   // Endpoint 2: crear servicio
   PostServices(titulo: String, descripcion: String, precio: String, imagen: String): Observable<any> {
     let token = localStorage.getItem("token")
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${ token }`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-      return this.http.post(`${API_URL}/api/services`, {
-        titulo,
-        descripcion,
-        precio,
-        imagen
+    return this.http.post(`${API_URL}/api/services`, {
+      titulo,
+      descripcion,
+      precio,
+      imagen
 
-      },{headers});
-    }
+    }, { headers });
+  }
+
+  // Endpoint 3: eliminar servicio
+  DeleteService(id: number): Observable<any> {
+    let token = localStorage.getItem("token")
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.delete(`${API_URL}/api/services/` + id, { headers });
+  }
+
+  //Endpoint 4: Actualizar servicio
+  PutService(id: number, titulo: String, descripcion: String, precio: String, imagen: String): Observable<any>{
+    let token = localStorage.getItem("token")
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.put(`${API_URL}/api/services/` + id,{
+      titulo,
+      descripcion,
+      precio,
+      imagen
+    }, { headers });
+  }
+
 }

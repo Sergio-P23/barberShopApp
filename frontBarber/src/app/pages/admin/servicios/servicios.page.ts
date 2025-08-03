@@ -165,18 +165,52 @@ export class ServiciosPage implements OnInit {
 
       const precioNumerico = parseFloat(datosEditados.precio);
       const precioFormateado = `$${precioNumerico.toLocaleString('es-CO')} COP`;
+      const imagenFinal = this.imagenPreview || 'https://static.entori.jp/media/et/sample_img1.png';
+
 
       // Si servicioActual tiene ID, estamos editando
       if (this.servicioActual && this.servicioActual.id) {
-        const index = this.servicios.findIndex(s => s.id === this.servicioActual.id);
-        if (index !== -1) {
-          this.servicios[index] = {
-            ...this.servicios[index],
-            ...datosEditados,
-            precio: precioFormateado,
-            imagen: this.imagenPreview || this.servicios[index].imagen
-          };
-        }
+
+        //ID para que durante todo el proceso del llamado a la API exista
+        const servicioId = this.servicioActual.id;
+
+        this.servicioService.PutService(
+          servicioId,
+          datosEditados.titulo,
+          datosEditados.descripcion,
+          precioFormateado,
+          imagenFinal
+        ).subscribe({
+          next: res => {
+            console.log('✅ servicio actualizado', res);
+
+            const index = this.servicios.findIndex(s => s.id === servicioId);
+            if (index !== -1) {
+              this.servicios[index] = {
+                ...this.servicios[index],
+                ...datosEditados,
+                precio: precioFormateado,
+                imagen: imagenFinal
+              };
+            }
+
+            this.finalizarGuardado();
+          },
+          error: err => {
+            console.error('❌ Error al actualizar servicio:', err);
+            this.guardando = false;
+          }
+        });
+        // const index = this.servicios.findIndex(s => s.id === this.servicioActual.id);
+        // if (index !== -1) {
+        //   this.servicios[index] = {
+        //     ...this.servicios[index],
+        //     ...datosEditados,
+        //     precio: precioFormateado,
+        //     imagen: this.imagenPreview || this.servicios[index].imagen
+        //   };
+        // }
+        //CREAR SEVICIO
       } else {
         this.servicioService.PostServices(datosEditados.titulo, datosEditados.descripcion, precioFormateado, this.imagenPreview || 'https://static.entori.jp/media/et/sample_img1.png')
           .subscribe({
@@ -223,12 +257,6 @@ export class ServiciosPage implements OnInit {
     this.mostrarModalBorrar = true;
   }
 
-  // borrar() {
-  //   this.servicios = this.servicios.filter(s => s.id !== this.servicioSeleccionado.id);
-  //   this.mostrarModalBorrar = false;
-  //   this.servicioSeleccionado = null;
-  // }
-
   // Ahora el botón FAB "Agregar Servicio" usa este método 'crear()' para abrir el modal de edición
   crear() {
     this.servicioActual = null; // Esto indica que se va a crear un nuevo servicio
@@ -237,4 +265,14 @@ export class ServiciosPage implements OnInit {
     this.inicializarFormulario(); // Reinicia el formulario para un nuevo servicio
     this.mostrarModalEditar = true;
   }
+
+  private finalizarGuardado() {
+    this.mostrarModalEditar = false;
+    this.servicioActual = null;
+    this.imagenPreview = null;
+    this.imagenFile = null;
+    this.editarForm.reset();
+    this.guardando = false;
+  }
+
 }
