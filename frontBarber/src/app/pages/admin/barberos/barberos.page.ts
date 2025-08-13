@@ -94,10 +94,10 @@ export class BarberosPage implements OnInit {
       });
   }
 
-  deleteBarber(){
+  deleteBarber() {
     this.barberoService.DeleteBarber(this.barberoSeleccionado.id)
-    .subscribe({
-       next: res => {
+      .subscribe({
+        next: res => {
           console.log('✅ barbero borrado', res);
           this.barberos = this.barberos.filter(s => s.id !== this.barberoSeleccionado.id);
           this.mostrarModalBorrar = false;
@@ -106,7 +106,7 @@ export class BarberosPage implements OnInit {
         error: err => {
           console.error('❌ Error de borrar servicios:', err);
         }
-    });
+      });
   }
 
   confirmarBorrado(barbero: any) {
@@ -135,8 +135,9 @@ export class BarberosPage implements OnInit {
     this.barberoActual = { ...barbero };
     this.editarForm.patchValue({
       nombre: barbero.nombre,
-      correo: barbero.correo,
-      contraseña: barbero.contraseña
+      correo: barbero.correo_usuario,
+      contraseña: '',
+      celular: barbero.celular_usuario
     });
     this.fotoPreview = barbero.foto || null;
     this.fotoFile = null;
@@ -182,14 +183,25 @@ export class BarberosPage implements OnInit {
 
       // Si barberoActual tiene ID, estamos editando
       if (this.barberoActual && this.barberoActual.id) {
-        const index = this.barberos.findIndex(b => b.id === this.barberoActual.id);
-        if (index !== -1) {
-          this.barberos[index] = {
-            ...this.barberos[index],
-            ...datosEditados,
-            foto: this.fotoPreview || this.barberos[index].foto
-          };
-        }
+
+        this.barberoService.PutBarber(this.barberoActual.id, datosEditados.nombre, datosEditados.correo, datosEditados.contraseña, this.fotoPreview || 'https://img.freepik.com/iconos-gratis/seguidor_318-745495.jpg').subscribe({
+          next: (res) => {
+           this.ngOnInit()
+          },
+          error: (err) => {
+            console.error('❌ Error al actualizar barbero:', err);
+            this.guardando = false;
+          }
+        });
+
+
+        this.mostrarModalEditar = false;
+        
+        this.fotoPreview = null;
+        this.fotoFile = null;
+        this.editarForm.reset();
+        this.guardando = false;
+
       } else { // Si barberoActual es null o no tiene ID, estamos creando uno nuevo
 
         const nuevoBarbero = {
@@ -197,7 +209,7 @@ export class BarberosPage implements OnInit {
           correo: datosEditados.correo,
           celular: datosEditados.celular,
           password: datosEditados.contraseña,
-          foto: this.fotoPreview || 'https://img.freepik.com/iconos-gratis/seguidor_318-745495.jpg', // Foto por defecto
+          foto_perfil: this.fotoPreview || 'https://img.freepik.com/iconos-gratis/seguidor_318-745495.jpg', // Foto por defecto
           rol: 'barbero'
         };
 
@@ -205,14 +217,14 @@ export class BarberosPage implements OnInit {
           .subscribe({
             next: (res) => {
               console.log('✅ Barbero creado en backend:', res);
-              
+
               const barberoAñadido = {
-                id: res.service.id,
+                id: res.service.barber_profile.usuario_id,
                 nombre: nuevoBarbero.nombre,
                 correo: nuevoBarbero.correo,
                 celular: nuevoBarbero.celular,
-                contraseña: datosEditados.contraseña,
-                foto: nuevoBarbero.foto,
+                contraseña: '',
+                foto: nuevoBarbero.foto_perfil,
                 rol: 'barbero'
               };
 
@@ -226,11 +238,12 @@ export class BarberosPage implements OnInit {
       }
 
       this.mostrarModalEditar = false;
-      this.barberoActual = null;
+      
       this.fotoPreview = null;
       this.fotoFile = null;
       this.editarForm.reset();
       this.guardando = false;
+      
     } else {
       Object.keys(this.editarForm.controls).forEach(key => {
         this.editarForm.get(key)?.markAsTouched();
@@ -244,12 +257,12 @@ export class BarberosPage implements OnInit {
     this.editarForm.reset();
     this.fotoPreview = null;
     this.fotoFile = null;
-    this.barberoActual = null;
+    
   }
 
   // Abrir modal para crear un nuevo barbero
   crear() {
-    this.barberoActual = null; // Indica que es un nuevo barbero
+     // Indica que es un nuevo barbero
     this.fotoPreview = null;
     this.fotoFile = null;
     this.inicializarFormulario(); // Reinicia el formulario para un nuevo barbero

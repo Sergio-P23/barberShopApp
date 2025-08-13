@@ -12,9 +12,12 @@ import { addIcons } from 'ionicons';
 import { personOutline, callOutline, mailOutline, lockClosedOutline, chevronBackOutline, alertCircleOutline, checkmarkCircleOutline } from 'ionicons/icons';
 
 import { ServicioService } from 'src/app/services/servicios/servicio.service';
+import { ReservaService } from 'src/app/services/reservas/reserva.service';
+import { BarberoService } from '../../services/barberos/barbero.service';
 
 
-// Definición de interfaces para mejor tipado (opcional, pero buena práctica)
+
+// Definición de interfaces para mejor tipado
 interface Servicio {
   id: number;
   titulo: string;
@@ -53,19 +56,11 @@ interface Hour {
 })
 export class HomePage implements OnInit {
 
-  // Arreglo para almacenar la información de los servicios
-  servicios: Servicio[] = [
-    
-  ];
+  // Arreglo para almacenar la información de los servicios (se carga de API)
+  servicios: Servicio[] = [];
 
-  // Arreglo para almacenar la información de los barberos
-  barberos: Barbero[] = [
-    { id: 1, nombre: 'Pepe', foto: 'https://images.squarespace-cdn.com/content/v1/6221649741ec3a06ecd99f53/1646359598438-K4U2BJH9GLDZ9DO19NX9/_DSC1144+2.jpg?format=1000w' },
-    { id: 2, nombre: 'María', foto: 'https://www.elespectador.com/resizer/RyHY-KnNENTkRpmat3fTYn8gHLc=/920x613/filters:format(jpeg)/cloudfront-us-east-1.images.arcpublishing.com/elespectador/OMTV66O42RAMZILNY6MVVHCF7E.jpg' },
-    { id: 3, nombre: 'Juan', foto: 'https://th.bing.com/th/id/R.133099d40cb1df5f2740591798752e32?rik=BKO6PxHI%2fCanuw&riu=http%3a%2f%2fbarberosbarberias.com%2fassets%2fimg%2fGaleria%2fdani_colombia.webp&ehk=gavSAr7Tg%2bDzCtmKupSpTZG8MtUDqvDjPfUnLluTZk0%3d&risl=&pid=ImgRaw&r=0' },
-    { id: 4, nombre: 'Juan 2', foto: 'https://tse1.mm.bing.net/th/id/OIP.2GjjHEG8IvcAPJDx8SYcNwHaEz?r=0&rs=1&pid=ImgDetMain&o=7&rm=3' },
-    // Puedes añadir más barberos aquí
-  ];
+  // 🆕 Arreglo para almacenar la información de los barberos (se carga de API)
+  barberos: Barbero[] = [];
 
   // Arreglos para la selección de fecha y hora
   availableYears: number[] = [];
@@ -84,16 +79,21 @@ export class HomePage implements OnInit {
 
 
   selectedService: Servicio | null = null;
-  selectedBarber: Barbero | null = null; // selectedBarber ahora es un objeto Barbero
-  selectedYear: number | null = null; // Cambiado a number para los años
-  selectedMonth: number | null = null; // Cambiado a number para los meses
+  selectedBarber: Barbero | null = null;
+  selectedYear: number | null = null;
+  selectedMonth: number | null = null;
   selectedDay: number | null = null;
   selectedTime: string | null = null;
   customerPhone: string = '';
   customerName: string = '';
 
 
-  constructor(private servicioService: ServicioService) {
+  // 🆕 Inyectamos ReservaService
+  constructor(
+    private servicioService: ServicioService,
+    private reservaService: ReservaService,
+    private barberoService: BarberoService 
+  ) {
     addIcons({
       personOutline,
       callOutline,
@@ -108,10 +108,10 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.populateDateTimeOptions();
     this.getAllServices();
-
+    this.getAllBarbers(); // 🆕 Llamamos al método para cargar los barberos al iniciar
   }
 
-   getAllServices() {
+  getAllServices() {
     this.servicioService.GetAllServices()
       .subscribe({
         next: res => {
@@ -124,15 +124,35 @@ export class HomePage implements OnInit {
       });
   }
 
+  // 🆕 Nuevo método para cargar los barberos desde la API
+  getAllBarbers() {
+    this.barberoService.GetAllBarbers()
+      .subscribe({
+        next: (barbers) => {
+          console.log('✅ Barberos cargados OK:', barbers);
+          this.barberos = barbers;
+        },
+        error: (err) => {
+          console.error('❌ Error al cargar barberos:', err);
+          // Opcionalmente, mantener los barberos de prueba si hay un error
+          this.barberos = [
+            { id: 1, nombre: 'Pepe', foto: 'https://images.squarespace-cdn.com/content/v1/6221649741ec3a06ecd99f53/1646359598438-K4U2BJH9GLDZ9DO19NX1/_DSC1144+2.jpg?format=1000w' },
+            { id: 2, nombre: 'María', foto: 'https://www.elespectador.com/resizer/RyHY-KnNENTkRpmat3fTYn8gHLc=/920x613/filters:format(jpeg)/cloudfront-us-east-1.images.arcpublishing.com/elespectador/OMTV66O42RAMZILNY6MVVHCF7E.jpg' },
+            { id: 3, nombre: 'Juan', foto: 'https://th.bing.com/th/id/R.133099d40cb1df5f2740591798752e32?rik=BKO6PxHI%2fCanuw&riu=http%3a%2f%2fbarberosbarberias.com%2fassets%2fimg%2fGaleria%2fdani_colombia.webp&ehk=gavSAr7Tg%2bDzCtmKupSpTZG8MtUDqvDjPfUnLluTZk0%3d&risl=&pid=ImgRaw&r=0' },
+            { id: 4, nombre: 'Juan 2', foto: 'https://tse1.mm.bing.net/th/id/OIP.2GjjHEG8IvcAPJDx8SYcNwHaEz?r=0&rs=1&pid=ImgDetMain&o=7&rm=3' },
+          ];
+        }
+      });
+  }
+
+
   // Método para llenar las opciones de años, meses, días y horas
   populateDateTimeOptions() {
-    // Años: Actual + próximos 2 años
     const currentYear = new Date().getFullYear();
     for (let i = 0; i < 3; i++) {
       this.availableYears.push(currentYear + i);
     }
 
-    // Meses
     this.availableMonths = [
       { value: 1, name: 'Enero' }, { value: 2, name: 'Febrero' }, { value: 3, name: 'Marzo' },
       { value: 4, name: 'Abril' }, { value: 5, name: 'Mayo' }, { value: 6, name: 'Junio' },
@@ -140,12 +160,10 @@ export class HomePage implements OnInit {
       { value: 10, name: 'Octubre' }, { value: 11, name: 'Noviembre' }, { value: 12, name: 'Diciembre' }
     ];
 
-    // Días (por simplicidad, 1-31. En un sistema real se calcularía por mes/año)
     for (let i = 1; i <= 31; i++) {
       this.availableDays.push(i);
     }
 
-    // Horas (ejemplo de 9 AM a 6 PM, cada hora)
     for (let i = 9; i <= 18; i++) {
       const hourValue = `${String(i).padStart(2, '0')}:00`;
       const displayHour = i > 12 ? `${i - 12}:00 PM` : `${i}:00 AM`;
@@ -160,7 +178,7 @@ export class HomePage implements OnInit {
   }
 
   // --- Lógica del Modal de Barbero ---
-  selectBarber(barber: Barbero) { // Ahora recibe un objeto Barbero
+  selectBarber(barber: Barbero) {
     this.selectedBarber = barber;
     console.log('Barbero seleccionado:', this.selectedBarber.nombre);
   }
@@ -175,15 +193,15 @@ export class HomePage implements OnInit {
   }
 
   cerrarModal() {
-  this.isAlertSelectBarberModalOpen = false;
-  this.isAlertSelectDateModalOpen = false;
-  this.isAlertInfoModalOpen = false;
-}
+    this.isAlertSelectBarberModalOpen = false;
+    this.isAlertSelectDateModalOpen = false;
+    this.isAlertInfoModalOpen = false;
+  }
 
-cerrarModalSucces() {
-  this.isAlertSuccesModalOpen = false;
-  this.resetBookingProcess(); // Solo limpiamos los datos aquí
-}
+  cerrarModalSucces() {
+    this.isAlertSuccesModalOpen = false;
+    this.resetBookingProcess(); // Solo limpiamos los datos aquí
+  }
 
   cancelBarberSelection() {
     this.isBarberModalOpen = false;
@@ -210,25 +228,38 @@ cerrarModalSucces() {
     this.resetBookingProcess();
   }
 
-  // --- Lógica del Modal de Información y Reserva ---
+  // 🆕 Modificado para usar el servicio de creación de reservas
   makeReservation() {
-    if (this.customerPhone && this.customerName) {
-        console.log('Reserva a enviar:', {
-            service: this.selectedService?.titulo,
-            barber: this.selectedBarber?.nombre, // Accede al nombre del barbero
-            year: this.selectedYear,
-            month: this.selectedMonth,
-            day: this.selectedDay,
-            time: this.selectedTime,
-            phone: this.customerPhone,
-            name: this.customerName
-        });
-        this.isAlertSuccesModalOpen = true;
-        // alert(`¡Cita para ${this.selectedService?.titulo} con ${this.selectedBarber?.nombre} reservada con éxito! Nos pondremos en contacto contigo.`);
-        this.isInfoModalOpen = false;
-        // this.resetBookingProcess();
+    if (this.customerPhone && this.customerName && this.selectedService && this.selectedBarber && this.selectedYear && this.selectedMonth && this.selectedDay && this.selectedTime) {
+      const fechaReserva = `${this.selectedYear}-${String(this.selectedMonth).padStart(2, '0')}-${String(this.selectedDay).padStart(2, '0')}`;
+      const horaReserva = this.selectedTime;
+
+      const bookingData = {
+        nombre_cliente: this.customerName,
+        telefono_cliente: this.customerPhone,
+        barbero_id: this.selectedBarber.id,
+        servicio_id: this.selectedService.id,
+        fecha_reserva: fechaReserva,
+        hora_reserva: horaReserva
+      };
+
+      console.log('Reserva a enviar:', bookingData);
+
+      this.reservaService.CreateBooking(bookingData).subscribe({
+        next: (response) => {
+          console.log('✅ Reserva creada exitosamente:', response);
+          this.isAlertSuccesModalOpen = true;
+          this.isInfoModalOpen = false;
+          // La limpieza de datos se hace en cerrarModalSucces()
+        },
+        error: (err) => {
+          console.error('❌ Error al crear reserva:', err);
+          // Puedes añadir un modal de error aquí si lo deseas
+          // alert('Error al crear la reserva. Por favor, inténtalo de nuevo.');
+        }
+      });
     } else {
-        this.isAlertInfoModalOpen = true;
+      this.isAlertInfoModalOpen = true;
     }
   }
 

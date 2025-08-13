@@ -18,18 +18,19 @@
 
 
 
+<h1 class="text-center display-5 fw-bold text-dark mb-4">¡Bienvenido a Sky's the Limit!</h1>
 
   <div class="carousel-section">
     <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="../../../assets/carrusel1.jpg" class="d-block w-100 carousel-image" alt="Imagen de barbería 1">
+          <img src="../../../assets/carrusel1.jfif" class="d-block w-100 carousel-image" alt="Imagen de barbería 1">
         </div>
         <div class="carousel-item">
-          <img src="../../../assets/carrusel2.jpg" class="d-block w-100 carousel-image" alt="Imagen de barbería 2">
+          <img src="../../../assets/carrusel2.jfif" class="d-block w-100 carousel-image" alt="Imagen de barbería 2">
         </div>
         <div class="carousel-item">
-          <img src="../../../assets/carrusel3.avif" class="d-block w-100 carousel-image" alt="Imagen de barbería 3">
+          <img src="../../../assets/carrusel3.jfif" class="d-block w-100 carousel-image" alt="Imagen de barbería 3">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
@@ -45,7 +46,7 @@
 
   <div class="container text-center">
     <div class="p-5">
-      <h1 class="display-5 fw-bold text-warning mb-4">¡Bienvenido a Sky's the Limit!</h1>
+      
       <p class="lead text-dark">
         Aquí no solo cortamos cabello, <span class="fw-semibold text-warning">creamos estilo</span>.<br>
         Somos más que una barbería: el lugar donde la actitud, el detalle y el flow se encuentran.<br>
@@ -66,7 +67,7 @@
             <div class="service-details">
               <h3 class="service-display-title">{{ servicio.titulo }}</h3>
               <p class="service-display-description">{{ servicio.descripcion }}</p>
-              <p class="service-display-price">{{ servicio.precio }}</p>
+              <p class="service-display-price">{{ servicio.precio | currency:'COP':'symbol':'1.0-0' }}</p>
               <ion-button expand="block" class="reserve-button">Reservar</ion-button>
             </div>
           </div>

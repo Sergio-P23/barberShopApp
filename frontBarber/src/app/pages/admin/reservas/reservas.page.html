@@ -70,7 +70,7 @@
                   <ion-card-title class="service-title">{{ reserva.titulo }}</ion-card-title>
                 </div>
                 <div class="col text-end">
-                  <ion-card-subtitle class="service-subtitle">{{ reserva.fecha }}</ion-card-subtitle>
+                  <ion-card-subtitle class="service-subtitle">{{ reserva.fecha }} {{reserva.hora}}</ion-card-subtitle>
                 </div>
               </div>
 
@@ -79,12 +79,12 @@
             <ion-card-content>
               <div class="row w-100">
                 <div class="col-7 text-start">
-                  <p><strong>Cliente:</strong> {{ reserva.nombre }}</p>
-                  <p><strong>Teléfono:</strong> {{ reserva.telefono }}</p>
+                  <p><strong>Cliente:</strong> {{ reserva.nombre_cliente }}</p>
+                  <p><strong>Teléfono:</strong> {{ reserva.telefono_cliente }}</p>
                 </div>
                 <div class="col-5 text-end">
                   <p><strong>Barbero:</strong> {{ reserva.barbero }}</p>
-                  <p><strong>Precio:</strong> ${{ reserva.precio }}</p>
+                  <p><strong>Precio:</strong> ${{ reserva.precio | currency:'COP':'symbol':'1.0-0' }}</p>
                 </div>
 
               </div>

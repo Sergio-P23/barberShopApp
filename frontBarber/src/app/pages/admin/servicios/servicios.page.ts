@@ -122,7 +122,7 @@ export class ServiciosPage implements OnInit {
     this.editarForm.patchValue({
       titulo: servicio.titulo,
       descripcion: servicio.descripcion,
-      precio: parseFloat(servicio.precio.replace('$', '').replace(' COP', '').replace('.', '')) // Limpiar formato para el input numérico
+      precio: parseFloat(servicio.precio) // Limpiar formato para el input numérico
     });
     this.imagenPreview = servicio.imagen || null;
     this.imagenFile = null;
@@ -164,7 +164,7 @@ export class ServiciosPage implements OnInit {
       const datosEditados = this.editarForm.value;
 
       const precioNumerico = parseFloat(datosEditados.precio);
-      const precioFormateado = `$${precioNumerico.toLocaleString('es-CO')} COP`;
+      
       const imagenFinal = this.imagenPreview || 'https://static.entori.jp/media/et/sample_img1.png';
 
 
@@ -178,7 +178,7 @@ export class ServiciosPage implements OnInit {
           servicioId,
           datosEditados.titulo,
           datosEditados.descripcion,
-          precioFormateado,
+          String(datosEditados.precio),
           imagenFinal
         ).subscribe({
           next: res => {
@@ -189,7 +189,7 @@ export class ServiciosPage implements OnInit {
               this.servicios[index] = {
                 ...this.servicios[index],
                 ...datosEditados,
-                precio: precioFormateado,
+                precio: String(datosEditados.precio),
                 imagen: imagenFinal
               };
             }
@@ -203,7 +203,7 @@ export class ServiciosPage implements OnInit {
         });
         //CREAR SEVICIO
       } else {
-        this.servicioService.PostServices(datosEditados.titulo, datosEditados.descripcion, precioFormateado, this.imagenPreview || 'https://static.entori.jp/media/et/sample_img1.png')
+        this.servicioService.PostServices(datosEditados.titulo, datosEditados.descripcion, String(datosEditados.precio), this.imagenPreview || 'https://static.entori.jp/media/et/sample_img1.png')
           .subscribe({
             next: res => {
               console.log('✅ servicio creado OK:', res);
@@ -211,7 +211,7 @@ export class ServiciosPage implements OnInit {
                 id: res.service.id,
                 titulo: datosEditados.titulo,
                 descripcion: datosEditados.descripcion,
-                precio: precioFormateado,
+                precio: String(datosEditados.precio),
                 imagen: res.service.imagen || 'https://static.entori.jp/media/et/sample_img1.png' // Imagen por defecto si no se carga una
               };
               this.servicios.push(servicioAñadido);

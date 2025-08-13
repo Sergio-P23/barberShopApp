@@ -28,7 +28,7 @@ export class BarberoService {
     }
   
     //Endpoint 3: Actualizar barbero
-    PutBarber(id: number, nombre: String, correo: String, password: String, imagen: String): Observable<any>{
+    PutBarber(id: number, nombre: String, correo: String, password: String, foto: String): Observable<any>{
       let token = localStorage.getItem("token")
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`,
@@ -38,7 +38,7 @@ export class BarberoService {
         nombre,
         correo,
         password,
-        imagen
+        foto
       }, { headers });
     }
 }

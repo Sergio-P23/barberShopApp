@@ -24,7 +24,7 @@
         <div class="service-details">
           <h3 class="service-admin-title">{{ servicio.titulo }}</h3>
           <p class="service-admin-description">{{ servicio.descripcion }}</p>
-          <p class="service-admin-price">{{servicio.precio}}</p>
+          <p class="service-admin-price">{{servicio.precio | currency:'COP':'symbol':'1.0-0' }}</p>
         </div>
         <div class="service-actions">
           <ion-button fill="clear" size="small" class="action-button edit-button" (click)="abrirModalEditar(servicio)">

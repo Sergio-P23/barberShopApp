@@ -8,12 +8,13 @@ const API_URL = 'https://api-barber-iwiu.onrender.com';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService{
-   user : any = null ; 
-  constructor(private http: HttpClient) {}
-
+export class UsuarioService {
   
-   // Endpoint 1: Login de usuario
+  user: any = null;
+  constructor(private http: HttpClient) { }
+
+
+  // Endpoint 1: Login de usuario
   loginUsuario(identificador: string, password: string): Observable<any> {
     return this.http.post(`${API_URL}/api/auth/login`, {
       identificador,
@@ -28,7 +29,7 @@ export class UsuarioService{
     correo: string,
     password: string,
     rol: string,
-    foto: string
+    foto_perfil: string
   }): Observable<any> {
     return this.http.post(`${API_URL}/api/auth/register`, data);
   }
