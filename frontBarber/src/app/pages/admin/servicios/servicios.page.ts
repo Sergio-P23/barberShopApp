@@ -135,11 +135,8 @@ export class ServiciosPage implements OnInit {
       if (!file.type.startsWith('image/')) {
         alert('Por favor selecciona una imagen válida');
         return;
-      } console.log(file.size)
-      if (file.size > 1000768) {
-        alert('La imagen no puede superar los 100kb');
-        return;
-      }
+      } 
+      
       this.imagenFile = file;
       const reader = new FileReader();
       reader.onload = (e: any) => {

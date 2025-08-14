@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { addIcons } from 'ionicons';
 import {
@@ -33,7 +33,7 @@ export class SideMenuComponent implements OnInit {
 
   cargando = true
   // Opcional: inyectar MenuController para control más general del menú
-  constructor(private menuCtrl: MenuController, public usuarioService : UsuarioService) {
+  constructor(private menuCtrl: MenuController, public usuarioService : UsuarioService,private router: Router) {
     addIcons({
       logOutOutline,
       cutOutline,
@@ -48,12 +48,23 @@ export class SideMenuComponent implements OnInit {
       this.usuarioService.user = JSON.parse(localStorage.getItem('user')!)
       
     }
+
+
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['/home']); 
+    }
   }
 
 
   async closeMenu(menu: IonMenu) {
-    localStorage.clear()
+   if (localStorage.getItem('token') == null) {
+      this.router.navigate(['/home']); 
+    }
     await menu.close();
+  }
+
+  borrarSesion(){
+    localStorage.clear()
   }
 
 

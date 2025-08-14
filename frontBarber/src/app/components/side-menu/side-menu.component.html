@@ -24,7 +24,7 @@
   </ion-content>
   <ion-footer class="custom-menu-footer">
     <ion-toolbar>
-      <ion-button routerLink="/home" expand="block" class="logout-button" (click)="closeMenu(menu)">
+      <ion-button routerLink="/home" expand="block" class="logout-button" (click)="closeMenu(menu); borrarSesion()">
         <ion-icon name="log-out-outline" slot="start"></ion-icon>
         Cerrar Sesión
       </ion-button>
