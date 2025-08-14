@@ -44,10 +44,15 @@ export class SideMenuComponent implements OnInit {
 
   ngOnInit() {
 
+    if (this.usuarioService.user == null) {
+      this.usuarioService.user = JSON.parse(localStorage.getItem('user')!)
+      
+    }
   }
 
 
   async closeMenu(menu: IonMenu) {
+    localStorage.clear()
     await menu.close();
   }
 

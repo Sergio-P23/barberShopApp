@@ -61,5 +61,10 @@ export class ReservaService {
   DeleteBooking(id: number): Observable<any> {
     return this.http.delete(`${API_URL}/api/bookings/${id}`, { headers: this.getAuthHeaders() });
   }
+
+  GetBarberAvailability(barberoId: number, fecha: string): Observable<any> {
+    const params = new HttpParams().set('fecha', fecha);
+    return this.http.get(`${API_URL}/api/barbers/${barberoId}/availability`, { params: params });
+  }
   
 }

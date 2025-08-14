@@ -18,7 +18,7 @@
 
 
 
-<h1 class="text-center display-5 fw-bold text-dark mb-4">¡Bienvenido a Sky's the Limit!</h1>
+  <h1 class="text-center display-5 fw-bold text-dark mb-4">¡Bienvenido a Sky's the Limit!</h1>
 
   <div class="carousel-section">
     <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -46,7 +46,7 @@
 
   <div class="container text-center">
     <div class="p-5">
-      
+
       <p class="lead text-dark">
         Aquí no solo cortamos cabello, <span class="fw-semibold text-warning">creamos estilo</span>.<br>
         Somos más que una barbería: el lugar donde la actitud, el detalle y el flow se encuentran.<br>
@@ -157,28 +157,33 @@
     <ion-content class="ion-padding">
 
       <ion-item class="modal-input-item">
-        <ion-select interface="popover" label="Año" labelPlacement="floating" [(ngModel)]="selectedYear">
+        <ion-select interface="popover" label="Año" labelPlacement="floating" [(ngModel)]="selectedYear"
+          (ionChange)="calcularHorasDeDisponibilidad()">
           <ion-select-option *ngFor="let year of availableYears" [value]="year">{{ year }}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item class="modal-input-item">
-        <ion-select interface="popover" label="Mes" labelPlacement="floating" [(ngModel)]="selectedMonth">
-          <ion-select-option *ngFor="let month of availableMonths" [value]="month.value">{{
-            month.name}}</ion-select-option>
+        <ion-select interface="popover" label="Mes" labelPlacement="floating" [(ngModel)]="selectedMonth"
+          (ionChange)="calcularHorasDeDisponibilidad()">
+          <ion-select-option *ngFor="let month of availableMonths" [value]="month.value">{{ month.name
+            }}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item class="modal-input-item">
-        <ion-select interface="popover" label="Día" labelPlacement="floating" [(ngModel)]="selectedDay">
+        <ion-select interface="popover" label="Día" labelPlacement="floating" [(ngModel)]="selectedDay"
+          (ionChange)="calcularHorasDeDisponibilidad()">
           <ion-select-option *ngFor="let day of availableDays" [value]="day">{{ day }}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item class="modal-input-item ">
-        <ion-select interface="popover" label="Hora" labelPlacement="floating" [(ngModel)]="selectedTime">
-          <ion-select-option *ngFor="let hour of availableHours" [value]="hour.value">{{
-            hour.display}}</ion-select-option>
+        <ion-select interface="popover" label="Hora" labelPlacement="floating" [(ngModel)]="selectedTime"
+          [disabled]="availableHours.length === 0">
+          <ion-select-option *ngFor="let hour of availableHours" [value]="hour.value">
+            {{ hour.display }}
+          </ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -258,10 +263,12 @@
       <div class="icon-wrapper">
         <ion-icon name="checkmark-circle-outline" class="alert-icon-succes"></ion-icon>
       </div>
-      <p class="alert-select-message">¡Cita para {{ selectedService?.titulo }} con {{ selectedBarber?.nombre }} reservada con éxito! Nos pondremos en contacto contigo.</p>
+      <p class="alert-select-message">¡Cita para {{ selectedService?.titulo }} con {{ selectedBarber?.nombre }}
+        reservada con éxito! Nos pondremos en contacto contigo.</p>
 
       <div class="modal-action-buttons">
-        <ion-button style="--background: rgb(220, 182, 58);" expand="block" class="accept-button" (click)="cerrarModalSucces()">De acuerdo</ion-button>
+        <ion-button style="--background: rgb(220, 182, 58);" expand="block" class="accept-button"
+          (click)="cerrarModalSucces()">De acuerdo</ion-button>
       </div>
     </div>
   </ng-template>

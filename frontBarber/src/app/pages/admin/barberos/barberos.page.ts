@@ -249,6 +249,8 @@ export class BarberosPage implements OnInit {
         this.editarForm.get(key)?.markAsTouched();
       });
     }
+
+    this.barberoActual = null
   }
 
   // Cancelar edición
@@ -257,6 +259,7 @@ export class BarberosPage implements OnInit {
     this.editarForm.reset();
     this.fotoPreview = null;
     this.fotoFile = null;
+    this.barberoActual = null;
     
   }
 
