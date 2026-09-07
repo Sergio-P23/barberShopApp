@@ -26,13 +26,6 @@ Aplicación móvil desarrollada con **Ionic** para la gestión y reserva de turn
 
 - [x] Visualización de servicios y catálogo de la barbería.
 - [x] Flujo de reserva de citas y selección de horarios.
-- [x] Conexión e intercambio de datos con la API backend.
 
 ---
 
-## 🛠️ Instalación y Ejecución Local
-
-1. **Clonar el repositorio:**
-   ```bash
-   git clone [https://github.com/Sergio-P23/barberShopApp.git](https://github.com/Sergio-P23/barberShopApp.git)
-   cd barberShopApp
